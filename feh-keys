@@ -1,0 +1,17 @@
+prev_img  		  k BackSpace
+next_img          j space
+
+scroll_up         C-Up
+scroll_down       C-Down
+scroll_left       C-Left
+scroll_right      C-Right
+scroll_up_page    Up
+scroll_down_page  Down
+scroll_left_page  Left
+scroll_right_page Right
+
+save_image
+save_filelist
+
+flip V
+mirror H

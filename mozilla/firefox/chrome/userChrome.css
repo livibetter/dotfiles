@@ -1,0 +1,116 @@
+/*
+ * Author: Yu-Jie Lin
+ * Creation Date: 2010-08-31T16:49:38+0800
+ *
+ * Do not remove the @namespace line -- it's required for correct functioning
+ */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
+
+#navigator-toolbox {
+  /* remove the line below tabs bar */
+  border-bottom: none !important;
+}
+
+#TabsToolbar {
+  background: #242424 !important;
+}
+
+.tabbrowser-tab,
+.tabs-newtab-button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: #eee !important;
+  font-family: "Crimson Text";
+  font-size: 16px;
+  padding-left: 4px !important;
+  padding-right: 0 !important;
+  min-height: 24px !important;
+  height: 24px !important;
+}
+
+.tabs-newtab-button {
+  width: 24px;
+}
+
+.tabbrowser-tab:hover,
+.tabs-newtab-button:hover {
+  background: #404040 !important;
+}
+
+.tabs-newtab-button {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tabbrowser-tab[pinned] {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.tabbrowser-tab[selected] {
+  background: #666 !important;
+}
+
+.tab-close-button {
+  -moz-appearance: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 1ex !important;
+}
+
+.tab-close-button:hover {
+  background: #888 !important;
+}
+
+/* All tabs list
+ * ============= */
+
+#alltabs-button {
+  -moz-appearance: none !important;
+  background: #aaa !important;
+  border: none !important;
+}
+
+#alltabs-button:hover {
+  background: #bbb !important;
+}
+
+/* Also knows as "Group Your Tabs" in Firefox 4
+ * ============================================ */
+
+#tabview-button {
+  -moz-appearance: none !important;
+  background: #aaa !important;
+  border: none !important;
+}
+
+#tabview-button:hover {
+  background: #bbb !important;
+}
+
+/* (Connection) Status panel */
+
+.statuspanel-label {
+  background: -moz-linear-gradient(top, rgba(96,96,96,0.75) 0%, rgba(64,64,64,0.75) 5%, #333 100%) !important;
+  border: none !important;
+  color: #eee !important;
+  font-family: "Inconsolata" !important;
+  font-size: 16px !important;
+}
+
+/* Application button menu */
+
+#appmenu-toolbar-button {
+  -moz-appearance: none !important;
+  background: #aaa !important;
+  border: none !important;
+}
+
+#appmenu-toolbar-button:hover {
+  background: #bbb !important;
+}
+
+/* vim:et:ts=2:sts=2:sw=2:ai
+ * */
