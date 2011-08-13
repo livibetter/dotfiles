@@ -15,7 +15,7 @@ set tw=0
 imap <F8><F10> <ESC>:call Ctab()<CR><INSERT><RIGHT>
 nmap <F8><F10> <ESC>:call Ctab()<CR>
 let CtabOn=0
-function Ctab()
+function! Ctab()
   if g:CtabOn == 0
     for i in range(1, 7)
       if i == 1
@@ -82,15 +82,12 @@ imap <C-X><Left> <ESC>:tabp<CR>
 nmap <C-X><Left> :tabp<CR>
 imap <C-X><Right> <ESC>:tabn<CR>
 nmap <C-X><Right> :tabn<CR>
+" no highlight
+imap <C-X>8 <ESC>:nohl<CR><Insert><Right>
+nmap <C-X>8 :nohl<CR>
  
 imap <F4> <C-R>=strftime("%FT%TZ", localtime()-8*3600)<CR>
 nmap <F4> "=strftime("%FT%TZ", localtime()-8*3600)<CR>p
-
-"nmap <F5><F5> :!bash sync<CR>
-
-" no highlight
-imap <C-8> :nohl<CR>
-nmap <C-8> :nohl<CR>
 
 " Fix key control codes
 map [31~ <S-F7>
