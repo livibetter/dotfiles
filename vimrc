@@ -216,4 +216,8 @@ augroup json
   
 augroup END
 
-" vim: set sw=2 ts=2 et:
+" https://github.com/xolox/vim-notes
+let g:notes_directory = '~/Documents/VimNotes'
+let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
+
+" vim: set sw=2 et:
