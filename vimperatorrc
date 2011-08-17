@@ -101,7 +101,7 @@ switch (liberator.profileName) {
 		liberator.execute('autocmd PageLoad tw\\\\.finance\\\\.yahoo.com\\\\/pf\\\\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()');
 
 		// Auto-pin
-		liberator.execute('autocmd PageLoad grooveshark.com set apptab');
+		liberator.execute('autocmd PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()');
 
 		// Fix damn YouTube
 		liberator.execute('autocmd DOMLoad www\\\\.youtube\\\\.com\\\\/$ js fix_yt_home(<tab>)');
