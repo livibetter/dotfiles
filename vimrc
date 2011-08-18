@@ -3,10 +3,10 @@ set t_Co=256
 
 colorscheme koehler
 
-" Do not set ts=4, if does, can't really tell the difference between
+" Do not set ts=2, if does, can't really tell the difference between
 " tab/space. It will be easy to tell someone mess up the coding style.
-set ai sts=4 et
-set sw=4
+set ai sts=2 et
+set sw=2
 set tw=0
 
 " Showing space-indentation, evolved from the following links
