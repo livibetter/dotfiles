@@ -6,7 +6,7 @@
 
 PATH=$HOME/bin:/sbin:/usr/sbin:/usr/games/bin:$PATH
 MANPATH=$HOME/share/man:$MANPATH
-PYTHONPATH="$HOME/lib/python2.5:/usr/local/lib64/python2.6:$PYTHONPATH"
+PYTHONPATH="$HOME/lib64/python2.6/site-packages:$HOME/lib/python2.5:/usr/local/lib64/python2.6:$PYTHONPATH"
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
 BROWSER=firefox
