@@ -7,6 +7,18 @@ alias ll='ls -l --color=auto'
 alias l.='ls -d .* --color=auto'
 alias ls='ls --color=auto'
 
+alias .vim='/usr/bin/vim'
+alias .vi='.vim'
+_vim() {
+  if (( $# > 0 )); then
+    /usr/bin/vim --servername VIM --remote "$@"
+  else
+    /usr/bin/vim --servername VIM
+  fi
+  }
+alias vimp='/usr/bin/vim --servername VIM --remote-tab'
+alias vim='_vim'
+alias vip='vimp'
 alias vi='vim'
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
 alias lhl='less -R'
