@@ -2,11 +2,18 @@
 # Author: Yu-Jie Lin
 # Creation Date: 2007-12-27T05:58:17+0800
 
-# User specific aliases and functions
+#######
+# Alias
+#######
+
+####
+# ls
 alias ll='ls -l --color=auto'
 alias l.='ls -d .* --color=auto'
 alias ls='ls --color=auto'
 
+#####
+# vim
 alias .vim='/usr/bin/vim'
 alias .vi='.vim'
 _vim() {
@@ -20,8 +27,11 @@ alias vimp='/usr/bin/vim --servername VIM --remote-tab'
 alias vim='_vim'
 alias vip='vimp'
 alias vi='vim'
+
+#######
+# misc.
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
-alias lhl='less -R'
+alias ytdl='youtube-dl --max-quality=22 -t'
 
 # for root
 if (( UID == 0 )); then
