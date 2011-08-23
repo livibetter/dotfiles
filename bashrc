@@ -14,8 +14,8 @@ alias ls='ls --color=auto'
 
 #####
 # vim
-alias .vim='/usr/bin/vim'
-alias .vi='.vim'
+alias vim.='/usr/bin/vim'
+alias vi.='vim.'
 _vim() {
   if (( $# > 0 )); then
     /usr/bin/vim --servername VIM --remote "$@"
