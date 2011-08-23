@@ -2,12 +2,18 @@
 set t_Co=256 
 
 colorscheme koehler
+" statusline with koehler colors is hard to read when using splits
+highlight StatusLine   cterm=bold ctermbg=darkgray ctermfg=lightgreen
+highlight StatusLineNC cterm=NONE ctermbg=darkgray ctermfg=darkgreen
 
 " Do not set ts=2, if does, can't really tell the difference between
 " tab/space. It will be easy to tell someone mess up the coding style.
 set ai sts=2 et
 set sw=2
 set tw=0
+
+" reset all mappings
+mapclear
 
 " Showing space-indentation, evolved from the following links
 " http://www.vim.org/scripts/script.php?script_id=1800
@@ -76,16 +82,9 @@ nmap <F6> <ESC>:set ttym=xterm2<CR>
 imap <F6><F6> <ESC>:set ttym=<CR>
 nmap <F6><F6> <ESC>:set ttym=<CR>
 
-imap <C-X><C-X> <ESC>:tabnew<CR>
-nmap <C-X><C-X> :tabnew<CR>
-imap <C-X><Left> <ESC>:tabp<CR>
-nmap <C-X><Left> :tabp<CR>
-imap <C-X><Right> <ESC>:tabn<CR>
-nmap <C-X><Right> :tabn<CR>
-" no highlight
-imap <C-X>8 <ESC>:nohl<CR><Insert><Right>
-nmap <C-X>8 :nohl<CR>
- 
+imap <F3> <ESC>:set hlsearch! hlsearch?<CR><INSERT><RIGHT>
+nmap <F3> :set hlsearch! hlsearch?<CR>
+
 imap <F4> <C-R>=strftime("%FT%TZ", localtime()-8*3600)<CR>
 nmap <F4> "=strftime("%FT%TZ", localtime()-8*3600)<CR>p
 
@@ -203,6 +202,14 @@ augroup mkd
 
 augroup END
 
+" rst
+augroup rst
+
+  autocmd BufRead *.rst map <F5> <ESC>:w<CR>:!gen-blog-rst.sh "%"<CR>
+  autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:!gen-blog-rst.sh "%"<CR>
+
+augroup END
+
 " For Chrome Extension manifest.json
 augroup json
 
@@ -219,5 +226,9 @@ augroup END
 " https://github.com/xolox/vim-notes
 let g:notes_directory = '~/Documents/VimNotes'
 let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
+
+" For setting current directory
+nnoremap , cd : cd %:p:h<CR>:pwd<CR>
+nnoremap ,lcd :lcd %:p:h<CR>:pwd<CR>
 
 " vim: set sw=2 et:
