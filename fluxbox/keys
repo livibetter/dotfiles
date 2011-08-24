@@ -1,3 +1,13 @@
+! fluxbox-update_configs added '(workspace=[current])' to (Next|Prev)(Window|Group)
+! check lines marked by 'FBCV13' if they are correctly updated
+!mouse actions added by fluxbox-update_configs
+OnTitlebar Mouse1 :MacroCmd {Focus} {Raise} {ActivateTab}
+!mouse actions added by fluxbox-update_configs
+OnTitlebar Move1 :StartMoving
+OnLeftGrip Move1 :StartResizing bottomleft
+OnRightGrip Move1 :StartResizing bottomright
+OnWindowBorder Move1 :StartMoving
+
 
 # click on the desktop to get menus
 OnDesktop Mouse1 :HideMenus
@@ -37,8 +47,8 @@ OnTitlebar Double Mouse1 :Maximize
 OnTitlebar Mouse3 :WindowMenu
 
 # alt-tab
-Mod1 Tab :NextWindow {groups}
-Mod1 Shift Tab :PrevWindow {groups}
+Mod1 Tab :NextWindow {groups} (workspace=[current])  !! FBCV13 !!
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])  !! FBCV13 !!
 
 # Easier to select window
 Mod4 T T :exec better-alt-tab.sh t
@@ -186,3 +196,7 @@ Mod4 L :Exec xlock -mode blank -startCmd monitorOff.sh -timeout 15 -dpmsoff 1
 Mod4 R :Exec ~/bin/chk-url-browser.sh
 # Search from terminal
 Mod4 G :Exec ~/bin/terminal-search.sh
+
+
+
+
