@@ -259,18 +259,12 @@ self_restart(const Arg *arg) {
 
 /* bottom stack layouts */
 // http://dwm.suckless.org/patches/bottom_stack
-// from source for 5.6.1
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.6.1-bstack.c"
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.6.1-bstackhoriz.c"
+// from source for 5.9
+#include "/etc/portage/savedconfig/x11-wm/dwm-5.9-bstack.c"
 
 /* push patch */
 // http://dwm.suckless.org/patches/push
 // from patch for 5.7.1
-// Note: arguments of two arrange() calls are removed, 5.6.1 version of
-// arrange() do not accept any arguments.
-//
-// Another patch for 5.6.1, movestack http://dwm.suckless.org/patches/movestack
-// It doesn't work well and crashes after few moves.
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.6.1-push.c"
+#include "/etc/portage/savedconfig/x11-wm/dwm-5.7.1-push.c"
 
 // vim:sw=2:sts=2:et:smarttab
