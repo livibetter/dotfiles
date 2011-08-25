@@ -18,6 +18,7 @@ static const Bool topbar      = True;   /* False means bottom bar */
 void enternotify_ffm(XEvent *e);
 void self_restart(const Arg *arg);
 void toggle_ffm(const Arg *arg);
+void toggle_rules(const Arg *arg);
 void togglebar_dzen(const Arg *arg);
 // patches
 void grid(Monitor *m);
@@ -29,7 +30,8 @@ static void pushdown(const Arg *arg);
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "q", "w", "e", "a", "s", "d" };
 
-static const Rule rules[] = {
+/* rules can not be const if using toggle_rules() */
+static Rule rules[] = {
   /* class          instance      title       tags mask isfloating  monitor */
   // Stuff need to be floating
   { "feh",          NULL,         NULL,       0,        True,       -1 },
@@ -141,6 +143,7 @@ static Key keys[] = {
   { MODKEY,                       XK_F3,      spawn,          {.v = monitor_expand_cmd} },
 
   { MODKEY|ShiftMask,             XK_m,       toggle_ffm,     {0} },
+  { MODKEY|ShiftMask,             XK_r,       toggle_rules,   {0} },
 
   { MODKEY,                       XK_b,       togglebar_dzen, {0} },
 
@@ -229,6 +232,34 @@ toggle_ffm(const Arg *arg) {
   if (handler[EnterNotify] == enternotify)
     handler[EnterNotify] = enternotify_ffm;
   focus_follows_mouse = !focus_follows_mouse;
+}
+
+/* toggle rules */
+// 2: uninitalized
+// 0: off - tags are set to NULL
+// 1: on  - restore original tags
+static unsigned char rules_toggled = 2;
+static unsigned int *saved_rules_tags;
+
+void
+toggle_rules(const Arg *arg) {
+  int i;
+  int len_rules;
+
+  len_rules = LENGTH(rules);
+  if (rules_toggled == 2) {
+    saved_rules_tags = malloc(sizeof(unsigned int) * len_rules);
+    for (i=0; i<len_rules; i++)
+      saved_rules_tags[i] = rules[i].tags;
+    rules_toggled = True;
+  }
+
+  rules_toggled = !rules_toggled;
+  for (i=0; i<len_rules; i++)
+    if (rules_toggled)
+      rules[i].tags = saved_rules_tags[i];
+    else
+      rules[i].tags = 0;
 }
 
 /* toggle bar and dzen */
