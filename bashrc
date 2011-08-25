@@ -31,7 +31,7 @@ alias vi='vim'
 #######
 # misc.
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
-alias ytdl='youtube-dl --max-quality=22 -t'
+alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 
 # for root
 if (( UID == 0 )); then
