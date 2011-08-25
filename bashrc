@@ -33,6 +33,35 @@ alias vi='vim'
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
 alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 
+
+##################
+# Helper functions
+##################
+
+############
+# wget & tar
+
+# Usage: wt 'http://example.com/blah.blah.tar.gz' [keep]
+# If [keep] is presented, whatever it is, the tarball will be saved.
+wt() {
+  (( $# == 0 )) && return
+  URL="$1"
+  keep="$2"
+  filename="$(basename "$URL")"
+  wget "$URL" -O "$filename"
+  tar xf "$filename"
+  if [[ -z "$keep" ]]; then
+    rm "$filename"
+  fi
+  d="${filename%.*.*}"
+  if [[ -d "$d" ]]; then
+    cd "$d"
+  else
+    echo "Sorry, I don't know what's the name of extracted directory."
+  fi
+  }
+
+
 # for root
 if (( UID == 0 )); then
 	alias rm='rm -i'
