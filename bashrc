@@ -42,7 +42,7 @@ alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 # wget & tar
 
 # Usage: wt 'http://example.com/blah.blah.tar.gz' [keep]
-# If [keep] is presented, whatever it is, the tarball will be saved.
+# If [keep] is presented, whatever it is, the tarball will be kept.
 wt() {
   (( $# == 0 )) && return
   URL="$1"
@@ -50,10 +50,9 @@ wt() {
   filename="$(basename "$URL")"
   wget "$URL" -O "$filename"
   tar xf "$filename"
-  if [[ -z "$keep" ]]; then
-    rm "$filename"
-  fi
-  d="${filename%.*.*}"
+  [[ -z "$keep" ]] && rm "$filename"
+  # Guessing the directory
+  d="${filename%%.[a-z]*}"
   if [[ -d "$d" ]]; then
     cd "$d"
   else
