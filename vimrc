@@ -231,4 +231,10 @@ let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
 nnoremap , cd : cd %:p:h<CR>:pwd<CR>
 nnoremap ,lcd :lcd %:p:h<CR>:pwd<CR>
 
+" XPT
+" https://github.com/drmingdrmer/xptemplate
+set nocompatible
+filetype plugin on
+let g:xptemplate_vars = "SParg=&author=Yu-Jie Lin&email=livibetter@gmail.com"
+
 " vim: set sw=2 et:
