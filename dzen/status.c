@@ -554,7 +554,12 @@ int main(void) {
 
 	chdir("/home/livibetter/.dzen");
 	
-	dzen = popen("dzen2 -bg '#303030' -fg '#aaa' -fn 'Envy Code R-9' -x 840 -y 0 -w 840 -h 17 -ta right -e 'button3='", "w");
+//	dzen = popen("dzen2 -bg '#303030' -fg '#aaa' -fn 'Envy Code R-9' -x 840 -y 0 -w 840 -h 17 -ta right -e 'button3='", "w");
+	if ((dzen = fopen("/home/livibetter/.config/dzen-status/dzen", "r")) == NULL)
+		return 2;
+	fgets(old_dzen, sizeof old_dzen, dzen);
+	fclose(dzen);
+	dzen = popen(old_dzen, "w");
 	if (!dzen) {
 		fprintf (stderr, "can not open dzen2.\n");
 		return 1;
