@@ -232,6 +232,8 @@ toggle_ffm(const Arg *arg) {
   if (handler[EnterNotify] == enternotify)
     handler[EnterNotify] = enternotify_ffm;
   focus_follows_mouse = !focus_follows_mouse;
+
+  update_toggling_text();
 }
 
 /* toggle rules */
@@ -260,6 +262,17 @@ toggle_rules(const Arg *arg) {
       rules[i].tags = saved_rules_tags[i];
     else
       rules[i].tags = 0;
+
+  update_toggling_text();
+}
+
+/* update status text for toggling status */
+void
+update_toggling_text(void) {
+  strcpy(stext, "  ");
+  stext[0] = rules_toggled ? 'R' : 'r';
+  stext[1] = focus_follows_mouse ? 'M' : 'm';
+  drawbars();
 }
 
 /* toggle bar and dzen */
