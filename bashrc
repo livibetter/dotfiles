@@ -18,7 +18,7 @@ alias vim.='/usr/bin/vim'
 alias vi.='vim.'
 _vim() {
   if (( $# > 0 )); then
-    /usr/bin/vim --servername VIM --remote "$@"
+    /usr/bin/vim --servername VIM --remote-silent "$@"
   else
     /usr/bin/vim --servername VIM
   fi
