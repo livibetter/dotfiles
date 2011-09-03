@@ -15,6 +15,12 @@ set tw=0
 " reset all mappings
 mapclear
 
+" Leader
+let mapleader = ","
+
+" reset all autocmd
+""au!
+
 " Showing space-indentation, evolved from the following links
 " http://www.vim.org/scripts/script.php?script_id=1800
 " http://viming.blogspot.com/2007/02/indent-level-highlighting.html
@@ -97,18 +103,11 @@ map <F7> <ESC>:setlocal spell! spelllang=en_us<CR>
 set pastetoggle=<F12>
 set modeline
 
-" " For i18n
-" vmap <F2> "xd"="__("<CR>P"xp"=")"<CR>p
-" vmap <F2><F2> "xd"="_e("<CR>P"xp"=")"<CR>p
-" "nmap <F3> :.s/_[_e](\(['"]\).\{-}\1)/<?php &; ?>/g<CR> :nohlsearch<CR>
-" vmap <F3> "xd"="<?php _e('"<CR>P"xp"="'); ?>"<CR>p
-" 
-" fu! LoadPHPDebugger()
-"     so $HOME/.vim/plugin/debugger
-"     echo "PHP Debugger loaded."
-" endf
-
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
+" ==========================================================================
+" Python
+" ==========================================================================
 
 " For Python source
 " autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
@@ -120,17 +119,6 @@ autocmd BufRead *.py set softtabstop=2
 autocmd BufRead *.py set autoindent
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-
-fu! CheckGoogleGadgets()
-	let gg=0
-	silent! exec 'g/<Content type="html">/let gg=1'
-	if gg==1
-		runtime! syntax/GoogleGadgets.vim
-		echo "Google Gadgets syntax loaded."
-	endif
-endf
-
-autocmd BufRead *.xml call CheckGoogleGadgets()
 
 " http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 " Freely jump between your code and python class libraries
@@ -150,9 +138,9 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 " Syntax Checking
 " http://vim.wikia.com/wiki/Python_-_check_syntax_and_run_script
-autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-autocmd BufRead *.py nmap <F5> :!python %<CR>
+autocmd BufEnter *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+autocmd BufEnter *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+autocmd BufEnter *.py nmap <Leader>rr :!python %<CR>
 
 python << EOL
 import vim
@@ -160,6 +148,9 @@ def EvaluateCurrentRange():
 	eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 EOL
 map <C-h> :py EvaluateCurrentRange()<CR>
+
+" ==========================================================================
+" ==========================================================================
 
 " Set shell title
 " http://vim.wikia.com/wiki/Automatically_set_screen_title
@@ -173,6 +164,8 @@ if &term == "screen" || &term == "xterm" || &term == "urxvt"
   set title
 endif
 
+" ==========================================================================
+
 " Append modeline after last line in buffer.
 " Use substitute() (not printf()) to handle '%%s' modeline in LaTeX files.
 " http://vim.wikia.com/wiki/Modeline_magic
@@ -185,7 +178,10 @@ endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 
+" ==========================================================================
 " Markdown syntax
+" ==========================================================================
+
 " http://plasticboy.com/markdown-vim-mode/
 augroup mkd
 
@@ -202,7 +198,10 @@ augroup mkd
 
 augroup END
 
+" ==========================================================================
 " rst
+" ==========================================================================
+
 augroup rst
 
   autocmd BufRead *.rst map <F5> <ESC>:w<CR>:!gen-blog-rst.sh "%"<CR>
@@ -210,31 +209,53 @@ augroup rst
 
 augroup END
 
-" For Chrome Extension manifest.json
-augroup json
-
-  autocmd BufRead *.json set tabstop=2
-  autocmd BufRead *.json set shiftwidth=2
-  autocmd BufRead *.json set smarttab
-  autocmd BufRead *.json set expandtab
-  autocmd BufRead *.json set softtabstop=2
-  autocmd BufRead *.json set ai
-  autocmd BufRead *.json set syntax=javascript
-  
-augroup END
-
+" ==========================================================================
 " https://github.com/xolox/vim-notes
+" ==========================================================================
+
 let g:notes_directory = '~/Documents/VimNotes'
 let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
+
+" ==========================================================================
 
 " For setting current directory
 nnoremap , cd : cd %:p:h<CR>:pwd<CR>
 nnoremap ,lcd :lcd %:p:h<CR>:pwd<CR>
 
-" XPT
+" Easy out in insert mode
+imap <C-j> <Esc>
+
+" For reload vimrc quick
+nmap <Leader>ev :tabnew ~/.vimrc<CR>
+nmap <Leader>rv :source ~/.vimrc<CR>
+
+" Buffers
+nmap <Leader>ls :ls<CR>
+nmap <Leader>bp :bp<CR>
+nmap <Leader>bn :bn<CR>
+nmap <Leader>bw :bw<CR>
+
+
+" ==========================================================================
+" Clipboard
+" ==========================================================================
+" shortcuts for copying to clipboard
+nmap <leader>y "+y
+
+" copy the current line to the clipboard
+nmap <leader>Y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+
+" ==========================================================================
+" XP template
+" ==========================================================================
 " https://github.com/drmingdrmer/xptemplate
 set nocompatible
 filetype plugin on
 let g:xptemplate_vars = "SParg=&author=Yu-Jie Lin&email=livibetter@gmail.com"
+
+" FileTypes
+au BufEnter * lcd %:p:h
 
 " vim: set sw=2 et:
