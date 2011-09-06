@@ -16,7 +16,7 @@ volume_normalization	"yes"
 audio_output {
 	type				"alsa"
 	name				"Sound Card"
-	options				"dev=dmixer"
-	device				"plug:dmix"
+#	options				"dev=dmixer"
+#	device				"plug:dmix"
 }
 mixer_type "software"
