@@ -108,6 +108,11 @@ static const char *sound_vol_up_cmd[]   = { "amixer", "sset", "Master,0", "5%+",
 static const char *sound_vol_down_cmd[] = { "amixer", "sset", "Master,0", "5%-", NULL };
 static const char *sound_mute_cmd[]     = { "amixer", "sset", "Master,0", "toggle", NULL };
 
+static const char *mpd_play_cmd[] = { "mp-ctrl.sh", "pause", NULL };
+static const char *mpd_stop_cmd[] = { "mp-ctrl.sh", "stop",  NULL };
+static const char *mpd_prev_cmd[] = { "mp-ctrl.sh", "prev",  NULL };
+static const char *mpd_next_cmd[] = { "mp-ctrl.sh", "next",  NULL };
+
 static const char *xsnap_cmd[]      = SHCMD("xsnap -file \"$HOME/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\"");
 static const char *xsnap_full_cmd[] = SHCMD("xsnap -file \"$HOME/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\" -region \"`xwininfo -root | sed '/\\(Width\\|Height\\)/ {s/[ :a-z-]//gi;p} ; d' | tr '\\n' ' ' | cut -d ' ' -f1-2 | tr ' ' 'x'`+0+0\"");
 
@@ -132,7 +137,12 @@ static Key keys[] = {
   { 0,                            0x1008ff11, spawn,          {.v = sound_vol_down_cmd } },
   // keysym XF86AudioMute 0x1008ff12, keycode 121
   { 0,                            0x1008ff12, spawn,          {.v = sound_mute_cmd } },
-  
+
+  { 0,                            0x1008ff14, spawn,          {.v = mpd_play_cmd } },
+  { 0,                            0x1008ff15, spawn,          {.v = mpd_stop_cmd } },
+  { 0,                            0x1008ff16, spawn,          {.v = mpd_prev_cmd } },
+  { 0,                            0x1008ff17, spawn,          {.v = mpd_next_cmd } },
+
   { 0,                            XK_Print,   spawn,          {.v = xsnap_cmd} },
   { MODKEY,                       XK_Print,   spawn,          {.v = xsnap_full_cmd} },
   
