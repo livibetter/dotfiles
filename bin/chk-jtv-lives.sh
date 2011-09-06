@@ -3,8 +3,8 @@
 # WTFPL License
 
 JTV_USERNAME="${1:-livibetter}"
-LOGINS="$(wget -q "http://www.justin.tv/$JTV_USERNAME/following" -O - |
-sed -n '/videos">$/ {s/\([^\/]\+\/\)\([^\/]\+\).*/\2/;H} ; $ {x;s/\n/,/g;s/^,//;p}')"
+LOGINS="$JTV_USERNAME,$(wget -q "http://www.justin.tv/$JTV_USERNAME/following" -O - |
+sed -n '/videos">$/ {s/\([^\/]\+\/\)\([^\/]\+\).*/\2/;H} ; $ {x;s/\n/,/g;p}')"
 
 i=0
 API_URL="http://api.justin.tv/api/stream/list.xml?channel=$LOGINS"
