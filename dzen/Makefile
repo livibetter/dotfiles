@@ -1,3 +1,4 @@
+CFLAGS = -g
 LDFLAGS = -lasound
 
 all: status

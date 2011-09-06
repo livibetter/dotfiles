@@ -491,9 +491,9 @@ void update_sound(int ID) {
   int percentage;
   int switch_value;
   
-  snd_mixer_t *h_mixer;
-  snd_mixer_selem_id_t *sid;
-  static snd_mixer_elem_t *elem = NULL;
+  static snd_mixer_t          *h_mixer = NULL;
+  static snd_mixer_selem_id_t *sid     = NULL;
+  static snd_mixer_elem_t     *elem    = NULL;
 
   if (!elem) {
     snd_mixer_open(&h_mixer, 1);
@@ -508,6 +508,9 @@ void update_sound(int ID) {
     elem = snd_mixer_find_selem(h_mixer, sid);
   }
 
+  // Crap, next line stole one hour of my life.
+  // It's important for mixer's properties to be updated.
+  snd_mixer_handle_events(h_mixer);
   snd_mixer_selem_get_playback_volume(elem, CHANNEL, &vol);
   snd_mixer_selem_get_playback_volume_range(elem, &vol_min, &vol_max);
   snd_mixer_selem_get_playback_switch(elem, CHANNEL, &switch_value);
