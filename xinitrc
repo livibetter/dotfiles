@@ -35,6 +35,8 @@ xrdb -merge .Xresources
 xset fp+ ~/.fonts/Envy\ Code\ R/
 setxkbmap -model pc104 -layout us -option compose:menu
 
+pulseaudio --start
+
 urxvtd -q -o -f
 
 if [[ "$1" == "dwm" ]]; then
