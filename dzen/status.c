@@ -493,23 +493,27 @@ void update_sound(int ID) {
   
   snd_mixer_t *h_mixer;
   snd_mixer_selem_id_t *sid;
-  snd_mixer_elem_t *elem ;
+  static snd_mixer_elem_t *elem = NULL;
 
-  snd_mixer_open(&h_mixer, 1);
-  snd_mixer_attach(h_mixer, ATTACH);
-  snd_mixer_selem_register(h_mixer, NULL, NULL);
-  snd_mixer_load(h_mixer);
+  if (!elem) {
+    snd_mixer_open(&h_mixer, 1);
+    snd_mixer_attach(h_mixer, ATTACH);
+    snd_mixer_selem_register(h_mixer, NULL, NULL);
+    snd_mixer_load(h_mixer);
 
-  snd_mixer_selem_id_alloca(&sid);
-  snd_mixer_selem_id_set_index(sid, 0);
-  snd_mixer_selem_id_set_name(sid, SELEM_NAME);
+    snd_mixer_selem_id_alloca(&sid);
+    snd_mixer_selem_id_set_index(sid, 0);
+    snd_mixer_selem_id_set_name(sid, SELEM_NAME);
 
-  elem = snd_mixer_find_selem(h_mixer, sid);
+    elem = snd_mixer_find_selem(h_mixer, sid);
+  }
 
   snd_mixer_selem_get_playback_volume(elem, CHANNEL, &vol);
   snd_mixer_selem_get_playback_volume_range(elem, &vol_min, &vol_max);
   snd_mixer_selem_get_playback_switch(elem, CHANNEL, &switch_value);
-  snd_mixer_close(h_mixer);
+  // when an ends comes, it's the end, nothing else matter.
+  // you don't need to return the rent book when 2012 comes.
+  // snd_mixer_close(h_mixer);
   percentage = 100 * vol / vol_max;
   
   sprintf(dzen_str, "^ca(1,urxvtc -name 'dzen-status-sound' -title 'Sound Mixer' -geometry 160x40 -e alsamixer)^i(icons/spkr_01.xbm)^ca() ");
