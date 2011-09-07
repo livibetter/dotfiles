@@ -50,6 +50,8 @@ static Rule rules[] = {
   { "Smplayer",     NULL,         NULL,       0,        True,       -1 },
   
   { "URxvt",        "bashrun",    NULL,       0,        True,       -1 },
+  { NULL,           NULL,         "Volume Control",
+                                              0,        True,       -1 },
   { "URxvt",        "dzen-status-sound",
                                   NULL,       0,        True,       -1 },
   { "URxvt",        "mc",         NULL,       0,        True,       -1 },
