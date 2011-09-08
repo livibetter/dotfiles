@@ -56,12 +56,12 @@ if [[ -r "$LF_SUBMIT_CURRENTSONG" ]]; then
 	song_title="$(line <"$LF_SUBMIT_CURRENTSONG")"
 	song_artist="$(sed '2q;d' "$LF_SUBMIT_CURRENTSONG")"
 	line="$song_artist - $song_title"
-        notify-send "♫ $line"
+        twmnc --pos bcur -t "♫ Playing $line"
 	echo -n "^pa(5;$((i*line_height + 5)))$line"
 else
 	mpc -f '%artist% - %title% - %album%' | while read line; do
 		echo -n "^pa(5;$((i*line_height + 5)))$line"
-                (( i == 0 )) && notify-send "♫ $line"
+                (( i == 0 )) && twmnc --pos bcur -t "♫ Playing $line"
 		((i++))
 	done
 fi
