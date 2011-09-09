@@ -1,15 +1,15 @@
-colorscheme vimPgray
+colorscheme dactyLgray
 
 set defsearch=g
-set toolbars=none,tabs
 set editor="urxvt -name vimp-ext-editor -e vim"
 
-" Remove all key mappings
-mapclear
+" Remove all key mappings (1.0b7pre+) as mapclear in Vimperator and older
+" versions.
+unmap!
 
-map <silent> <C-F8> :js toggle_bottombar()<CR>
-map <silent> <S-F8> :js toggle_tabs()<CR>
-map <silent> <F8> :js toggle_toolbars()<CR>
+map <silent> <C-F8> :set guioptions!=s<CR>
+map <silent> <S-F8> :js options.showtabline = (options.showtabline == 'always') ? 'never' : 'always';<CR>
+map <silent> <F8> :set guioptions!=BTm<CR>
 
 " Tab order rearragement
 map <silent> <C-S-PageUp> :tabm -1<CR>
@@ -18,39 +18,14 @@ map <silent> <C-S-PageDown> :tabm +1<CR>
 " I hate when I want to press <C-w> but I hit q instead
 map <C-q> <Nop>
 
-" Some version around 3.1 or 3.2, key d cannot delete pinned tab anymore
-map D :tabclose!<CR>
-
 " Toggle app tab
-map <C-A-a> :set apptab!<CR>
+map <C-A-a> :pintab!<CR>
 
 " Clean up all auto commands
-:autocmd!
+autocmd!
 
-:js << EOF
-function toggle_bottombar() {
-	var bb = document.getElementById('liberator-bottombar');
-	if (!bb)
-		return;
-	bb.style.height = (bb.style.height == '') ? '0px' : '';
-	bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
-	}
-
-function toggle_toolbars() {
-	if (options.get('toolbars').get().indexOf('nomenu') != -1)
-		options.get('toolbars').set('addons,bookmarks,menu,navigation')
-	else
-		options.get('toolbars').set('noaddons,nobookmarks,nomenu,nonavigation');
-	}
-
-function toggle_tabs() {
-	if (options.get('toolbars').get().indexOf('notabs') != -1)
-		options.get('toolbars').set('tabs')
-	else
-		options.get('toolbars').set('notabs');
-	}
-
-function fix_yt_home(tab) {
+js <<EOF
+window.fix_yt_home = function(tab) {
 	var d = tabs.getTab(tab - 1).linkedBrowser.contentDocument;
 	var target_ids = ['homepage-side-content'];
 	for (idx in target_ids) {
@@ -83,51 +58,42 @@ function fix_yt_home(tab) {
 '
 	d.getElementsByTagName('head')[0].appendChild(s);
 	}
-
-
-switch (liberator.profileName) {
-	case 'Normal':
-		// Enter passthrough mode automatically in Gmail, Reader, and GrooveShark
-		sites_re = [
-			'(mail|groups)\\.google\\.com',
-			'www\\.google\\.com\\/reader\\/',
-			'code\\.google\\.com\\/p\\/[a-z0-9-]+\\/issues\\/',
-			'github\\.com\\/[a-zA-Z]+\\/[a-zA-Z0-9-]+\\/(issues|network)',
-			'grooveshark\\.com'
-			]
-		liberator.execute('autocmd LocationChange .* js modes.passAllKeys = /(' + sites_re.join('|') + ')/.test(buffer.URL)');
-
-		// Auto reload
-		liberator.execute('autocmd PageLoad tw\\\\.finance\\\\.yahoo.com\\\\/pf\\\\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()');
-
-		// Auto-pin
-		liberator.execute('autocmd PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()');
-
-		// Fix damn YouTube
-		liberator.execute('autocmd DOMLoad www\\\\.youtube\\\\.com\\\\/$ js fix_yt_home(<tab>)');
-		liberator.execute('autocmd PageLoad www\\\\.youtube\\\\.com\\\\/$ js tabs.getTab(<tab> - 1).linkedBrowser.contentDocument.getElementById("masthead-search-term").blur()');
-		
-		liberator.execute('autocmd PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333"');
-		// PageLoad isn't fired when browser is launched
-		if (getBrowser().contentDocument.location.href == 'about:blank')
-			getBrowser().contentDocument.body.style.backgroundColor = "#333";
-		break;
-	case 'Test':
-		// Make command line red
-		for ([k, v] in Iterator(highlight)) {
-			highlight.set(k, highlight.get(k).value.replace('background: #333', 'background: #633'));
-			}
-
-		liberator.execute('autocmd PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#633"');
-		// PageLoad isn't fired when browser is launched
-		if (getBrowser().contentDocument.location.href == 'about:blank')
-			getBrowser().contentDocument.body.style.backgroundColor = "#633";
-		
-		// Source special config
-		io.source('~/.vimperator-Test.rc', false);
-		break;
-	}
 EOF
+
+:if dactyl.profileName == "Normal"
+  " Enter passthrough mode automatically in Gmail, Reader, and GrooveShark
+  au LocationChange (mail|groups)\.google\.com normal! <C-z>
+  au LocationChange www\.google\.com\/reader\/ normal! <C-z>
+  au LocationChange code\.google\.com\/p\/[a-z0-9-]+\/issues\/ normal! <C-z>
+  au LocationChange github\.com\/[a-zA-Z]+\/[a-zA-Z0-9-]+\/(issues|network) normal! <C-z>
+  au LocationChange grooveshark\.com normal! <C-z>
+
+  " Auto reload
+  au PageLoad tw\.finance\.yahoo.com\/pf\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()
+"
+  " Auto-pin
+  au PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()
+
+  " Fix damn YouTube
+  au DOMLoad  www\.youtube\.com\/$ js fix_yt_home(<tab>)
+  au PageLoad www\.youtube\.com\/$ js tabs.getTab(<tab> - 1).linkedBrowser.contentDocument.getElementById("masthead-search-term").blur()
+
+  au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333";
+  " PageLoad isn't fired when browser is launched
+  :if getBrowser().contentDocument.location.href == 'about:blank'
+    js getBrowser().contentDocument.body.style.backgroundColor = "#333";
+  :endif
+  " The following line is simple but has problem with Blogger post editor, it
+  " causes the background color of editor becomes #333.
+  " style -name blank about:blank body { background-color: #333 !important }
+:elif dactyl.profileName == "Test"
+  au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#633";
+  " PageLoad isn't fired when browser is launched
+  :if getBrowser().contentDocument.location.href == 'about:blank'
+    js getBrowser().contentDocument.body.style.backgroundColor = "#633";
+  :endif
+  source '~/.vimperator-Test.rc'
+:endif
 
 " Styles
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
@@ -138,3 +104,5 @@ style www.google.com,docs.google.com,groups.google.com,mail.google.com,news.goog
 style www.google.com -name google-nav-searchform #searchform { top: 20px !important; }
 " fix Blogger template editing
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
+
+" vim: sts=2:sw=2:et:ai:smarttab
