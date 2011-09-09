@@ -38,7 +38,7 @@ COVERART[1]='<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 while :; do
 # Update last fm play count and cover art
-lf-playcount-image.sh
+[[ -z "$RUNONCE_STUFF" ]] && lf-playcount-image.sh
 read _ playcount _ _ _ _ loved </tmp/lf-playcount-image
 # Preparing cover art
 image_filename="/tmp/lf-images/$(cut -f 4 -d \  "/tmp/lf-playcount-image" | tr -t \/ -)"
@@ -56,12 +56,12 @@ if [[ -r "$LF_SUBMIT_CURRENTSONG" ]]; then
 	song_title="$(line <"$LF_SUBMIT_CURRENTSONG")"
 	song_artist="$(sed '2q;d' "$LF_SUBMIT_CURRENTSONG")"
 	line="$song_artist - $song_title"
-        twmnc --pos bcur -t "♫ Playing $line"
+        [[ -z "$RUNONCE_STUFF" ]] && twmnc --pos bcur -t "♫ Playing $line"
 	echo -n "^pa(5;$((i*line_height + 5)))$line"
 else
 	mpc -f '%artist% - %title% - %album%' | while read line; do
 		echo -n "^pa(5;$((i*line_height + 5)))$line"
-                (( i == 0 )) && twmnc --pos bcur -t "♫ Playing $line"
+                (( i == 0 )) && [[ -z "$RUNONCE_STUFF" ]] && twmnc --pos bcur -t "♫ Playing $line"
 		((i++))
 	done
 fi
@@ -71,4 +71,5 @@ echo -n "^pa($((width-92-5));5)^i($image_filename_xpm)"
 echo ""
 sleep 1
 [[ $1 -gt 0 ]] && [[ $(date +%s%N) > "$end_time" ]] && break
+RUNONCE_STUFF=1
 done | dzen2 -x $((S_WIDTH - width)) -y $((S_HEIGHT - height)) -w $width -h $height -bg "$bg_color" -ta left -fn "Envy Code R:pixelsize=$font_pixelsize" -e 'leavetitle=exit;button3=exit;button4=scrollup;button5=scrolldown;onstart=uncollapse'
