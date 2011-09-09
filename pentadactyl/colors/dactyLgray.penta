@@ -27,7 +27,7 @@ hi CompItem[selected]   background: #666;
 
 " Used in Command Line
 " Entire bottom line
-hi CmdLine              color: #aaa; background: #333; font-family: Inconsolata; font-size: 14px; padding: 0px; vertical-align: middle; border: none;
+hi CmdLine              color: #aaa !important; background: #333; font-family: Inconsolata; font-size: 14px; padding: 0px; vertical-align: middle; border: none;
 
 " Used in the URL column of `bmarks`
 hi CompResult           color: #aaa; width: 45%; overflow: hidden;
