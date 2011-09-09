@@ -112,7 +112,7 @@ EOF
   :if getBrowser().contentDocument.location.href == 'about:blank'
     js getBrowser().contentDocument.body.style.backgroundColor = "#633";
   :endif
-  source '~/.vimperator-Test.rc'
+  source '~/.pentadactyl-Test.rc'
 :endif
 
 " Styles
