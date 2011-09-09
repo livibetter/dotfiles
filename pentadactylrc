@@ -8,7 +8,9 @@ set editor="urxvt -name vimp-ext-editor -e vim"
 unmap!
 
 map <silent> <C-F8> :set guioptions!=s<CR>
-map <silent> <S-F8> :js options.showtabline = (options.showtabline == 'always') ? 'never' : 'always';<CR>
+" options.showtabline controls all windows, which is not what I want.
+" I need a per-window setting.
+map <silent> <S-F8> :js (function(){tb = document.getElementById('TabsToolbar'); tb.collapsed = !tb.collapsed;})();<CR>
 map <silent> <F8> :set guioptions!=BTm<CR>
 
 " Tab order rearragement
