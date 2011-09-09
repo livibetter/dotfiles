@@ -1,0 +1,140 @@
+colorscheme vimPgray
+
+set defsearch=g
+set toolbars=none,tabs
+set editor="urxvt -name vimp-ext-editor -e vim"
+
+" Remove all key mappings
+mapclear
+
+map <silent> <C-F8> :js toggle_bottombar()<CR>
+map <silent> <S-F8> :js toggle_tabs()<CR>
+map <silent> <F8> :js toggle_toolbars()<CR>
+
+" Tab order rearragement
+map <silent> <C-S-PageUp> :tabm -1<CR>
+map <silent> <C-S-PageDown> :tabm +1<CR>
+
+" I hate when I want to press <C-w> but I hit q instead
+map <C-q> <Nop>
+
+" Some version around 3.1 or 3.2, key d cannot delete pinned tab anymore
+map D :tabclose!<CR>
+
+" Toggle app tab
+map <C-A-a> :set apptab!<CR>
+
+" Clean up all auto commands
+:autocmd!
+
+:js << EOF
+function toggle_bottombar() {
+	var bb = document.getElementById('liberator-bottombar');
+	if (!bb)
+		return;
+	bb.style.height = (bb.style.height == '') ? '0px' : '';
+	bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+	}
+
+function toggle_toolbars() {
+	if (options.get('toolbars').get().indexOf('nomenu') != -1)
+		options.get('toolbars').set('addons,bookmarks,menu,navigation')
+	else
+		options.get('toolbars').set('noaddons,nobookmarks,nomenu,nonavigation');
+	}
+
+function toggle_tabs() {
+	if (options.get('toolbars').get().indexOf('notabs') != -1)
+		options.get('toolbars').set('tabs')
+	else
+		options.get('toolbars').set('notabs');
+	}
+
+function fix_yt_home(tab) {
+	var d = tabs.getTab(tab - 1).linkedBrowser.contentDocument;
+	var target_ids = ['homepage-side-content'];
+	for (idx in target_ids) {
+		var id = target_ids[idx];
+		var target = d.getElementById(id);
+		if (target)
+			target.parentNode.removeChild(target);
+		}
+	var target_classes = ['top-videos-module'];
+	for (idx in target_classes) {
+		var cls = target_classes[idx];
+		var targets = d.getElementsByClassName(cls);
+		while (targets.length) {
+			var target = targets[0];
+			target.parentNode.removeChild(target);
+			}
+		}
+	var s = d.createElement('style');
+	s.innerHTML = '\
+#homepage-main-content {\
+	width: 970px;\
+	margin-right: 0;\
+	}\
+.see-more-videos-from-aggregate-feeditem {\
+	margin-right: 0;\
+	}\
+.feedmodule-item-with-x {\
+	width: 16%;\
+	}\
+'
+	d.getElementsByTagName('head')[0].appendChild(s);
+	}
+
+
+switch (liberator.profileName) {
+	case 'Normal':
+		// Enter passthrough mode automatically in Gmail, Reader, and GrooveShark
+		sites_re = [
+			'(mail|groups)\\.google\\.com',
+			'www\\.google\\.com\\/reader\\/',
+			'code\\.google\\.com\\/p\\/[a-z0-9-]+\\/issues\\/',
+			'github\\.com\\/[a-zA-Z]+\\/[a-zA-Z0-9-]+\\/(issues|network)',
+			'grooveshark\\.com'
+			]
+		liberator.execute('autocmd LocationChange .* js modes.passAllKeys = /(' + sites_re.join('|') + ')/.test(buffer.URL)');
+
+		// Auto reload
+		liberator.execute('autocmd PageLoad tw\\\\.finance\\\\.yahoo.com\\\\/pf\\\\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()');
+
+		// Auto-pin
+		liberator.execute('autocmd PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()');
+
+		// Fix damn YouTube
+		liberator.execute('autocmd DOMLoad www\\\\.youtube\\\\.com\\\\/$ js fix_yt_home(<tab>)');
+		liberator.execute('autocmd PageLoad www\\\\.youtube\\\\.com\\\\/$ js tabs.getTab(<tab> - 1).linkedBrowser.contentDocument.getElementById("masthead-search-term").blur()');
+		
+		liberator.execute('autocmd PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333"');
+		// PageLoad isn't fired when browser is launched
+		if (getBrowser().contentDocument.location.href == 'about:blank')
+			getBrowser().contentDocument.body.style.backgroundColor = "#333";
+		break;
+	case 'Test':
+		// Make command line red
+		for ([k, v] in Iterator(highlight)) {
+			highlight.set(k, highlight.get(k).value.replace('background: #333', 'background: #633'));
+			}
+
+		liberator.execute('autocmd PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#633"');
+		// PageLoad isn't fired when browser is launched
+		if (getBrowser().contentDocument.location.href == 'about:blank')
+			getBrowser().contentDocument.body.style.backgroundColor = "#633";
+		
+		// Source special config
+		io.source('~/.vimperator-Test.rc', false);
+		break;
+	}
+EOF
+
+" Styles
+" fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
+" fix groups, it is... ahm... never mind.
+style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
+" fix da broken navigation bar of Google's
+style www.google.com,docs.google.com,groups.google.com,mail.google.com,news.google.com,sites.google.com,translate.google.com -name google-nav #mngb, #gb { position: absolute; top: 0; right: 0; width: auto; z-index: 466453; } #gbz { display: none; } #gbg { padding-right: 0 !important; } #gbg>ol { opacity: 1; background-color: rgba(50%, 50%, 50%, 0.75) !important; border-bottom-left-radius: 5px; font-family: 'Envy Code R'; } #gbg>ol>li:nth-child(2), #gbg>ol>li:nth-child(3), #gbg>ol>li:nth-child(4), #gbg>ol>li:nth-child(5) { display: none !important; } #gbg>ol>li * { color: #000 !important; }
+style www.google.com -name google-nav-searchform #searchform { top: 20px !important; }
+" fix Blogger template editing
+style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
