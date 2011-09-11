@@ -15,8 +15,7 @@
   background: #242424 !important;
 }
 
-.tabbrowser-tab,
-.tabs-newtab-button {
+.tabbrowser-tab {
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
@@ -29,18 +28,8 @@
   height: 24px !important;
 }
 
-.tabs-newtab-button {
-  width: 24px;
-}
-
-.tabbrowser-tab:hover,
-.tabs-newtab-button:hover {
+.tabbrowser-tab:hover {
   background: #404040 !important;
-}
-
-.tabs-newtab-button {
-  margin: 0 !important;
-  padding: 0 !important;
 }
 
 .tabbrowser-tab[pinned] {
@@ -64,52 +53,10 @@
   background: #888 !important;
 }
 
-/* All tabs list
- * ============= */
-
-#alltabs-button {
-  -moz-appearance: none !important;
-  background: #aaa !important;
-  border: none !important;
-}
-
-#alltabs-button:hover {
-  background: #bbb !important;
-}
-
-/* Also knows as "Group Your Tabs" in Firefox 4
- * ============================================ */
-
-#tabview-button {
-  -moz-appearance: none !important;
-  background: #aaa !important;
-  border: none !important;
-}
-
-#tabview-button:hover {
-  background: #bbb !important;
-}
-
-/* (Connection) Status panel */
-
-.statuspanel-label {
-  background: -moz-linear-gradient(top, rgba(96,96,96,0.75) 0%, rgba(64,64,64,0.75) 5%, #333 100%) !important;
-  border: none !important;
-  color: #eee !important;
-  font-family: "Inconsolata" !important;
-  font-size: 16px !important;
-}
-
 /* Application button menu */
 
 #appmenu-toolbar-button {
-  -moz-appearance: none !important;
-  background: #aaa !important;
-  border: none !important;
-}
-
-#appmenu-toolbar-button:hover {
-  background: #bbb !important;
+  display: none !important;
 }
 
 /* vim:et:ts=2:sts=2:sw=2:ai
