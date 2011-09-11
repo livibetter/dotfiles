@@ -5,8 +5,10 @@ XSLT="$(readlink "$0")"
 XSLT="${XSLT%.sh}.xslt"
 
 JTV_USERNAME="${1:-livibetter}"
-LOGINS="$JTV_USERNAME,$(wget -q "http://www.justin.tv/$JTV_USERNAME/following" -O - |
-sed -n '/videos">$/ {s/\([^\/]\+\/\)\([^\/]\+\).*/\2/;H} ; $ {x;s/\n/,/g;p}')"
+# Favorites are whom this user follows
+# http://apiwiki.justin.tv/mediawiki/index.php/User/favorites
+LOGINS="$JTV_USERNAME$(wget -q "http://api.justin.tv/api/user/favorites/$JTV_USERNAME.xml?live=true" -O - |
+sed -n '/login/ {s/ \+<login>\([^<]\+\)<\/login>/\1/;H} ; $ {x;s/\n/,/g;p}')"
 
 i=0
 API_URL="http://api.justin.tv/api/stream/list.xml?channel=$LOGINS"
