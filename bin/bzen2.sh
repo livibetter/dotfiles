@@ -40,6 +40,7 @@ get_wid() {
 # Kill existing bzen2.sh
 # TODO
 
+get_xy
 echo "$@" | dzen2 -x $X -y $Y -w $WIDTH -h $HEIGHT -fg '#ffaaaa' -bg '#603030' -fn "$FONT" -p &
 DZEN_PID=$!
 
