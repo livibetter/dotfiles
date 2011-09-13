@@ -12,7 +12,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <xsl:value-of select="channel_count"/> 
     <xsl:text> (</xsl:text>
       <xsl:value-of select="embed_count"/>
-    <xsl:text> embeds)&#xA;&#xA;</xsl:text>
+    <xsl:text> embeds)&#xA;</xsl:text>
+    
+    <xsl:text>%DATE%</xsl:text>
+    <xsl:value-of select="up_time"/>
+    <xsl:text>&#xA;&#xA;</xsl:text>
 
     <xsl:text>ANSI[1;37m</xsl:text>
     <xsl:choose>
