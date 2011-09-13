@@ -21,10 +21,10 @@ xsltproc "$XSLT" - |
 sed $'s/ANSI/\033/g' |
 while read line; do
   if [[ "$line" =~ "%DATE%" ]]; then
-    echo "$(td.sh $(($(date +%s) - $(date -d "${line:6} PDT" +%s)))) ago"
+    echo "NOFOLD$(td.sh $(($(date +%s) - $(date -d "${line:6} PDT" +%s)))) ago"
   else
     echo "$line"
   fi
 done |
 fold -w 68 |
-sed '/32m/ n ; s/^./    &/'
+sed '/NOFOLD/ {s/NOFOLD//;p;d} ; s/^./    &/'

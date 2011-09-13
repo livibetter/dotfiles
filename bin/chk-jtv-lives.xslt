@@ -4,7 +4,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template match="/">
   <xsl:for-each select="*/stream">
-    <xsl:text>ANSI[1;32m</xsl:text>
+    <xsl:text>NOFOLDANSI[1;32m</xsl:text>
       <xsl:value-of select="channel/title"/>
     <xsl:text>ANSI[0m</xsl:text>
 
@@ -14,6 +14,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <xsl:value-of select="embed_count"/>
     <xsl:text> embeds)&#xA;</xsl:text>
     
+    <xsl:text>NOFOLD</xsl:text>
+    <xsl:value-of select="channel/channel_url"/>
+    <xsl:text>&#xA;</xsl:text>
+
     <xsl:text>%DATE%</xsl:text>
     <xsl:value-of select="up_time"/>
     <xsl:text>&#xA;&#xA;</xsl:text>
