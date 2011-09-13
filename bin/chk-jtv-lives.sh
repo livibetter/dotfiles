@@ -8,7 +8,7 @@
 XSLT="$(readlink "$0")"
 XSLT="${XSLT%.sh}.xslt"
 
-JTV_USERNAME="${1:-livibetter}"
+JTV_USERNAME="${1:-$USER}"
 # Favorites are whom this user follows
 # http://apiwiki.justin.tv/mediawiki/index.php/User/favorites
 LOGINS="$JTV_USERNAME$(wget -q "http://api.justin.tv/api/user/favorites/$JTV_USERNAME.xml?live=true" -O - |
