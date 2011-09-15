@@ -2,6 +2,13 @@
 # Copyright 2011 Yu-Jie Lin
 # WTFPL License
 #
+# Checks Justin.tv user's favored channels live status
+#
+# Usage
+#   chk-jtv-lives.sh [USERNAME]
+#
+# USERNAME default is $USER
+#
 # Requires
 #   http://code.google.com/p/yjl/source/browse/Bash/td.sh
 
@@ -26,5 +33,5 @@ while read line; do
     echo "$line"
   fi
 done |
-fold -w 68 |
+fold -w 68 -s |
 sed '/NOFOLD/ {s/NOFOLD//;p;d} ; s/^./    &/'
