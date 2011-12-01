@@ -39,40 +39,6 @@ window.toggle_toolbars = function(ids) {
   for (var i in ids)
     window.toggle_toolbar(ids[i]);
   }
-
-window.fix_yt_home = function(tab) {
-	var d = tabs.getTab(tab - 1).linkedBrowser.contentDocument;
-	var target_ids = ['homepage-side-content'];
-	for (idx in target_ids) {
-		var id = target_ids[idx];
-		var target = d.getElementById(id);
-		if (target)
-			target.parentNode.removeChild(target);
-		}
-	var target_classes = ['top-videos-module'];
-	for (idx in target_classes) {
-		var cls = target_classes[idx];
-		var targets = d.getElementsByClassName(cls);
-		while (targets.length) {
-			var target = targets[0];
-			target.parentNode.removeChild(target);
-			}
-		}
-	var s = d.createElement('style');
-	s.innerHTML = '\
-#homepage-main-content {\
-	width: 970px;\
-	margin-right: 0;\
-	}\
-.see-more-videos-from-aggregate-feeditem {\
-	margin-right: 0;\
-	}\
-.feedmodule-item-with-x {\
-	width: 16%;\
-	}\
-'
-	d.getElementsByTagName('head')[0].appendChild(s);
-	}
 EOF
 
 :if dactyl.profileName == "Normal"
@@ -88,10 +54,6 @@ EOF
 "
   " Auto-pin
   au PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()
-
-  " Fix damn YouTube
-  au DOMLoad  www\.youtube\.com\/$ js fix_yt_home(<tab>)
-  au PageLoad www\.youtube\.com\/$ js tabs.getTab(<tab> - 1).linkedBrowser.contentDocument.getElementById("masthead-search-term").blur()
 
   au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333";
   " PageLoad isn't fired when browser is launched
