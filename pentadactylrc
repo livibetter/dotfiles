@@ -41,7 +41,7 @@ window.toggle_toolbars = function(ids) {
   }
 EOF
 
-:if dactyl.profileName == "Normal"
+:if config.profileName == "Normal"
   " Enter passthrough mode automatically in Gmail, Reader, and GrooveShark
   au LocationChange (mail|groups)\.google\.com normal! <C-z>
   au LocationChange www\.google\.com\/reader\/ normal! <C-z>
@@ -63,7 +63,7 @@ EOF
   " The following line is simple but has problem with Blogger post editor, it
   " causes the background color of editor becomes #333.
   " style -name blank about:blank body { background-color: #333 !important }
-:elif dactyl.profileName == "Test"
+:elif config.profileName == "Test"
   " Make command line red
   js <<EOF
     for ([k, v] in Iterator(highlight))
