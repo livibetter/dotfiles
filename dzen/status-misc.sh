@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SP_LINES=11
+SP_LINES=13
 SP_TW=80
 
 source status-func.sh
@@ -29,10 +29,11 @@ echo -n " Portage: "
 echo "$td"
 
 echo "          $(date --date=@$((ts + thres)) +'%A, %B %d, %Y %H:%M:%S')"
+echo
 
 wget -O - 'http://weather.yahooapis.com/forecastrss?w=2306179&u=c' |
-sed -n '/CDATA/,/]]/p' |
-sed -n '1n;$n;s/^/ /;s/<[^>]*>//g;p'
+sed -n '/CDATA/,/]]/{s/<[^>]*>//g;p}' |
+sed -n '1n;/^$/n;/Full Forecast/q;s/^/ /g;/Current\|Forecast/!s/^/  /;p'
 
 echo '^uncollapse()'
 } |
