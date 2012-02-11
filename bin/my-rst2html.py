@@ -5,7 +5,7 @@ import subprocess
 import sys
 from docutils import nodes
 from docutils.core import publish_parts
-from docutils.parsers.rst import Directive, directives
+from docutils.parsers.rst import Directive, directives, roles
 from xml.sax.saxutils import escape
 
 from smartypants import smartyPants
@@ -22,6 +22,16 @@ def register_directive(dir_name):
     directives.register_directive(dir_name, directive)
     return directive
   return _register_directive
+
+
+def register_role(role_name):
+
+  def _register_role(role):
+
+    roles.register_canonical_role(role_name, role)
+    return role
+
+  return _register_role
 
 
 # YouTube video embedding by Jason Stitt. MIT License
@@ -128,6 +138,13 @@ class PyRun(Directive):
     if stderr:
       raws.append(nodes.raw('', '<pre>%s</pre>' % escape(stderr), format='html'))
     return raws
+
+
+@register_role('kbd')
+def kbd(name, rawtext, text, lineno, inliner, options=None, content=None):
+  """Generate kbd element"""
+
+  return [nodes.raw('', '<kbd>%s</kbd>' % text, format='html')], []
 
 
 def main():
