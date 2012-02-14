@@ -2,6 +2,7 @@
 set t_Co=256 
 
 colorscheme koehler
+" colorscheme bubblegum
 " statusline with koehler colors is hard to read when using splits
 highlight StatusLine   cterm=bold ctermbg=darkgray ctermfg=lightgreen
 highlight StatusLineNC cterm=NONE ctermbg=darkgray ctermfg=darkgreen
@@ -234,6 +235,7 @@ nmap <Leader>ls :ls<CR>
 nmap <Leader>bp :bp<CR>
 nmap <Leader>bn :bn<CR>
 nmap <Leader>bw :bw<CR>
+nmap <Leader>b# :b#<CR>
 
 " ==========================================================================
 " Notes
@@ -251,14 +253,6 @@ nmap <leader>y "+y
 nmap <leader>Y "+yy
 nmap <leader>p "+p
 nmap <leader>P "+P
-
-" ==========================================================================
-" XP template
-" ==========================================================================
-" https://github.com/drmingdrmer/xptemplate
-set nocompatible
-filetype plugin on
-let g:xptemplate_vars = "SParg=&author=Yu-Jie Lin&email=livibetter@gmail.com"
 
 " FileTypes
 au BufEnter * lcd %:p:h
