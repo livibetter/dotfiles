@@ -112,7 +112,12 @@ class PreCode(Directive):
 
 @register_directive('pyrun')
 class PyRun(Directive):
-  """Append the output of Python code"""
+  """Append the output of Python code
+  
+  The encoding definition may be required when use Unicode characters:
+
+    # -*- coding: utf-8 -*-
+  """
   # TODO expand this to arbitrary command
   option_spec = {'command': directives.unchanged,
                  'class': directives.unchanged,
@@ -129,14 +134,14 @@ class PyRun(Directive):
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
-    stdout, stderr = proc.communicate(code)
+    stdout, stderr = proc.communicate(code.encode('utf-8'))
 
     raws = [nodes.raw('', PreCode._run(code, 'python', self.options), format='html')]
     if not stdout:
       stdout = '*** NO OUTPUT ***'
-    raws.append(nodes.raw('', '<pre class="no-collapse">%s</pre>' % escape(stdout), format='html'))
+    raws.append(nodes.raw('', '<pre class="no-collapse">%s</pre>' % escape(stdout.decode('utf-8')), format='html'))
     if stderr:
-      raws.append(nodes.raw('', '<pre>%s</pre>' % escape(stderr), format='html'))
+      raws.append(nodes.raw('', '<pre>%s</pre>' % escape(stderr.decode('utf-8')), format='html'))
     return raws
 
 
