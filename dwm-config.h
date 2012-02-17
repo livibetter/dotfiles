@@ -77,6 +77,7 @@ static Rule rules[] = {
 
 /* layout(s) */
 static const float mfact    = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = True; /* False means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
@@ -165,6 +166,10 @@ static Key keys[] = {
   { MODKEY|ShiftMask,             XK_j,       pushdown,       {.i = +1 } },
   { MODKEY|ShiftMask,             XK_k,       pushup,         {.i = -1 } },
 
+  // nmaster
+  { MODKEY|ControlMask|ShiftMask, XK_j,       incnmaster,     {.i = +1 } },
+  { MODKEY|ControlMask|ShiftMask, XK_k,       incnmaster,     {.i = -1 } },
+        
   { MODKEY,                       XK_h,       setmfact,       {.f = -0.05} },
   { MODKEY,                       XK_l,       setmfact,       {.f = +0.05} },
   { MODKEY|ShiftMask,             XK_h,       setmfact,       {.f = -0.01} },
