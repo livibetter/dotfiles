@@ -31,6 +31,9 @@
 // Flashing rate when in low capacity, the default is 500ms for red, 500ms for yellow/cyan
 #define UI_BAT_FLASH 500000
 
+// Showing red icon when resource is in low
+#define CRITICAL_MEM 75
+
 char old_dzen[2048];
 char new_dzen[2048];
 
@@ -134,7 +137,12 @@ void update_mem(int ID) {
 
   color = used_color(used, 1024 * 1024, -1, 100 * 1024);
 
-  sprintf(dzen_str, "^ca(1,./status-mem.sh)^i(icons/mem.xbm)^ca() ^fg(%s)%4dMB %2d%%^fg()", color, used / 1024, mem_percentage);
+  sprintf(dzen_str, "^ca(1,./status-mem.sh)");
+  if (mem_percentage >= CRITICAL_MEM)
+    sprintf(dzen_str+strlen(dzen_str), "^fg(#f00)^i(icons/mem.xbm)^fg()");
+  else
+    sprintf(dzen_str+strlen(dzen_str), "^i(icons/mem.xbm)");
+  sprintf(dzen_str+strlen(dzen_str), "^ca() ^fg(%s)%4dMB %2d%%^fg()", color, used / 1024, mem_percentage);
   }
 
 void update_fs(int ID) {
