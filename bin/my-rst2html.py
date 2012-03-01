@@ -136,7 +136,7 @@ class PyRun(Directive):
                             stderr=subprocess.PIPE)
     stdout, stderr = proc.communicate(code.encode('utf-8'))
 
-    raws = [nodes.raw('', PreCode._run(code, 'python', self.options), format='html')]
+    raws = [nodes.raw('', PreCode._run(code, self.options.get('class', 'python'), self.options), format='html')]
     if not stdout:
       stdout = '*** NO OUTPUT ***'
     raws.append(nodes.raw('', '<pre class="no-collapse">%s</pre>' % escape(stdout.decode('utf-8')), format='html'))
