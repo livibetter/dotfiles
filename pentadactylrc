@@ -83,5 +83,7 @@ EOF
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
 " fix Blogger template editing
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
+" get rid of clickTrap of Blogger post writing preview
+style blog.yjl.im div.blogger-clickTrap { display: none }
 
 " vim: sts=2:sw=2:et:ai:smarttab
