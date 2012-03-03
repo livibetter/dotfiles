@@ -39,6 +39,18 @@ window.toggle_toolbars = function(ids) {
   for (var i in ids)
     window.toggle_toolbar(ids[i]);
   }
+
+window.one_unpinned_tab = function(event) {
+  for (idx in gBrowser.tabs) {
+    var tab = gBrowser.tabs[idx];
+    if (!tab.pinned && !tab.closing) {
+      return;
+      }
+    }
+  gBrowser.addTab('about:blank');
+  }
+gBrowser.mTabContainer.addEventListener('TabClose', one_unpinned_tab, false);
+gBrowser.mTabContainer.addEventListener('TabPinned', one_unpinned_tab, false);
 EOF
 
 :if config.profileName == "Normal"
