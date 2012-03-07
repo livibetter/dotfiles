@@ -205,8 +205,8 @@ augroup END
 
 augroup rst
 
-  autocmd BufRead *.rst map <F5> <ESC>:w<CR>:!gen-blog-rst.sh '%'<CR>
-  autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:!gen-blog-rst.sh '%'<CR>
+  autocmd BufRead *.rst  map <F5> <ESC>:w<CR>:exec '!gen-blog-rst.sh ' . shellescape(@%)<CR>
+  autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:exec '!gen-blog-rst.sh ' . shellescape(@%)<CR>
 
 augroup END
 
