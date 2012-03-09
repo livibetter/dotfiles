@@ -1,6 +1,33 @@
 // Multi-color and Vim-like abbreviated working directory PS1
 // using Bash loadable builtin
-// by Yu-Jie Lin
+// Copyright (C) 2011, 2012, Yu-Jie Lin
+//
+// Compilation
+// ===========
+//
+//   Put a copy of Bash source at ./bash
+//   Put a copy of vcprompt source at ./vcprompt
+//   Run `make vimps1`
+//
+// This program uses code from vcprompt <http://vc.gerg.ca/hg/vcprompt/>,
+// whose License is appeneded, which is also this program is licensed under.
+/*
+ * Copyright (C) 2009, 2010, Gregory P. Ward and contributors.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 #include <config.h>
 
@@ -12,6 +39,13 @@
 
 #include "builtins.h"
 #include "shell.h"
+
+#include "common.h"
+#include "cvs.h"
+#include "git.h"
+#include "hg.h"
+#include "svn.h"
+#include "fossil.h"
 
 #define S_CTLESC "\001"
 #define S_CTLNUL "\177"
@@ -32,6 +66,41 @@
 #define color_home 35
 #define color_sep  31
 #define color_abbr 37
+
+void print_vcprompt() {
+  // code from vcprompt
+  options_t options = {
+    .debug         = 0,
+    .format        = "[%n:%b%m%u] ",
+    .show_branch   = 1,
+    .show_revision = 0,
+    .show_unknown  = 1,
+    .show_modified = 1,
+  };
+
+  set_options(&options);
+
+  vccontext_t* contexts[] = {
+    get_cvs_context(&options),
+    get_git_context(&options),
+    get_hg_context(&options),
+    get_svn_context(&options),
+    get_fossil_context(&options),
+  };
+  int num_contexts = sizeof(contexts) / sizeof(vccontext_t*);
+
+  result_t* result = NULL;
+  vccontext_t* context = NULL;
+
+  if (context = probe_parents(contexts, num_contexts)) {
+    result = context->get_info(context);
+    if (result != NULL) {
+      print_result(context, &options, result);
+      free_result(result);
+    }
+  }
+  // end of code from vcprompt
+}
 
 int vimps1_builtin (WORD_LIST *list) {
   char *term_str, *pwd_str;
@@ -114,10 +183,15 @@ int vimps1_builtin (WORD_LIST *list) {
       }
     }
 
+  fputs(ps1, stdout);
+  p_ps1 = ps1;
+  fprintf(stdout, " " CF, 37);
+  print_vcprompt();
+
   // user role indicator
   if (strcmp(term_str, "screen") == 0)
     SPF(p_ps1, _PROMPT_START_IGNORE "\033k\033\\" _PROMPT_END_IGNORE);
-  SPF(p_ps1, " " CF "$ " _PROMPT_START_IGNORE "\033[0m" _PROMPT_END_IGNORE, color_user);
+  SPF(p_ps1, CF "$ " _PROMPT_START_IGNORE "\033[0m" _PROMPT_END_IGNORE, color_user);
 
   printf("%s", ps1);
   fflush (stdout);
