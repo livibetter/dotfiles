@@ -63,7 +63,7 @@ int vimps1_builtin (WORD_LIST *list) {
   //
 
   // Error code
-  if (*list->word->word != '0') {
+  if (list && *list->word->word != '0') {
     int columns;
     int i;
 
