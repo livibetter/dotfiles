@@ -125,7 +125,7 @@ static const char *monitor_expand_cmd[] = { "monitorExpand.sh", NULL };
 
 static const char *lock_cmd[] = { "xlock", "-mode", "blank", "-startCmd", "monitorOff.sh", "-timeout", "15", "-dpmsoff", "1", NULL };
 
-static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date +%Y-%m-%dT%H:%M:%SZ)");
+static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date --utc +%Y-%m-%dT%H:%M:%SZ)");
 
 static Key keys[] = {
   /* modifier                     key         function        argument */
