@@ -125,6 +125,8 @@ static const char *monitor_expand_cmd[] = { "monitorExpand.sh", NULL };
 
 static const char *lock_cmd[] = { "xlock", "-mode", "blank", "-startCmd", "monitorOff.sh", "-timeout", "15", "-dpmsoff", "1", NULL };
 
+static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date +%Y-%m-%dT%H:%M:%SZ)");
+
 static Key keys[] = {
   /* modifier                     key         function        argument */
   { MODKEY,                       XK_p,       spawn,          {.v = bashrun_cmd } },
@@ -154,6 +156,8 @@ static Key keys[] = {
   { MODKEY,                       XK_F1,      spawn,          {.v = monitor_off_cmd} },
   { MODKEY,                       XK_F2,      spawn,          {.v = monitor_switch_cmd} },
   { MODKEY,                       XK_F3,      spawn,          {.v = monitor_expand_cmd} },
+
+  { MODKEY|ShiftMask,             XK_t,       spawn,          {.v = ts_cmd} },
 
   { MODKEY|ShiftMask,             XK_m,       toggle_ffm,     {0} },
   { MODKEY|ShiftMask,             XK_r,       toggle_rules,   {0} },
