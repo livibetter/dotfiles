@@ -31,7 +31,7 @@ echo "$td"
 echo "          $(date --date=@$((ts + thres)) +'%A, %B %d, %Y %H:%M:%S')"
 echo
 
-echo "   mt.sh: $(mt.sh | tail -1 | sed 's/for  \+/for  /')"
+echo "   mt.sh: $(mt.sh | tail -1 | sed 's/\(for\|since\)  \+/\1  /')"
 echo
 
 wget -O - 'http://weather.yahooapis.com/forecastrss?w=2306179&u=c' |
