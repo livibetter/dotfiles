@@ -7,6 +7,7 @@ TITLE="${TITLE%.rst}"
 
 case "$(dirname "$1")" in
   *series/BSME*)
+    TITLE="${TITLE/ /: }"
     TITLE="BSME $TITLE"
     ;;
 esac
