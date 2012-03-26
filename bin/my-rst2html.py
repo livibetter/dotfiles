@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # Yu-Jie Lin. MIT License.
 
+import re
 import subprocess
 import sys
 from docutils import nodes
@@ -8,6 +9,7 @@ from docutils.core import publish_parts
 from docutils.parsers.rst import Directive, directives, roles
 from xml.sax.saxutils import escape
 
+import smartypants
 from smartypants import smartyPants
 
 
@@ -164,6 +166,11 @@ def main():
                           },
       writer_name="html")
 
+  RE = smartypants.tags_to_skip_regex 
+  pattern = RE.pattern.replace('|code', '|code|tt')
+  pattern = pattern.replace('|script', '|script|style')
+  RE = re.compile(pattern, RE.flags)
+  smartypants.tags_to_skip_regex = RE
   print smartyPants(doc_parts['fragment']).encode('utf-8')
 
 
