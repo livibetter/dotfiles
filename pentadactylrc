@@ -25,6 +25,7 @@ map <C-A-a> :pintab!<CR>
 
 " Grooveshark
 map gsn :js if((gs = gBrowser.tabs[0].linkedBrowser.contentWindow.wrappedJSObject.Grooveshark) != undefined) gs.next();<CR>
+map gsp :js if((gs = gBrowser.tabs[0].linkedBrowser.contentWindow.wrappedJSObject.Grooveshark) != undefined) gs.togglePlayPause();<CR>
 
 " Clean up all auto commands
 autocmd!
