@@ -11,7 +11,10 @@ PYTHONPATH="$HOME/lib64/python2.6/site-packages:$HOME/lib/python2.5:/usr/local/l
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
 BROWSER=firefox
-EDITOR=vim
+# Invoking Vim directly, not server mode via vi* alias defined in bashrc
+# Only use server mode by my explict command, programs invoke editor may have
+# problem with server mode.
+EDITOR=/usr/bin/vim
 #OOO_FORCE_DESKTOP="gnome"
 
 export PATH
