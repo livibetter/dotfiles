@@ -15,6 +15,8 @@ df -h | while read fs size used avail usep mountp; do
 		printf "%-10s %8s %8s %8s %8s %-10s^fg()\n" "$fs" $size $used $avail $usep "$mountp"
 	fi
 done
+echo
+cat /etc/mountcounts
 echo '^uncollapse()'
 } | 
 dzen2 \
