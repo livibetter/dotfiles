@@ -41,6 +41,10 @@ pulseaudio --start
 
 urxvtd -q -o -f
 
+# clean up serverauth files, which were left due to unexpected exit of X window
+for sa in ~/.serverauth.*; do pid=${sa/*.serverauth./}; [[ ! -d /proc/$pid ]] && rm ~/.serverauth.$pid; :; done
+unset sa pid
+
 if [[ "$1" == "dwm" ]]; then
 	{ sleep 1s ; dzen-status ; } &
 fi
