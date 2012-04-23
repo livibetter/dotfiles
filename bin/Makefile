@@ -22,22 +22,15 @@ VIMPS1_INC = -I. -I.. -I$(BASH_TOPDIR) -I$(BASH_TOPDIR)/lib -I$(BASH_TOPDIR)/bui
 
 ##########
 
-XCINFO_LDFLAGS = ${LD_FLAGS} -lX11 -lXfixes
-
-##########
-
 $(shell mkdir -p $(VCPROMPT_TOPDIR).o)
 
-all: vimps1 xcinfo
+all: vimps1
 
 ##########
 
 vimps1: vimps1.o $(VCPROMPT_OBJECTS)
 	@echo $(VCPROMPT_OBJECTS)
 	$(CC) $(VIMPS1_LDFLAGS) -o $@ vimps1.o $(VCPROMPT_OBJECTS) $(LIBS)
-
-xcinfo: xcinfo.o
-	$(CC) $(XCINFO_LDFLAGS) -o $@ xcinfo.o $(LIBS)
 
 ##########
 
@@ -47,11 +40,9 @@ $(VCPROMPT_OBJECTS):
 vimps1.o: vimps1.c
 	$(CC) $(VIMPS1_CFLAGS) $(CCFLAGS) $(VIMPS1_INC) -c -o $@ $<
 
-xcinfo.o: xcinfo.c
-
 ##########
 
 clean:
-	rm -f vimps1 vimps1.o $(VCPROMPT_OBJECTS) xcinfo xcinfo.o
+	rm -f vimps1 vimps1.o $(VCPROMPT_OBJECTS)
 
 .PHONY: all clean
