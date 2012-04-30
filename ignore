@@ -1,0 +1,6 @@
+# ignore files for both Git and Mercurial
+# Git doesn't has setting `syntax`, but it's fine, it will see it as a pattern.
+syntax: glob
+*.[oa]
+*.sw[op]
+__pycache__
