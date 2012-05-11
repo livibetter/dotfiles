@@ -101,5 +101,17 @@ style mail.google.com,groups.google.com -name google-monospace * { font-family: 
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
 style blog.yjl.im div.blogger-clickTrap { display: none }
+" maximize Labels popup in Blogger
+style draft.blogger.com <<EOF 
+div.blogg-menu-popup {
+    left: 0 !important;
+}
+div[role="listbox"] {
+    max-width: none !important;
+}
+div[role="listbox"] > div > div {
+  display: inline-block;
+}
+EOF
 
 " vim: sts=2:sw=2:et:ai:smarttab
