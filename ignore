@@ -2,5 +2,6 @@
 # Git doesn't has setting `syntax`, but it's fine, it will see it as a pattern.
 syntax: glob
 *.[oa]
+*.py[oc]
 *.sw[op]
 __pycache__
