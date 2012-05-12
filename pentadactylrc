@@ -102,7 +102,7 @@ style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !impo
 " get rid of clickTrap of Blogger post writing preview
 style blog.yjl.im div.blogger-clickTrap { display: none }
 " maximize Labels popup in Blogger
-style draft.blogger.com <<EOF 
+style http://draft.blogger.com/blogger.g* <<EOF 
 div.blogg-menu-popup {
     left: 0 !important;
 }
@@ -110,6 +110,15 @@ div[role="listbox"] {
     max-width: none !important;
 }
 div[role="listbox"] > div > div {
+  display: inline-block;
+}
+EOF
+" maximize Labels popup in Google Reader
+style https://www.google.com/reader/view/* <<EOF
+.subscription-folders-menu {
+  left: 0 !important;
+}
+.subscription-folders-menu div[role="menuitem"] {
   display: inline-block;
 }
 EOF
