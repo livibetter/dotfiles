@@ -1,6 +1,9 @@
 " Can not use the next setting with tmux
 set t_Co=256 
 
+" Save buffer list
+set viminfo='20,\"500,%
+
 colorscheme koehler
 " colorscheme bubblegum
 " statusline with koehler colors is hard to read when using splits

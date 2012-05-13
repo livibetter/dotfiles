@@ -1,2 +1,2 @@
 " CSS Property Sorter Script (:SortCSS to run)
-command! -range=% SortCSS :<line1>,<line2>!python ~/p/css-prop-sorter/css_prop_sorter.py
+command! -range=% -nargs=* SortCSS :<line1>,<line2>!sortcss.py <f-args>
