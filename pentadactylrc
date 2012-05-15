@@ -65,6 +65,9 @@ EOF
   au LocationChange github\.com\/[a-zA-Z]+\/[a-zA-Z0-9-]+\/(issues|network) normal! <C-z>
   au LocationChange grooveshark\.com normal! <C-z>
 
+  " Enter Insert mode
+  au LocationChange docs\.google\.com :normal gi
+
   " Auto reload
   au PageLoad tw\.finance\.yahoo.com\/pf\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()
 "
