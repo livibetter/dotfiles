@@ -100,6 +100,13 @@ EOF
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
+" fix Google+ annoyance
+style .* <<EOF
+#gbvg > ol.gbtc > li.gbt:nth-child(2),
+#gbvg > ol.gbtc > li.gbt:nth-child(3) {
+  display: none !important;
+}
+EOF
 " fix Blogger template editing
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
