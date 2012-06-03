@@ -101,9 +101,17 @@ EOF
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
 " fix Google+ annoyance
-style .* <<EOF
+style .*.google.com/.* <<EOF
+/* below black top bar, in gray area */
 #gbvg > ol.gbtc > li.gbt:nth-child(2),
 #gbvg > ol.gbtc > li.gbt:nth-child(3) {
+  display: none !important;
+}
+/* in the black top bar */
+#gbg > ol.gbtc > li.gbt:nth-child(2),
+#gbg > ol.gbtc > li.gbt:nth-child(3),
+#gbg > ol.gbtc > li.gbt:nth-child(4),
+#gbg > ol.gbtc > li.gbt:nth-child(5) {
   display: none !important;
 }
 EOF
