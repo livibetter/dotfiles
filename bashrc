@@ -33,6 +33,8 @@ alias vi='vim'
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
 alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 
+alias beeps='for i in {1..5}; do aplay -q /usr/share/sounds/generic.wav; sleep 0.5s; done'
+alias pyhttp='python -m SimpleHTTPServer'
 
 ##################
 # Helper functions
@@ -71,7 +73,7 @@ fi
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
-[[ -f $HOME/p/yjl/Bash/g ]] && . $HOME/p/yjl/Bash/g || echo "Can not found g script!"
+[[ -f $HOME/p/g/g ]] && . $HOME/p/g/g || echo "Can not found g script!"
 
 for comp in $HOME/.bash_completion.d/* ; do
     [[ -r "$comp" ]] && . "$comp"

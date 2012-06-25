@@ -46,7 +46,7 @@ gen_text()
     1) # I ♥ Quotes
       wget -q -O - http://www.iheartquotes.com/api/v1/random |
       head -n -2 |
-      sed 's/&quot;/"/g'
+      sed 's/&amp;/\&/g;s/&quot;/"/g'
       ;;
     2) # QDB
       echo -e 'setns a=http://purl.org/rss/1.0/\ncat //a:item[1]/a:description/text()' |

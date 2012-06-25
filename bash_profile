@@ -6,7 +6,7 @@
 # User specific environment and startup programs
 
 PATH=$HOME/bin:$PATH:/sbin:/usr/sbin:/usr/games/bin
-MANPATH=$MANPATH:$HOME/share/man
+MANPATH=$MANPATH:$HOME/share/man:$HOME/.local/man
 PYTHONPATH="$HOME/lib/python:$PYTHONPATH"
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
