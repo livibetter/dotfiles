@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2011 Yu-Jie Lin
+# Copyright 2011, 2012 Yu-Jie Lin
 # WTFPL License
 #
 # Checks Justin.tv user's favored channels live status
@@ -10,12 +10,16 @@
 # USERNAME default is $USER
 #
 # Requires
-#   http://code.google.com/p/yjl/source/browse/Bash/td.sh
+#   td.sh <http://code.google.com/p/yjl/source/browse/Bash/td.sh>
+#   xsltproc
+#   wget
 
 XSLT="$(readlink "$0")"
 XSLT="${XSLT%.sh}.xslt"
 
 JTV_USERNAME="${1:-$USER}"
+# Remove http://..../ part
+JTV_USERNAME="${JTV_USERNAME##*/}"
 # Favorites are whom this user follows
 # http://apiwiki.justin.tv/mediawiki/index.php/User/favorites
 LOGINS="$JTV_USERNAME$(wget -q "http://api.justin.tv/api/user/favorites/$JTV_USERNAME.xml?live=true" -O - |
