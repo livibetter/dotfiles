@@ -85,7 +85,7 @@ uf() {
 
   case "$ext" in
     rar)
-      unrar e "$1" "$d" 
+      unrar x "$1" "$d" 
       ;;
     zip)
       unzip "$1" -d "$d"
