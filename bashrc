@@ -62,6 +62,41 @@ wt() {
   fi
   }
 
+###############################
+# uf: Unarchive in new directory
+
+# Usage: df [-n] <archive>
+# Option:
+#   -n: do not change to new directory
+# ref: http://blog.yjl.im/2012/04/extracting-archive-to-different.html
+
+uf() {
+  local no_cd ext d
+
+  if [[ "$1" == "-n" ]]; then
+    no_cd=1
+    shift
+  fi
+
+  ext=${1##*.} # extension of archive
+  d="${1%.*}"  # directory to be created
+
+  [[ -z $ext ]] && return
+
+  case "$ext" in
+    rar)
+      unrar e "$1" "$d" 
+      ;;
+    zip)
+      unzip "$1" -d "$d"
+      ;;
+    *)
+      echo "Unknown archieve type: $ext" >&2
+  esac
+
+  [[ -z $no_cd ]] && cd "$d"
+  return 0
+  }
 
 # for root
 if (( UID == 0 )); then
