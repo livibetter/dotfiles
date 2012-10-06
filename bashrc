@@ -80,6 +80,8 @@ uf() {
 
   ext=${1##*.} # extension of archive
   d="${1%.*}"  # directory to be created
+  # unrar needs $d to be created already
+  mkdir -p "$d"
 
   [[ -z $ext ]] && return
 
