@@ -36,69 +36,8 @@ alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 alias beeps='for i in {1..5}; do aplay -q /usr/share/sounds/generic.wav; sleep 0.5s; done'
 alias pyhttp='python -m SimpleHTTPServer'
 
-##################
 # Helper functions
-##################
-
-############
-# wget & tar
-
-# Usage: wt 'http://example.com/blah.blah.tar.gz' [keep]
-# If [keep] is presented, whatever it is, the tarball will be kept.
-wt() {
-  (( $# == 0 )) && return
-  URL="$1"
-  keep="$2"
-  filename="$(basename "$URL")"
-  wget "$URL" -O "$filename"
-  tar xf "$filename"
-  [[ -z "$keep" ]] && rm "$filename"
-  # Guessing the directory
-  d="${filename%%.[a-z]*}"
-  if [[ -d "$d" ]]; then
-    cd "$d"
-  else
-    echo "Sorry, I don't know what's the name of extracted directory."
-  fi
-  }
-
-###############################
-# uf: Unarchive in new directory
-
-# Usage: df [-n] <archive>
-# Option:
-#   -n: do not change to new directory
-# ref: http://blog.yjl.im/2012/04/extracting-archive-to-different.html
-
-uf() {
-  local no_cd ext d
-
-  if [[ "$1" == "-n" ]]; then
-    no_cd=1
-    shift
-  fi
-
-  ext=${1##*.} # extension of archive
-  d="${1%.*}"  # directory to be created
-  # unrar needs $d to be created already
-  mkdir -p "$d"
-
-  [[ -z $ext ]] && return
-
-  case "$ext" in
-    rar)
-      unrar x "$1" "$d" 
-      ;;
-    zip)
-      unzip "$1" -d "$d"
-      ;;
-    *)
-      echo "Unknown archieve type: $ext" >&2
-  esac
-
-  [[ -z $no_cd ]] && cd "$d"
-  return 0
-  }
+[[ -f $HOME/.bash-helper-func.sh ]] && source $HOME/.bash-helper-func.sh
 
 # for root
 if (( UID == 0 )); then
