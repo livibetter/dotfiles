@@ -24,6 +24,8 @@
 
 # Usage: wt 'http://example.com/blah.blah.tar.gz' [keep]
 # If [keep] is presented, whatever it is, the tarball will be kept.
+# ref: http://blog.yjl.im/2011/08/simplifying-wget-and-and-tar-and-and-cd.html
+
 wt() {
   (( $# == 0 )) && return
   URL="$1"
@@ -41,7 +43,7 @@ wt() {
   fi
   }
 
-###############################
+################################
 # uf: Unarchive in new directory
 
 # Usage: df [-n] <archive>
@@ -72,7 +74,7 @@ uf() {
       unzip "$1" -d "$d"
       ;;
     *)
-      echo "Unknown archieve type: $ext" >&2
+      echo "Unknown archive type: $ext" >&2
   esac
 
   [[ -z $no_cd ]] && cd "$d"

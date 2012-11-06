@@ -41,9 +41,9 @@ alias pyhttp='python -m SimpleHTTPServer'
 
 # for root
 if (( UID == 0 )); then
-	alias rm='rm -i'
-	alias cp='cp -i'
-	alias mv='mv -i'
+  alias rm='rm -i'
+  alias cp='cp -i'
+  alias mv='mv -i'
 fi
 
 # Source global definitions
@@ -107,10 +107,10 @@ fi # end of prompt
 # Change the window title of X terminals
 # originally from /etc/bash/bashrc on Gentoo
 case ${TERM} in
-	xterm*|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-		PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
-		;;
-	screen)
-		PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'
-		;;
+  xterm*|rxvt*|Eterm|aterm|kterm|gnome*|interix)
+    PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+    ;;
+  screen)
+    PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'
+    ;;
 esac
