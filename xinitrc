@@ -25,8 +25,10 @@ export EDITOR
 # .bashrc ####################################################################
 
 #export XMODIFIERS="@im=gcin"
-#export GTK_IM_MODULE="xim"
-#export QT_IM_MODULE="xim"
+# Make sure updates of ~/.XCompose take effective on newly started programs
+# without needing to restart X.
+export GTK_IM_MODULE="xim"
+export QT_IM_MODULE="xim"
 #export XIM_PROGRAM="gcin"
 
 # .xinitrc ###################################################################
