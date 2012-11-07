@@ -80,3 +80,45 @@ uf() {
   [[ -z $no_cd ]] && cd "$d"
   return 0
   }
+
+#######################
+# sleeptil: Sleep until
+
+# Usage: sleeptil [-v] <date/time string> 
+# Option:
+#   -v: display date/time and seconds until the time
+# Optional:
+#   td.sh: for printing out human readable time
+#          https://github.com/livibetter/td.sh
+
+sleeptil () {
+  local verbose END_TS END_DATE DUR
+
+  if [[ $1 == -v ]]; then
+    verbose=1
+    shift
+  fi
+
+  # Checking valid of date/time string
+  if ! END_TS=$(date -d "$*" +%s); then
+    return 1
+  fi
+
+  # This is not a sci-fi, you cannot sleep back into the past.
+  if (( END_TS < $(date +%s ))); then
+    echo "$(date -d "$*") is in the past!" >&2
+    return 1
+  fi
+
+  if [[ ! -z $verbose ]]; then
+    END_DATE="$(date -d @$END_TS)"
+    if type td.sh &>/dev/null; then
+      DUR="$(td.sh $((END_TS - $(date +%s))))"
+    else
+      DUR="$((END_TS - $(date +%s))) seconds"
+    fi
+    echo "$END_DATE in $DUR"
+  fi
+
+  sleep $((END_TS - $(date +%s)))
+  }
