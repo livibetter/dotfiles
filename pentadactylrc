@@ -118,7 +118,7 @@ EOF
 " fix Blogger template editing
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
-style blog.yjl.im div.blogger-clickTrap { display: none }
+style 3803541356848955053.*.blogspot.com div.blogger-clickTrap { display: none }
 " maximize Labels popup in Blogger
 style http://draft.blogger.com/blogger.g* <<EOF 
 div.blogg-menu-popup {
