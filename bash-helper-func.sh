@@ -90,6 +90,7 @@ uf() {
 # Optional:
 #   td.sh: for printing out human readable time
 #          https://github.com/livibetter/td.sh
+# ref: http://blog.yjl.im/2012/11/sleeptil-sleep-until-bash-function.html
 
 sleeptil () {
   local verbose END_TS END_DATE DUR
