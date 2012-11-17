@@ -96,7 +96,16 @@ EOF
   source '~/.pentadactyl-Test.rc'
 :endif
 
+" ======
 " Styles
+" ======
+
+" Delete all styles, first.
+delstyle!
+
+" Google
+" ======
+
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
@@ -115,15 +124,16 @@ style .*.google.com/.* <<EOF
   display: none !important;
 }
 EOF
+
+" Blogger
+" =======
+
 " fix Blogger template editing
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
-style 3803541356848955053.*.blogspot.com div.blogger-clickTrap { display: none }
+style 3803541356848955053.*\.blogspot\.com div.blogger-clickTrap { display: none }
 " maximize Labels popup in Blogger
 style http://draft.blogger.com/blogger.g* <<EOF 
-div.blogg-menu-popup {
-    left: 0 !important;
-}
 div[role="listbox"] {
     max-width: none !important;
 }
@@ -131,6 +141,10 @@ div[role="listbox"] > div > div {
   display: inline-block;
 }
 EOF
+
+" Reader
+" ======
+
 " maximize Labels popup in Google Reader
 style https://www.google.com/reader/view/* <<EOF
 .subscription-folders-menu {

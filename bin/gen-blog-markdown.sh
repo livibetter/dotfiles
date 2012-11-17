@@ -2,7 +2,8 @@
 # 2010-01-09T20:47:29+0800
 
 #markdown2 --extras=code-friendly,footnotes "$1" > /tmp/draft.html
-~/bin/markdown2.py -v --extras=code-friendly,footnotes=^ "$1" > /tmp/draft.html
+markdown2 --extras=code-friendly,footnotes=^ "$1" > /tmp/draft.html
+#~/bin/markdown2.py -v --extras=code-friendly,footnotes=^ "$1" > /tmp/draft.html
 #~/bin/markdown2.py -v --extras=toc,code-friendly,footnotes=^ "$1" > /tmp/draft.html
 #~/bin/markdown2.py -v --extras=smarty-pants,toc,code-friendly,footnotes=^ "$1" > /tmp/draft.html
 
