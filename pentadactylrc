@@ -74,9 +74,9 @@ EOF
   " Auto-pin
   au PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()
 
-  au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333";
+  au PageLoad about:blank* js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333";
   " PageLoad isn't fired when browser is launched
-  :if getBrowser().contentDocument.location.href == 'about:blank'
+  :if getBrowser().contentDocument.location.href.indexOf('about:blank') == 0
     js getBrowser().contentDocument.body.style.backgroundColor = "#333";
   :endif
   " The following line is simple but has problem with Blogger post editor, it
