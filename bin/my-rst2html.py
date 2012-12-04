@@ -141,9 +141,9 @@ class PyRun(Directive):
     raws = [nodes.raw('', PreCode._run(code, self.options.get('class', 'python'), self.options), format='html')]
     if not stdout:
       stdout = '*** NO OUTPUT ***'
-    raws.append(nodes.raw('', '<pre class="no-collapse">%s</pre>' % escape(stdout.decode('utf-8')), format='html'))
+    raws.append(nodes.raw('', '<pre class="pyrun stdout">%s</pre>' % escape(stdout.decode('utf-8')), format='html'))
     if stderr:
-      raws.append(nodes.raw('', '<pre>%s</pre>' % escape(stderr.decode('utf-8')), format='html'))
+      raws.append(nodes.raw('', '<pre class="pyrun stderr">%s</pre>' % escape(stderr.decode('utf-8')), format='html'))
     return raws
 
 
