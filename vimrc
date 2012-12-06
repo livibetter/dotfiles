@@ -257,7 +257,37 @@ nmap <leader>Y "+yy
 nmap <leader>p "+p
 nmap <leader>P "+P
 
+" ==========================================================================
+" HTML Encode/Decode
+" ==========================================================================
+" ref: http://vim.wikia.com/wiki/HTML_entities#Perl_HTML::Entities
+function! HTMLEncode()
+perl << EOF
+ use HTML::Entities;
+ @pos = $curwin->Cursor();
+ $line = $curbuf->Get($pos[0]);
+ $encvalue = encode_entities($line);
+ $curbuf->Set($pos[0],$encvalue)
+EOF
+endfunction
+
+function! HTMLDecode()
+perl << EOF
+ use HTML::Entities;
+ @pos = $curwin->Cursor();
+ $line = $curbuf->Get($pos[0]);
+ $encvalue = decode_entities($line);
+ $curbuf->Set($pos[0],$encvalue)
+EOF
+endfunction
+
+vmap <Leader>h :call HTMLEncode()<CR>
+vmap <Leader>H :call HTMLDecode()<CR>
+
+" ==========================================================================
 " FileTypes
+" ==========================================================================
+
 au BufEnter * lcd %:p:h
 
 " vim: set sw=2 et:
