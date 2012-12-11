@@ -109,8 +109,12 @@ delstyle!
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
-" fix Google+ annoyance
-style .*.google.com/.* <<EOF
+
+" Google+
+" =======
+
+" for Blogger and many Google websites
+style .*\.(blogger|google)\.com/.* <<EOF
 /* below black top bar, in gray area */
 #gbvg > ol.gbtc > li.gbt:nth-child(2),
 #gbvg > ol.gbtc > li.gbt:nth-child(3) {
@@ -121,6 +125,13 @@ style .*.google.com/.* <<EOF
 #gbg > ol.gbtc > li.gbt:nth-child(3),
 #gbg > ol.gbtc > li.gbt:nth-child(4),
 #gbg > ol.gbtc > li.gbt:nth-child(5) {
+  display: none !important;
+}
+EOF
+
+" for YouTube
+style .*\.youtube\.com/.* <<EOF
+#sb-button-notify {
   display: none !important;
 }
 EOF
