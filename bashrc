@@ -33,7 +33,7 @@ alias vi='vim'
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
 alias ytdl='cd /tmp ; youtube-dl --max-quality=22 -t'
 
-alias beeps='(BEEPS_RET=$? ; ((BEEPS_RET)) && BEEPS=error || BEEPS=generic ; for i in {1..5} ; do (aplay -q /usr/share/sounds/$BEEPS.wav &) >/dev/null ; sleep 1 ; done ; (exit $BEEPS_RET))'
+alias beeps='(BEEPS_RET=$? ; ((BEEPS_RET)) && BEEPS=error || BEEPS=generic ; for i in {1..5} ; do (aplay -q /usr/share/sounds/$BEEPS.wav &) >/dev/null ; sleep 1 ; done ; exit $BEEPS_RET)'
 alias pyhttp='python -m SimpleHTTPServer'
 
 # Helper functions
