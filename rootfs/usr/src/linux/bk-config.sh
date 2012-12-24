@@ -10,7 +10,7 @@ if [[ ! -f "$KERNEL_CONFIG" ]]; then
 fi
 
 if ! diff kernel-config "$KERNEL_CONFIG" >/dev/null; then
-  cp -a "$KERNEL_CONFIG" kernel-config
+  cp -dR --preserve=mode,timestamps "$KERNEL_CONFIG" kernel-config
   echo "Saved"
 else
   echo ".config unchanged."
