@@ -238,6 +238,7 @@ nmap <Leader>ls :ls<CR>
 nmap <Leader>bp :bp<CR>
 nmap <Leader>bn :bn<CR>
 nmap <Leader>bw :bw<CR>
+nmap <Leader>bb :b#<CR>
 nmap <Leader>b# :b#<CR>
 
 " ==========================================================================
