@@ -197,8 +197,10 @@ augroup mkd
 
   autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
 
-  autocmd BufRead *.mkd map <F5> <ESC>:w<CR>:!gen-blog-markdown.sh "%"<CR>
-  autocmd BufRead *.mkd imap <F5> <ESC>:w<CR>:!gen-blog-markdown.sh "%"<CR>
+  autocmd BufRead *.mkd  map <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.mkd imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+
+  autocmd BufRead *.mkd nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
 
 augroup END
 
@@ -208,8 +210,10 @@ augroup END
 
 augroup rst
 
-  autocmd BufRead *.rst  map <F5> <ESC>:w<CR>:exec '!gen-blog-rst.sh ' . shellescape(expand('%:p'))<CR>
-  autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:exec '!gen-blog-rst.sh ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.rst  map <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+
+  autocmd BufRead *.rst nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
 
 augroup END
 
