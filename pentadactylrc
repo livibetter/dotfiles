@@ -45,7 +45,7 @@ window.toggle_toolbars = function(ids) {
   }
 
 window.one_unpinned_tab = function(event) {
-  for (idx in gBrowser.tabs) {
+  for (var idx = 0; idx < gBrowser.tabs.length; idx++) {
     var tab = gBrowser.tabs[idx];
     if (!tab.pinned && !tab.closing) {
       return;
