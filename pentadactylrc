@@ -152,8 +152,6 @@ div[role="listbox"] > div > div {
   display: inline-block;
 }
 EOF
-" show post edit icon
-style blog.yjl.im .item-control { display: inline !important }
 
 " Reader
 " ======
