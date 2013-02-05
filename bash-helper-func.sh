@@ -1,5 +1,5 @@
 # My Bash helper functions
-# Copyright (c) 2011, 2012 Yu-Jie Lin
+# Copyright (c) 2011-2013 Yu-Jie Lin
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +24,7 @@
 
 # Usage: wt 'http://example.com/blah.blah.tar.gz' [keep]
 # If [keep] is presented, whatever it is, the tarball will be kept.
+# (opt) dtrx: rhttp://brettcsmith.org/2007/dtrx/
 # ref: http://blog.yjl.im/2011/08/simplifying-wget-and-and-tar-and-and-cd.html
 
 wt() {
@@ -32,15 +33,14 @@ wt() {
   keep="$2"
   filename="$(basename "$URL")"
   wget "$URL" -O "$filename"
-  tar xf "$filename"
+  if type dtrx &>/dev/null; then
+    dtrx -n "$filename"
+  else
+    tar xf "$filename"
+  fi
   [[ -z "$keep" ]] && rm "$filename"
   # Guessing the directory
-  d="${filename%%.[a-z]*}"
-  if [[ -d "$d" ]]; then
-    cd "$d"
-  else
-    echo "Sorry, I don't know what's the name of extracted directory."
-  fi
+  cd "${filename%%.[a-z]*}"*
   }
 
 ################################
