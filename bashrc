@@ -94,7 +94,7 @@ printf "\e[41;1;37m%${COLUMNS}s\e[$(((COLUMNS-${#ret})/2))G%s\e[0m\n\[\e[0m\]" "
 )'
 
 # the first $DIR_COLOR can be removed
-if [[ $TERM == 'screen' ]]; then
+if [[ $TERM == screen* ]]; then
     PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD"'\[\033k\033\\\]'" $USER_COLOR\$ \[\e[0m\]"
 else
     PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD $USER_COLOR\$ \[\e[0m\]"
@@ -110,7 +110,7 @@ case ${TERM} in
   xterm*|rxvt*|Eterm|aterm|kterm|gnome*|interix)
     PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
     ;;
-  screen)
+  screen*)
     PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'
     ;;
 esac
