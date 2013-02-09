@@ -183,6 +183,21 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 
 " ==========================================================================
+" AsciiDoc
+" ==========================================================================
+
+augroup asciidoc
+
+  autocmd BufNewFile,BufRead *.asciidoc  setfiletype asciidoc
+
+  autocmd BufRead *.asciidoc  map <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.asciidoc imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
+
+  autocmd BufRead *.asciidoc nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
+
+augroup END
+
+" ==========================================================================
 " Markdown syntax
 " ==========================================================================
 
