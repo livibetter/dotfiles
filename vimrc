@@ -194,6 +194,7 @@ augroup asciidoc
   autocmd BufRead *.asciidoc imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
 
   autocmd BufRead *.asciidoc nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.asciidoc nmap <Leader>chk <ESC>:w<CR>:exec '!b.py checklink ' . shellescape(expand('%:p'))<CR>
 
 augroup END
 
@@ -216,6 +217,7 @@ augroup mkd
   autocmd BufRead *.mkd imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
 
   autocmd BufRead *.mkd nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.mkd nmap <Leader>chk <ESC>:w<CR>:exec '!b.py checklink ' . shellescape(expand('%:p'))<CR>
 
 augroup END
 
@@ -229,6 +231,7 @@ augroup rst
   autocmd BufRead *.rst imap <F5> <ESC>:w<CR>:exec '!b.py generate ' . shellescape(expand('%:p'))<CR>
 
   autocmd BufRead *.rst nmap <Leader>post <ESC>:w<CR>:exec '!b.py post ' . shellescape(expand('%:p'))<CR>
+  autocmd BufRead *.rst nmap <Leader>chk <ESC>:w<CR>:exec '!b.py checklink ' . shellescape(expand('%:p'))<CR>
 
 augroup END
 
