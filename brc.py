@@ -121,6 +121,13 @@ def kbd(name, rawtext, text, lineno, inliner, options=None, content=None):
 blog = 3803541356848955053
 
 handlers = {
+  'Markdown': {
+    'options': {
+      'config': {
+        'extensions': ['footnotes', 'toc'],
+      },
+    },
+  },
   'reStructuredText': {
     'options': {
       'markup_prefix': '.. sectnum::\n\n',
