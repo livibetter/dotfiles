@@ -48,6 +48,8 @@ static Rule rules[] = {
 
   { "MPlayer",      NULL,         NULL,       0,        True,       -1 },
   { "Smplayer",     NULL,         NULL,       0,        True,       -1 },
+  { NULL,           NULL,         "VLC media player",
+                                              0,        True,       -1 },
   
   { "URxvt",        "bashrun",    NULL,       0,        True,       -1 },
   { NULL,           NULL,         "Volume Control",
