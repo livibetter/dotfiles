@@ -67,13 +67,13 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 " Set shell title
 " http://vim.wikia.com/wiki/Automatically_set_screen_title
-let &titlestring = "vim:" . expand("%:t")
-if &term == "screen"
+autocmd BufEnter * let &titlestring = "vim:" . expand("%:t")
+if &term =~ "screen.*"
   " ^[ is by pressing Ctrl+V ESC
   set t_ts=k
   set t_fs=\
 endif
-if &term == "screen" || &term == "xterm" || &term == "urxvt"
+if &term =~ "(screen|urxvt|xterm).*"
   set title
 endif
 
@@ -85,10 +85,7 @@ endif
 augroup mkd
 
   autocmd BufRead *.mkd set tabstop=2
-  autocmd BufRead *.mkd set shiftwidth=2
   autocmd BufRead *.mkd set smarttab
-  autocmd BufRead *.mkd set expandtab
-  autocmd BufRead *.mkd set softtabstop=2
 
   autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
 
