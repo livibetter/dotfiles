@@ -1,0 +1,214 @@
+# my boxes styles
+#
+# author: Yu-Jie Lin
+# web   : https://github.com/livibetter/dotfiles/blob/master/boxes
+#
+# note: if you know any way to improve this file, please open an issue on
+#       GitHub or contact me via http://s.yjl.im/contact
+
+###################
+# one-liner style #
+###################
+
+BOX cmt-c
+
+sample
+  /* foobar */
+ends
+
+shapes {
+  w ("/*") e ("*/")
+}
+
+delim ?"
+replace "\*/" with "*\/"
+reverse "\*\\/" to "*/"
+
+padding {
+  horiz 1
+}
+
+elastic (w, e)
+
+END cmt-c
+
+BOX cmt-pound
+
+sample
+  # foobar
+ends
+
+shapes {
+  w ("#")
+}
+
+padding {
+  left 1
+}
+
+elastic (w)
+
+END cmt-pound
+
+BOX cmt-vim
+
+sample
+  " foobar
+ends
+
+shapes {
+  w ("\"")
+}
+
+padding {
+  left 1
+}
+
+elastic (w)
+
+END cmt-vim
+
+#################
+# heading style #
+#################
+
+# h1
+#####
+
+BOX h1-c
+
+sample
+  /**********/
+  /* foobar */
+  /**********/
+ends
+
+shapes {
+  nw ("/*") n("*") ne ("*/")
+   w ("/*")         e ("*/")
+  sw ("/*") s("*") se ("*/")
+}
+
+delim ?"
+replace "\*/" with "*\/"
+reverse "\*\\/" to "*/"
+
+padding {
+  horiz 1
+}
+
+elastic (n, w, s, e)
+
+END h1-c
+
+BOX h1-pound
+
+sample
+  ##########
+  # foobar #
+  ##########
+ends
+
+shapes {
+  nw ("#") n("#") ne ("#")
+   w ("#")         e ("#")
+  sw ("#") s("#") se ("#")
+}
+
+padding {
+  horiz 1
+}
+
+elastic (n, w, s, e)
+
+END h1-pound
+
+BOX h1-vim
+
+sample
+  "========"
+  " foobar "
+  "========"
+ends
+
+shapes {
+  nw ("\"") n("=") ne ("\"")
+   w ("\"")         e ("\"")
+  sw ("\"") s("=") se ("\"")
+}
+
+padding {
+  horiz 1
+}
+
+elastic (n, w, s, e)
+
+END h1-vim
+
+# h2
+#####
+
+BOX h2-c
+
+sample
+  /* foobar
+   *********/
+ends
+
+shapes {
+    w("/*")
+  wsw(" *")
+   sw(" *") s("*") se ("*/")
+}
+
+delim ?"
+replace "\*/" with "*\/"
+reverse "\*\\/" to "*/"
+
+padding {
+  left 1
+}
+
+elastic (wsw, s)
+
+END h2-c
+
+BOX h2-pound
+
+sample
+  # foobar 
+  #########
+ends
+
+shapes {
+   w ("#")
+  sw ("#") s("#") se ("#")
+}
+
+padding {
+  left 1
+}
+
+elastic (w, s)
+
+END h2-pound
+
+BOX h2-vim
+
+sample
+  " foobar
+  "========
+ends
+
+shapes {
+   w ("\"")
+  sw ("\"") s("=")
+}
+
+padding {
+  horiz 1
+}
+
+elastic (w, s)
+
+END h2-vim
