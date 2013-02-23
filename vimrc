@@ -6,12 +6,20 @@
 " note: if you know any way to improve this file, please open an issue on
 "       GitHub or contact me via http://s.yjl.im/contact
 
-colorscheme koehler
-" statusline with koehler colors is hard to read when using splits
-highlight StatusLine   cterm=bold ctermbg=darkgray ctermfg=lightgreen
-highlight StatusLineNC cterm=NONE ctermbg=darkgray ctermfg=darkgreen
+"=========="
+" Settings "
+"=========="
 
 set t_Co=256 
+
+" Solarized color scheme
+" https://github.com/altercation/vim-colors-solarized
+"=====================================================
+
+colorscheme solarized
+
+" Others
+"========
 
 " Save buffer list
 set viminfo='20,\"500,%

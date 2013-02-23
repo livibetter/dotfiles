@@ -3,83 +3,16 @@
 
 bashrun*font: xft:Envy Code R:style=Bold Oblique:pixelsize=20
 
-#########
-# Bashpad
-
-bashpad*inheritPixmap: false
-#bashpad*font: -adobe-courier-bold-o-normal--25-180-100-100-m-150-iso8859-1
-bashpad*font: xft:Andale Mono:style=Bold Oblique:pixelsize=20
-bashpad*geometry: 90x1+150+650
-bashpad*foreground: white
-bashpad*background: black
-#bashpad*borderWidth: 10
-bashpad*borderColor: pink
-bashpad*scrollBar: false
-#bashpad*borderLess:   true
-#bashpad*backgroundPixmap:   ~/.run.jpg;:propscale
-
 #############
 # Rxvt Colors
 
-Rxvt*background: #262626
-Rxvt*foreground: #a8a8a8
-Rxvt*color0: #262626
-#Rxvt*color0: #000000
-##Rxvt*color1: #ff5d28
-##Rxvt*color2: #b1d631
-##Rxvt*color3: #e6ea50
-Rxvt*color4: #3333ff
-##Rxvt*color4: #7e8aa2
-##Rxvt*color5: #af5f5f
-##Rxvt*color6: #acf0f2
-#Rxvt*color7: #e2e2e5
-Rxvt*color7: #a0a0a0
-#Rxvt*color8: #000000
-##Rxvt*color9: #ff5d28
-##Rxvt*color10: #b1d631
-##Rxvt*color11: #e6ea50
-Rxvt*color12: #3333ff
-##Rxvt*color12: #7e8aa2
-##Rxvt*color13: #af5f5f
-##Rxvt*color14: #acf0f2
-#Rxvt*color15: #e2e2e5
-Rxvt*color15: #a8a8a8
-
 # For less highlighting
 Rxvt*colorIT: #ff0000
-
-#*background:    #000000
-#*foreground:    #FFFFFF
-#!black
-#*color0 :            #222222
-#*color8 :            #454545
-!red
-#*color1 :            #B22222
-#*color9 :            #FA8072
-#!green
-#*color2 :            #556B2F
-#*color10:            #9ACD32
-#!yellow
-#*color3 :            #B8860B
-#*color11:            #DAA520
-#!blue
-#*color4 :            #4682B4
-#*color12:            #6495ED
-#!magenta
-#*color5 :            #9932CC
-#*color13:            #DA70D6
-#!cyan
-#*color6 :            #87CEEB
-#*color14:            #B0E0E6
-#!white
-#*color7 :            #C0C0C0
-#*color15:            #FFFFFF
 
 ###########
 # Rxvt misc
 
 Rxvt.font: xft:Envy Code R:style=Regular:size=9:antialias=false
-#Rxvt.font: xft:Envy Code B 10pt:style=Regular:size=10:antialias=false
 Rxvt.scrollBar: False
 Rxvt.cursorBlink: True
 
@@ -87,12 +20,8 @@ Rxvt.cursorBlink: True
 # URxvt
 
 URxvt.perl-lib: /home/livibetter/.urxvt/perl
-# Add url handler
-#URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: firefox-new-tab
 
 URxvt.perl-ext-common: default,url-select
-#URxvt.perl-ext-common: ...,url-select
-#URxvt.urlLauncher:     firefox
 URxvt.underlineURLs:   true
 URxvt.keysym.M-u:      perl:url-select:select_next

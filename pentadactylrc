@@ -1,4 +1,4 @@
-colorscheme dactyLgray
+colorscheme solarized-dark
 
 set defsearch=g
 set editor="urxvt -name vimp-ext-editor -e vim"
@@ -83,11 +83,6 @@ EOF
   " causes the background color of editor becomes #333.
   " style -name blank about:blank body { background-color: #333 !important }
 :elif config.profileName == "Test"
-  " Make command line red
-  js <<EOF
-    for ([k, v] in Iterator(highlight))
-      highlight.set(k, highlight.get(k).value.replace('background: #333', 'background: #633'));
-EOF
   au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#633";
   " PageLoad isn't fired when browser is launched
   :if getBrowser().contentDocument.location.href == 'about:blank'
