@@ -20,13 +20,12 @@ Xft.dpi: 96
 
 ! Bright Common
 
-#define S_brorange #db5b26
 #define S_brred #ec423f
-#define S_brmagenta #e34692
-#define S_brviolet #7c81d4
-#define S_brblue #369be2
-#define S_brcyan #3ab1a8
 #define S_brgreen #95a910
+#define S_bryellow #c59910
+#define S_brblue #369be2
+#define S_brmagenta #e34692
+#define S_brcyan #3ab1a8
 
 
 ! Dark
@@ -74,11 +73,12 @@ Xft.dpi: 96
 *color5: S_magenta
 *color6: S_cyan
 *color7: S_base2
-*color8: S_base03
-*color9: S_brorange
+
+*color8: S_base01
+*color9: S_brred
 *color10: S_brgreen
 *color11: S_bryellow
 *color12: S_brblue
-*color13: S_brviolet
+*color13: S_brmagenta
 *color14: S_brcyan
 *color15: S_base3
