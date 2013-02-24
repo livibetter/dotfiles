@@ -11,12 +11,7 @@
 "=========="
 
 set t_Co=256 
-
-" Solarized color scheme
-" https://github.com/altercation/vim-colors-solarized
-"=====================================================
-
-colorscheme solarized
+colorscheme koehler
 
 " Others
 "========
