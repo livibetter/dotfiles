@@ -18,6 +18,16 @@ Xft.dpi: 96
 #define S_cyan #2aa198
 #define S_green #859900
 
+! Bright Common
+
+#define S_brorange #db5b26
+#define S_brred #ec423f
+#define S_brmagenta #e34692
+#define S_brviolet #7c81d4
+#define S_brblue #369be2
+#define S_brcyan #3ab1a8
+#define S_brgreen #95a910
+
 
 ! Dark
 
@@ -49,7 +59,7 @@ Xft.dpi: 96
 ! URxvt*background: S_base03
 
 *background: S_base03
-*foreground: S_base0
+*foreground: S_base2
 *fading: 40
 *fadeColor: S_base03
 *cursorColor: S_base1
@@ -64,11 +74,11 @@ Xft.dpi: 96
 *color5: S_magenta
 *color6: S_cyan
 *color7: S_base2
-*color9: S_orange
 *color8: S_base03
-*color10: S_base01
-*color11: S_base00
-*color12: S_base0
-*color13: S_violet
-*color14: S_base1
+*color9: S_brorange
+*color10: S_brgreen
+*color11: S_bryellow
+*color12: S_brblue
+*color13: S_brviolet
+*color14: S_brcyan
 *color15: S_base3
