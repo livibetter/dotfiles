@@ -114,9 +114,7 @@ augroup fixes
   " CSS
   "=====
 
-  autocmd BufEnter * if &filetype =~ 'css\|html'
-    \ | command! -buffer -range=% -nargs=* SortCSS :<line1>,<line2>!sortcss.py <f-args>
-    \ | endif
+  autocmd BufEnter * if &filetype =~ 'css\|html' | call SortCSSCmd() | endif
 
   " Markdown
   "==========
@@ -131,6 +129,12 @@ augroup fixes
     \ | endif
 
 augroup END
+
+function! SortCSSCmd()
+
+  command! -buffer -range=% -nargs=* SortCSS :<line1>,<line2>!sortcss.py <f-args>
+
+endfunction
 
 "================================================="
 " boxes comments <http://boxes.thomasjensen.com/> "
