@@ -126,15 +126,15 @@ END h1-pound
 BOX h1-vim
 
 sample
-  "========"
+  " ====== "
   " foobar "
-  "========"
+  " ====== "
 ends
 
 shapes {
-  nw ("\"") n("=") ne ("\"")
+  nw ("\"") nnw (" ") n("=") nne (" ") ne ("\"")
    w ("\"")         e ("\"")
-  sw ("\"") s("=") se ("\"")
+  sw ("\"") ssw (" ") s("=") sse (" ") se ("\"")
 }
 
 padding {
@@ -177,12 +177,12 @@ BOX h2-pound
 
 sample
   # foobar 
-  #########
+  ########
 ends
 
 shapes {
    w ("#")
-  sw ("#") s("#") se ("#")
+  sw ("#") s("#")
 }
 
 padding {
@@ -197,16 +197,16 @@ BOX h2-vim
 
 sample
   " foobar
-  "========
+  " ======
 ends
 
 shapes {
    w ("\"")
-  sw ("\"") s("=")
+  sw ("\"") ssw(" ") s("=")
 }
 
 padding {
-  horiz 1
+  left 1
 }
 
 elastic (w, s)

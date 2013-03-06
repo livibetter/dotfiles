@@ -91,9 +91,9 @@ EOF
   source '~/.pentadactyl-Test.rc'
 :endif
 
-" ======
-" Styles
-" ======
+" ====== "
+" Styles "
+" ====== "
 
 " Delete all styles, first.
 delstyle!
@@ -134,5 +134,3 @@ style https://www.google.com/reader/view/* <<EOF
   display: inline-block;
 }
 EOF
-
-" vim: sts=2:sw=2:et:ai:smarttab

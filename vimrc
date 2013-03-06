@@ -156,7 +156,7 @@ function! BoxesMap()
     let boxestype = 'pound'
   elseif &filetype =~ '^\(c\|css\|javascript\)$'
     let boxestype = 'c'
-  elseif &filetype == 'vim'
+  elseif &filetype =~ 'vim\|pentadactyl'
     let boxestype = 'vim'
   else
     return
