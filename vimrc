@@ -152,7 +152,7 @@ augroup END
 
 function! BoxesMap()
 
-  if &filetype =~ '^\(boxes\|python\|sh\)$'
+  if &filetype =~ '^\(boxes\|make\|python\|sh\)$'
     let boxestype = 'pound'
   elseif &filetype =~ '^\(c\|css\|javascript\)$'
     let boxestype = 'c'
