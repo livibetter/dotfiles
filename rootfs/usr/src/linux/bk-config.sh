@@ -1,17 +1,17 @@
 #!/bin/bash
 
-TMP="$(readlink /usr/src/linux)"
-DIR_KERNEL="${TMP%/}"
-KERNEL_CONFIG="/usr/src/$DIR_KERNEL/.config"
+DIR_KERNEL="$(readlink -f /usr/src/linux)"
+KERNEL_CONFIG="$DIR_KERNEL/.config"
+TARGET="kernel-config"
 
 if [[ ! -f "$KERNEL_CONFIG" ]]; then
   echo ".config cannot be found at $DIR_KERNEL" >&2
   exit 1
 fi
 
-if ! diff kernel-config "$KERNEL_CONFIG" >/dev/null; then
-  cp -dR --preserve=mode,timestamps "$KERNEL_CONFIG" kernel-config
-  echo "Saved"
+if ! cmp --silent "$TARGET" "$KERNEL_CONFIG"; then
+  cp -dR --preserve=mode,timestamps "$KERNEL_CONFIG" "$TARGET"
+  echo "$TARGET saved."
 else
-  echo ".config unchanged."
+  echo "$KERNEL_CONFIG unchanged."
 fi
