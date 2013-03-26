@@ -17,6 +17,9 @@ map <silent>   <F8> :js toggle_toolbars(['PersonalToolbar', 'nav-bar', 'toolbar-
 map <silent> <C-S-PageUp> :tabm -1<CR>
 map <silent> <C-S-PageDown> :tabm +1<CR>
 
+" Enable to copy original URL
+map Y :yank gBrowser.contentDocument.location.href<CR>
+
 " I hate when I want to press <C-w> but I hit q instead
 map <C-q> <Nop>
 
