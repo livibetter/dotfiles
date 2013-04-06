@@ -77,12 +77,12 @@ class PyRun(Directive):
                  }
   has_content = True
 
-  def _generate_std(self, content):
+  def _generate_std(self, content, stdtype=''):
 
     content = escape(content.decode('utf-8'))
     return nodes.raw(
       '',
-      '<pre class="pyrun stdout">%s</pre>' % content,
+      '<pre class="pyrun %s">%s</pre>' % (stdtype or 'stdout', content),
       format='html'
     )
 
@@ -107,7 +107,7 @@ class PyRun(Directive):
       stdout = '*** NO OUTPUT ***'
     raws.append(self._generate_std(stdout))
     if stderr:
-      raws.append(self._generate_std(stderr))
+      raws.append(self._generate_std(stderr, 'stderr'))
     return raws
 
 
