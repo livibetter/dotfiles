@@ -61,9 +61,9 @@ gBrowser.mTabContainer.addEventListener('TabPinned', one_unpinned_tab, false);
 EOF
 
 :if config.profileName == "Normal"
-  " Enter passthrough mode automatically in Gmail, Reader, and GrooveShark
+  " Enter passthrough mode automatically in Gmail, CommaFeed, and GrooveShark
   au LocationChange (mail|groups)\.google\.com normal! <C-z>
-  au LocationChange www\.google\.com\/reader\/ normal! <C-z>
+  au LocationChange www\.commafeed\.com\/ normal! <C-z>
   au LocationChange code\.google\.com\/p\/[a-z0-9-]+\/issues\/ normal! <C-z>
   au LocationChange github\.com\/[a-zA-Z]+\/[a-zA-Z0-9-]+\/(issues|network) normal! <C-z>
   au LocationChange grooveshark\.com normal! <C-z>
@@ -121,19 +121,6 @@ div[role="listbox"] {
     max-width: none !important;
 }
 div[role="listbox"] > div > div {
-  display: inline-block;
-}
-EOF
-
-" Reader
-" ======
-
-" maximize Labels popup in Google Reader
-style https://www.google.com/reader/view/* <<EOF
-.subscription-folders-menu {
-  left: 0 !important;
-}
-.subscription-folders-menu div[role="menuitem"] {
   display: inline-block;
 }
 EOF
