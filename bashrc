@@ -51,11 +51,6 @@ fi
 
 [[ -f $HOME/p/g/g ]] && . $HOME/p/g/g || echo "Can not found g script!"
 
-for comp in $HOME/.bash_completion.d/* ; do
-    [[ -r "$comp" ]] && . "$comp"
-done
-unset comp
-
 # Prompt
 if enable -f ~/bin/vimps1 vimps1; then
     PS1='$(vimps1 $?)'
