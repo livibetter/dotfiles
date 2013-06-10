@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 
+import shlex
 import subprocess
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -92,7 +93,10 @@ class PyRun(Directive):
     cmd = 'python'
     if 'command' in self.options:
       cmd = self.options['command']
-    proc = subprocess.Popen((cmd, '-'),
+    args = shlex.split(cmd)
+    if args[0].startswith('python') and len(args) == 1:
+      args = (cmd, '-')
+    proc = subprocess.Popen(args,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
