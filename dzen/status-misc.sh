@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SP_LINES=15
+SP_LINES=18
 SP_TW=80
 
 source status-func.sh
@@ -14,7 +14,7 @@ updur="$(td.sh ${upsec%.*})"
 
 thres=$((7*24*60*60))
 ts="$(date -d "$(</usr/portage/metadata/timestamp.chk)" +%s)"
-dur=$(($(date +%s) - ts))
+dur=$(($(printf "%(%s)T" -1) - ts))
 td="$(td.sh $((thres-dur)))"
 
 # Formating
@@ -28,7 +28,7 @@ echo -n " Portage: "
 ((dur>=thres)) && echo -n "T + " || echo -n "T - "
 echo "$td"
 
-echo "          $(date --date=@$((ts + thres)) +'%A, %B %d, %Y %H:%M:%S')"
+printf "          %(%A, %B %d, %Y %H:%M:%S)T\n" $((ts + thres))
 echo
 
 echo "   mt.sh: $(mt.sh | tail -1 | sed 's/\(for\|since\)  \+/\1  /')"
