@@ -16,6 +16,9 @@ colorscheme koehler
 " Others
 "========
 
+" no intro message
+set shortmess+=I
+
 " Save buffer list
 set viminfo='20,\"500,%
 
