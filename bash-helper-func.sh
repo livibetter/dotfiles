@@ -128,8 +128,7 @@ sleeptil () {
 # beeps: Providing visual and audio notifications via dzen2 and a wave
 
 # Usage: beeps <message is written here>
-# ref: The poor man's notification (old method, audio only)
-#      http://blog.yjl.im/2012/12/the-poor-mans-notification.html
+# ref: http://blog.yjl.im/2013/06/beeps-with-dzen.html
 
 beeps() {
   (( BEEPS_RET=$? )) && BEEPS=error || BEEPS=generic
