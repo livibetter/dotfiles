@@ -31,7 +31,7 @@ alias vi='vim'
 #######
 # misc.
 alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
-alias ytdl='cd /tmp ; youtube-dl --write-sub'
+alias ytdl='cd /tmp ; youtube-dl --ignore-errors --write-sub'
 
 alias pyhttp='python -m SimpleHTTPServer 8001'
 
