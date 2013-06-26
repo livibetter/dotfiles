@@ -123,3 +123,27 @@ sleeptil () {
 
   sleep $((END_TS - $(date +%s)))
   }
+
+######################################################################
+# beeps: Providing visual and audio notifications via dzen2 and a wave
+
+# Usage: beeps <message is written here>
+# ref: The poor man's notification (old method, audio only)
+#      http://blog.yjl.im/2012/12/the-poor-mans-notification.html
+
+beeps() {
+  (( BEEPS_RET=$? )) && BEEPS=error || BEEPS=generic
+
+  # subshell'd to get rid of: [JOB#] PID#
+  (
+    for i in {1..5}; do
+      (aplay -q /usr/share/sounds/$BEEPS.wav &) >/dev/null
+      sleep 1
+    done &
+
+    echo "$@" |
+    dzen2 -p 10 -fn 'Envy Code R:size=24' -fg '#ff0000' &
+  )
+
+  return $BEEPS_RET
+}
