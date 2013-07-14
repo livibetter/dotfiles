@@ -137,6 +137,7 @@ handlers = {
       'markup_prefix': '.. sectnum::\n\n',
       'id_affix': '',
       'settings_overrides': {
+        'math_output': 'MathML',
       },
       'smartypants': True,
     },
