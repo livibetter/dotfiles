@@ -1,6 +1,6 @@
 // Multi-color and Vim-like abbreviated working directory PS1
 // using Bash loadable builtin
-// Copyright (C) 2011, 2012, Yu-Jie Lin
+// Copyright (C) 2011-2013 Yu-Jie Lin
 //
 // Compilation
 // ===========
@@ -46,6 +46,9 @@
 #include "hg.h"
 #include "svn.h"
 #include "fossil.h"
+
+// declare just for return type
+vccontext_t* probe_parents(vccontext_t** contexts, int num_contexts);
 
 #define S_CTLESC "\001"
 #define S_CTLNUL "\177"

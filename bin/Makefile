@@ -35,7 +35,7 @@ vimps1: vimps1.o $(VCPROMPT_OBJECTS)
 ##########
 
 $(VCPROMPT_OBJECTS):
-	$(CC) $(VIMPS1_CFLAGS) $(CCFLAGS) $(VIMPS1_INC) -c -o $@ $(subst .o,,$(@:.o=.c))
+	$(CC) -std=gnu99 $(VIMPS1_CFLAGS) $(CCFLAGS) $(VIMPS1_INC) -c -o $@ $(subst .o,,$(@:.o=.c))
 
 vimps1.o: vimps1.c
 	$(CC) $(VIMPS1_CFLAGS) $(CCFLAGS) $(VIMPS1_INC) -c -o $@ $<
