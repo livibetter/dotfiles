@@ -32,7 +32,7 @@ from bpy.handlers.rst import register_directive, register_role
 class PreCode(Directive):
   """Generate HTML as <pre><code> style for highlight.js"""
   optional_arguments = 1
-  option_spec = {'class': directives.unchanged}
+  option_spec = {'class': directives.unchanged, 'file': directives.unchanged}
   has_content = True
 
   @staticmethod
@@ -49,6 +49,10 @@ class PreCode(Directive):
       tmpl = ('<pre class="%s">' % options['class']) + tmpl + '</pre>'
     else:
       tmpl = '<pre>' + tmpl + '</pre>'
+
+    if 'file' in options:
+      with open(options['file']) as f:
+        code = f.read().decode('utf8')
 
     html = tmpl % escape(code)
     return html
