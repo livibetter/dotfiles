@@ -123,4 +123,14 @@ div[role="listbox"] {
 div[role="listbox"] > div > div {
   display: inline-block;
 }
+/* fix width of first column and font in Stats */
+div.postsStats,
+div.trafficSourcesStats {
+  width: auto !important;
+}
+p.GIL3GQOBBO {
+  font-family: 'Envy Code R' !important;
+  white-space: normal !important;
+  width: auto !important;
+}
 EOF
