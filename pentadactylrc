@@ -115,8 +115,9 @@ style mail.google.com,groups.google.com -name google-monospace * { font-family: 
 style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
 style 3803541356848955053.*\.blogspot\.com div.blogger-clickTrap { display: none }
-" maximize Labels popup in Blogger
+" fix dashboard
 style http://draft.blogger.com/blogger.g* <<EOF 
+/* maximize Labels popup in Blogger */
 div[role="listbox"] {
     max-width: none !important;
 }
@@ -132,5 +133,12 @@ p.GIL3GQOBBO {
   font-family: 'Envy Code R' !important;
   white-space: normal !important;
   width: auto !important;
+}
+/* hide +1 count */
+table.blogg-posttable > colgroup > col:nth-child(5) {
+  width: 0 !important;
+}
+a.GIL3GQOBLB {
+  display: none !important;
 }
 EOF
