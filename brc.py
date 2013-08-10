@@ -126,7 +126,10 @@ def kbd(name, rawtext, text, lineno, inliner, options=None, content=None):
   return [nodes.raw('', '<kbd>%s</kbd>' % text, format='html')], []
 
 
-blog = 3803541356848955053
+service = 'blogger'
+service_options = {
+  'blog': 3803541356848955053
+}
 
 handlers = {
   'Markdown': {
