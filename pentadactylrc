@@ -129,7 +129,7 @@ div.postsStats,
 div.trafficSourcesStats {
   width: auto !important;
 }
-p.GIL3GQOBBO {
+p.GHUY-LPLN {
   font-family: 'Envy Code R' !important;
   white-space: normal !important;
   width: auto !important;
@@ -138,7 +138,7 @@ p.GIL3GQOBBO {
 table.blogg-posttable > colgroup > col:nth-child(5) {
   width: 0 !important;
 }
-a.GIL3GQOBLB {
+table.blogg-posttable tr > td:nth-child(5) a {
   display: none !important;
 }
 EOF
