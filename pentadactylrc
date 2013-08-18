@@ -7,6 +7,8 @@ set editor="urxvt -name vimp-ext-editor -e vim"
 " versions.
 unmap!
 
+map , <Leader>
+
 " guioptions!=s controls and options.showtabline control all windows, not what
 " I need. I need to control each individually.
 map <silent> <C-F8> :js toggle_toolbar('addon-bar');<CR>
