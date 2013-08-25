@@ -137,6 +137,7 @@ handlers = {
       'config': {
         'extensions': ['footnotes', 'toc'],
       },
+      'smartypants': True,
     },
   },
   'reStructuredText': {
