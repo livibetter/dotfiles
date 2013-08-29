@@ -51,15 +51,12 @@ fi
 [[ -f $HOME/p/g/g ]] && . $HOME/p/g/g || echo "Can not found g script!"
 
 # Prompt
-if enable -f ~/bin/vimps1 vimps1; then
-    PS1='$(vimps1 $?)'
-else # fail to enable vimps1
-
 [[ $TERM == 'linux' ]] && STR_MAX_LENGTH=2 || STR_MAX_LENGTH=3
 DIR_COLOR='\[\e[1;32m\]'
 DIR_HOME_COLOR='\[\e[1;35m\]'
 DIR_SEP_COLOR='\[\e[1;31m\]'
 ABBR_DIR_COLOR='\[\e[1;37m\]'
+VCPROMPT_COLOR='\[\e[1;37m\]'
 (( UID == 0 )) && USER_COLOR='\[\e[1;31m\]' || USER_COLOR='\[\e[1;34m\]'
 
 NEW_PWD='$(
@@ -87,16 +84,16 @@ ret=$?
 printf "\e[41;1;37m%${COLUMNS}s\e[$(((COLUMNS-${#ret})/2))G%s\e[0m\n\[\e[0m\]" "" "$ret"
 )'
 
+VCPROMPT='$(vcprompt -f \[\033[1\;37m\][%n:%b%m%u]\ \[\033[0m\])'
+
 # the first $DIR_COLOR can be removed
 if [[ $TERM == screen* ]]; then
-    PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD"'\[\033k\033\\\]'" $USER_COLOR\$ \[\e[0m\]"
+    PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD"'\[\033k\033\\\]'" $VCPROMPT_COLOR$VCPROMPT$USER_COLOR\$ \[\e[0m\]"
 else
-    PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD $USER_COLOR\$ \[\e[0m\]"
+    PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD $VCPROMPT_COLOR$VCPROMPT$USER_COLOR\$ \[\e[0m\]"
 fi
 
-unset STR_MAX_LENGTH DIR_COLOR DIR_HOME_COLOR DIR_SEP_COLOR ABBR_DIR_COLOR USER_COLOR NEW_PWD PS1_ERROR
-
-fi # end of prompt
+unset STR_MAX_LENGTH DIR_COLOR DIR_HOME_COLOR DIR_SEP_COLOR ABBR_DIR_COLOR VCPROMPT_COLOR VCPROMPT USER_COLOR NEW_PWD PS1_ERROR
 
 # Change the window title of X terminals
 # originally from /etc/bash/bashrc on Gentoo
