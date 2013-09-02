@@ -1,0 +1,5 @@
+# BOOLEAN
+# This variable is only used in delayed substitution in COLORSCHEME?.
+# Set it (e.g. in your environment) if your terminal is configured to use
+# the solarized color scheme of Ethan Schoonover.
+SOLARIZED="true"
