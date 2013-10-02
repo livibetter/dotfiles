@@ -1,17 +1,17 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]      = "-*-envy code r-medium-r-normal-*-12-*-*-*-*-*-*-*";
+static const char font[]            = "-*-envy code r-medium-r-normal-*-12-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#303030";
-static const char normbgcolor[]   = "#303030";
-static const char normfgcolor[]   = "#808080";
-static const char selbordercolor[]    = "#80c080";
-static const char selbgcolor[]    = "#303030";
-static const char selfgcolor[]    = "#cccccc";
-static const unsigned int borderpx    = 2;    /* border pixel of windows */
-static const unsigned int snap    = 32;     /* snap pixel */
-static const Bool showbar         = True;   /* False means no bar */
-static const Bool topbar      = True;   /* False means bottom bar */
+static const char normbgcolor[]     = "#303030";
+static const char normfgcolor[]     = "#808080";
+static const char selbordercolor[]  = "#80c080";
+static const char selbgcolor[]      = "#303030";
+static const char selfgcolor[]      = "#cccccc";
+static const unsigned int borderpx  = 2;      /* border pixel of windows */
+static const unsigned int snap      = 8;      /* snap pixel */
+static const Bool showbar           = True;   /* False means no bar */
+static const Bool topbar            = True;   /* False means bottom bar */
 
 /* function declarations */
 // customized
