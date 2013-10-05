@@ -1,0 +1,2 @@
+#env
+LESS = -R -M --shift 5 -j.5
