@@ -131,7 +131,7 @@ div.postsStats,
 div.trafficSourcesStats {
   width: auto !important;
 }
-p.GHUY-LPLN {
+p.GHUY-LPKN {
   font-family: 'Envy Code R' !important;
   white-space: normal !important;
   width: auto !important;
