@@ -12,15 +12,5 @@ eval "$(grep LOCALVERSION= "$KC")"
 BOOTIMG=/boot/kernel-$(uname -m)-$VERSION$CONFIG_LOCALVERSION
 
 if cp /usr/src/$DIR_KERNEL/arch/$(uname -m)/boot/bzImage "$BOOTIMG"; then
-  sed -i "
-/splashimage/ a\\
-\\
-title Gentoo Linux $VERSION$CONFIG_LOCALVERSION\\
-root (hd0,0)\\
-kernel /boot/kernel-$(uname -m)-$VERSION$CONFIG_LOCALVERSION root=/dev/sda3 quiet\\
-\\
-title Gentoo Linux $VERSION$CONFIG_LOCALVERSION (recuse)\\
-root (hd0,0)\\
-kernel /boot/kernel-$(uname -m)-$VERSION$CONFIG_LOCALVERSION root=/dev/sda3 init=/bin/bb
-" /boot/grub/grub.conf
+  grub2-mkconfig -o /boot/grub/grub.cfg
 fi
