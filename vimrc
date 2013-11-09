@@ -213,7 +213,7 @@ endfunction
 " https://github.com/xolox/vim-notes "
 "===================================="
 
-let g:notes_directory = '~/Documents/VimNotes'
+let g:notes_directories = ['~/Documents/VimNotes']
 let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
 
 nmap <LEADER>todo :Note ToDo<CR>
