@@ -218,6 +218,9 @@ let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
 
 nmap <LEADER>todo :Note ToDo<CR>
 
+" using command-line-only abbrev to alias Note
+cabbrev note Note
+
 "============================================================="
 " HTML Encode/Decode                                          "
 " http://vim.wikia.com/wiki/HTML_entities#Perl_HTML::Entities "
