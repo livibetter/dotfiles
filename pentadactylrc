@@ -103,6 +103,19 @@ EOF
 " Delete all styles, first.
 delstyle!
 
+" Tired of these shits, CPU suckers
+style * <<EOF
+* {
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+  text-shadow: none !important;
+
+  animation: none !important;
+  transition: none !important;
+}
+EOF
+
 " Google
 " ======
 
@@ -118,7 +131,7 @@ style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !impo
 " get rid of clickTrap of Blogger post writing preview
 style 3803541356848955053.*\.blogspot\.com div.blogger-clickTrap { display: none }
 " fix dashboard
-style http://draft.blogger.com/blogger.g* <<EOF 
+style draft.blogger.com/blogger.g* <<EOF 
 /* maximize Labels popup in Blogger */
 div[role="listbox"] {
     max-width: none !important;
