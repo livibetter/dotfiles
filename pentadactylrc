@@ -127,11 +127,11 @@ style mail.google.com,groups.google.com -name google-monospace * { font-family: 
 " =======
 
 " fix Blogger template editing
-style draft.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
+style www.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
 " get rid of clickTrap of Blogger post writing preview
 style 3803541356848955053.*\.blogspot\.com div.blogger-clickTrap { display: none }
 " fix dashboard
-style draft.blogger.com/blogger.g* <<EOF 
+style www.blogger.com/blogger.g* <<EOF 
 /* maximize Labels popup in Blogger */
 div[role="listbox"] {
     max-width: none !important;
