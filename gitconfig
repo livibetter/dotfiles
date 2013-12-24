@@ -1,0 +1,11 @@
+[user]
+	name = Yu-Jie Lin
+	email = livibetter@gmail.com
+[core]
+	excludesfile = ~/.gitignore
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+[push]
+	default = matching
