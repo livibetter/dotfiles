@@ -157,3 +157,19 @@ table.blogg-posttable tr > td:nth-child(5) a {
   display: none !important;
 }
 EOF
+style wordpress.com <<EOF 
+#sidebar-topics-list li {
+  display: inline-block;
+  border: none !important;
+}
+#sidebar-topics-list li a {
+  border: none !important;
+  padding: 5px 30px 5px 5px !important;
+}
+#sidebar-topics-list li a.remove-topic {
+  padding: 0 5px !important;
+}
+#sidebar-topics-list li a.remove-topic span {
+  top: 2px !important;
+}
+EOF
