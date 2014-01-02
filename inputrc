@@ -3,13 +3,13 @@
 
 #set completion-ignore-case On
 
-# Use Shift+Left/Right to jump between words
+# Use Ctrl+Left/Right to jump between words
 # Screen/tmux
-"\eOD": backward-word
-"\eOC": forward-word
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
 # xterm/urxvt
-"\e[d": backward-word
-"\e[c": forward-word
+"\eOd": backward-word
+"\eOc": forward-word
 
 # Automatic inputting '' or "" and move the cursor
 "\C-x\'": "'' \e[D\e[D"
