@@ -7,6 +7,7 @@
 
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH:/sbin:/usr/sbin:/usr/games/bin
 export MANPATH=$MANPATH:$HOME/share/man:$HOME/.local/man
+export PERL5LIB=$HOME/.local/lib/perl5:$PERL5LIB
 export BROWSER=firefox-bin
 # Invoking Vim directly, not server mode via vi* alias defined in bashrc
 # Only use server mode by my explict command, programs invoke editor may have

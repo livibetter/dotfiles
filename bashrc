@@ -48,7 +48,9 @@ fi
 # Source global definitions
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
-[[ -f $HOME/p/g/g ]] && . $HOME/p/g/g || echo "Can not found g script!"
+# qfi
+source $HOME/.local/etc/profile.d/qfi.sh
+alias g=qfi
 
 # Prompt
 [[ $TERM == 'linux' ]] && STR_MAX_LENGTH=2 || STR_MAX_LENGTH=3
