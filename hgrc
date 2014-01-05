@@ -1,0 +1,7 @@
+[extensions]
+hgext.convert=
+mq=
+
+[ui]
+username = Yu-Jie Lin <livibetter@gmail.com>
+ignore = ~/.hgignore
