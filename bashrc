@@ -49,8 +49,9 @@ fi
 [[ -f /etc/bashrc ]] && . /etc/bashrc
 
 # qfi
-source $HOME/.local/etc/profile.d/qfi.sh
+source $HOME/.local/share/qfi/wrapper.sh
 alias g=qfi
+complete -F _qfi g
 
 # Prompt
 [[ $TERM == 'linux' ]] && STR_MAX_LENGTH=2 || STR_MAX_LENGTH=3
