@@ -146,6 +146,7 @@ handlers = {
       'id_affix': '',
       'settings_overrides': {
         'math_output': 'MathML',
+        'syntax_highlight': 'short',
       },
       'smartypants': True,
     },
