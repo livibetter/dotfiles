@@ -139,21 +139,19 @@ div[role="listbox"] {
 div[role="listbox"] > div > div {
   display: inline-block;
 }
-/* fix width of first column and font in Stats */
-div.postsStats,
-div.trafficSourcesStats {
-  width: auto !important;
-}
-p.GHUY-LPKN {
-  font-family: 'Envy Code R' !important;
-  white-space: normal !important;
-  width: auto !important;
+/* hide stats tab */
+div.blogg-tab.stats {
+  display: none;
 }
 /* hide +1 count */
-table.blogg-posttable > colgroup > col:nth-child(5) {
+table.blogg-posttable > colgroup > col:nth-child(5),
+table.blogg-posttable > colgroup > col:nth-child(6),
+table.blogg-posttable > colgroup > col:nth-child(7) {
   width: 0 !important;
 }
-table.blogg-posttable tr > td:nth-child(5) a {
+table.blogg-posttable tr > td:nth-child(5),
+table.blogg-posttable tr > td:nth-child(6),
+table.blogg-posttable tr > td:nth-child(7) {
   display: none !important;
 }
 EOF
