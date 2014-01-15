@@ -19,6 +19,8 @@ colorscheme koehler
 " no intro message
 set shortmess+=I
 
+set hidden
+
 " Save buffer list
 set viminfo='20,\"500,%
 
