@@ -34,14 +34,12 @@ static const char *tags[] = { "1", "2", "3", "q", "w", "e", "a", "s", "d" };
 static Rule rules[] = {
   /* class          instance      title       tags mask isfloating  monitor */
   // Stuff need to be floating
-  { "feh",          NULL,         NULL,       0,        True,       -1 },
+  { "Sxiv",         NULL,         NULL,       0,        True,       -1 },
   // Make sure Firefox's pop out dialog/windows floating
   { "Firefox",      "Browser",    NULL,       0,        True,       -1 },
   { "Firefox",      "Dialog",     NULL,       0,        True,       -1 },
   { "Firefox",      "Places",     NULL,       0,        True,       -1 },
   
-  { "Keepnote",     NULL,         "Find",     0,        True,       -1 },
-
   { "Key-mon",      NULL,         NULL,       ~0,       True,       -1 },
   
   { "Leafpad",      NULL,         NULL,       0,        True,       -1 },
@@ -65,8 +63,6 @@ static Rule rules[] = {
 
   // Tag row #2
   // Programs with special initial tag
-  { "Keepnote",     NULL,         "KeepNote", 1<<3,     False,      -1 },
-  
   { "libreoffice",  NULL,         NULL,       1<<4,     False,      -1 },
 
   { "Geeqie",       NULL,         NULL,       1<<5,     False,      -1 },

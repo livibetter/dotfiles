@@ -1,0 +1,68 @@
+shell_patterns=0
+
+#### Direcotry ####
+
++ t d
+s sxiv
+  sxiv %f/* &
+
+#### Archive ####
+
++ f \.rar$ | f \.zip | f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
+l List
+  dtrx %f ; read -p 'Press any key...' -n 1
++ f \.rar$ | f \.zip | f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
+u Unpack
+  dtrx -n --one=here %f
++ f \.rar$ | f \.zip | f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
+t Unpack to /tmp
+  cd /tmp ; dtrx -n --one=here %d/%f
+
+#### Code File Menu ####
+
++ f \.py$ & t n
+1 Run
+  python %f
+
+#### Video File Menu ####
+
++ f \.avi$ | f \.mpe?g$ | f \.m2v$ | f \.mkv$ | f \.ts$ | f \.rm$ | f \.vob$ | f \.rmvb$ | f \.flv$ | f \.swf$ | f \.wmv$ | f \.ram$ | f \.mp4$ | f \.m4v | f \.asf$ | f \.ogm$ | f \.evo$ & t r & ! t t
+1 mplayer
+  mplayer %f &
++ f \.avi$ | f \.mpe?g$ | f \.m2v$ | f \.mkv$ | f \.ts$ | f \.rm$ | f \.vob$ | f \.rmvb$ | f \.flv$ | f \.swf$ | f \.wmv$ | f \.ram$ | f \.mp4$ | f \.m4v | f \.asf$ | f \.ogm$ | f \.evo$ & t r & ! t t
+2 mplayer (loop)
+  mplayer -loop 0 %f &
++ f \.avi$ | f \.mpe?g$ | f \.m2v$ | f \.mkv$ | f \.ts$ | f \.rm$ | f \.vob$ | f \.rmvb$ | f \.flv$ | f \.swf$ | f \.wmv$ | f \.ram$ | f \.mp4$ | f \.m4v | f \.asf$ | f \.ogm$ | f \.evo$ & t r & ! t t
+3 mplayer (No video)
+  mplayer -vo null %f &
++ f \.avi$ | f \.mpe?g$ | f \.m2v$ | f \.mkv$ | f \.ts$ | f \.rm$ | f \.vob$ | f \.rmvb$ | f \.flv$ | f \.swf$ | f \.wmv$ | f \.ram$ | f \.mp4$ | f \.m4v | f \.asf$ | f \.ogm$ | f \.evo$ & t r & ! t t
+4 mplayer (No video, loop)
+  mplayer -vo null -loop 0 %f &
+
+#### Audio File Menu ####
+
++ f \.mp3$ | f \.ogg$ | f \.rm$ & t r & ! t t
+1 mplayer
+  mplayer %f &
++ f \.mp3$ | f \.ogg$ | f \.rm$ & t r & ! t t
+2 mplayer (loop)
+  mplayer -loop 0 %f &
++ f \.mp3$ | f \.ogg$ | f \.rm$ & t r & ! t t
+3 smplayer
+  smplayer %f &
+
+#### Image File Menu ####
+
++ f \.gif$ | f \.png$ | f \.jpe?g$ & & t r & ! t t
+1 gimp
+  gimp %f &
++ f \.gif$ | f \.png$ | f \.jpe?g$ & t r & ! t t
+s sxiv
+  sxiv %f &
+
++ f \.CR2$
+3 ufraw
+  ufraw %f &
++ f \.CR2$
+s sxiv
+  sxiv %f &
