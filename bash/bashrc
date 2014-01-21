@@ -1,6 +1,6 @@
 # .bashrc
 # Author: Yu-Jie Lin
-# Creation Date: 2007-12-27T05:58:17+0800
+# https://github.com/livibetter/dotfiles/tree/master/bash/bashrc
 
 source /etc/profile
 source $HOME/.bash_base
