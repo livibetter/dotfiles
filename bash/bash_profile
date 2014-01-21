@@ -1,0 +1,4 @@
+# .bash_profile
+# vim:ft=sh
+
+source $HOME/.bash_base

@@ -2,6 +2,18 @@
 # Author: Yu-Jie Lin
 # Creation Date: 2007-12-27T05:58:17+0800
 
+source /etc/profile
+source $HOME/.bash_base
+source $HOME/.bash_helper_func.sh
+
+#############
+# Variables #
+#############
+
+HISTFILESIZE=5000
+HISTSIZE=5000
+HISTCONTROL=ignoredups
+
 #######
 # Alias
 #######
@@ -35,18 +47,12 @@ alias ytdl='cd /tmp ; youtube-dl'
 
 alias pyhttp='python -m SimpleHTTPServer 8001'
 
-# Helper functions
-[[ -f $HOME/.bash-helper-func.sh ]] && source $HOME/.bash-helper-func.sh
-
 # for root
 if (( UID == 0 )); then
   alias rm='rm -i'
   alias cp='cp -i'
   alias mv='mv -i'
 fi
-
-# Source global definitions
-[[ -f /etc/bashrc ]] && . /etc/bashrc
 
 # qfi
 source $HOME/.local/share/qfi/wrapper.sh
