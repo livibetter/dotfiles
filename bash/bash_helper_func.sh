@@ -146,3 +146,21 @@ beeps() {
 
   return $BEEPS_RET
 }
+
+########################################################
+# ghclone: Cloning GitHub repository with different URLs
+
+# Usage: gitclone <url>
+# url could be one of:
+# Smart HTTP: https://github.com/{user}/{repo}.git
+# SSH       : git@github.com:{user}/{repo}.git
+# Subversion: https://github.com/{user}/[repo}
+
+ghclone() {
+  local URL="${1%.git}" user repo
+  repo="${URL##*/}"
+  URL="${URL%/$repo}"
+  user="${URL##*[:/]}"
+
+  git clone "git@github.com:$user/$repo" && cd "$repo"
+}
