@@ -3,8 +3,9 @@
 
 FONTNAME='Envy Code R'
 FONTSIZE='9'
+FONTSTYLE='Regular'
 
-while getopts "f:s:" opt; do
+while getopts "f:s:S:" opt; do
   case $opt in
     f)
       FONTNAME="$OPTARG"
@@ -12,9 +13,12 @@ while getopts "f:s:" opt; do
     s)
       FONTSIZE="$OPTARG"
       ;;
+    S)
+      FONTSTYLE="$OPTARG"
+      ;;
   esac
 done
 
-FONT="xft:$FONTNAME:style=Regular:size=$FONTSIZE:antialias=false"
+FONT="xft:$FONTNAME:style=$FONTSTYLE:size=$FONTSIZE:antialias=false"
 
 printf '\e]710;%s\007' "$FONT"
