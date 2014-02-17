@@ -41,6 +41,9 @@ set modeline
 
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
+" pathogen.vim
+execute pathogen#infect()
+
 "============="
 " keymappings "
 "============="
