@@ -6,12 +6,15 @@
 " note: if you know any way to improve this file, please open an issue on
 "       GitHub or contact me via http://s.yjl.im/contact
 
+" pathogen.vim
+execute pathogen#infect()
+
 "=========="
 " Settings "
 "=========="
 
 set t_Co=256 
-colorscheme koehler
+colorscheme apprentice
 
 " Others
 "========
@@ -40,9 +43,6 @@ set pastetoggle=<F12>
 set modeline
 
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
-
-" pathogen.vim
-execute pathogen#infect()
 
 "============="
 " keymappings "
