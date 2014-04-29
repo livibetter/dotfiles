@@ -158,6 +158,7 @@ beeps() {
 
 ghclone() {
   local URL="${1%.git}" user repo
+  URL="${URL%/}"
   repo="${URL##*/}"
   URL="${URL%/$repo}"
   user="${URL##*[:/]}"
