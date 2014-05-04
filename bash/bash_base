@@ -5,7 +5,7 @@
 # Paths #
 #########
 
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH:/sbin:/usr/sbin:/usr/games/bin
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.gem/ruby/2.0.0/bin:$PATH:/sbin:/usr/sbin:/usr/games/bin
 export MANPATH=$MANPATH:$HOME/share/man:$HOME/.local/man:$HOME/.local/share/man
 export PERL5LIB=$HOME/.local/lib/perl5:$PERL5LIB
 
