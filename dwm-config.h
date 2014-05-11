@@ -45,6 +45,7 @@ static Rule rules[] = {
   { "Leafpad",      NULL,         NULL,       0,        True,       -1 },
 
   { "MPlayer",      NULL,         NULL,       0,        True,       -1 },
+  { "mplayer2",     NULL,         NULL,       0,        True,       -1 },
   { "Smplayer",     NULL,         NULL,       0,        True,       -1 },
   { NULL,           NULL,         "VLC media player",
                                               0,        True,       -1 },
