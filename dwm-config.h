@@ -21,9 +21,11 @@ void toggle_ffm(const Arg *arg);
 void toggle_rules(const Arg *arg);
 void togglebar_dzen(const Arg *arg);
 // patches
+#include "grid.c"
 void grid(Monitor *m);
 static void bstack(Monitor *m);
 static void bstackhoriz(Monitor *m);
+#include "b/push.c"
 static void pushup(const Arg *arg);
 static void pushdown(const Arg *arg);
 
@@ -316,19 +318,9 @@ self_restart(const Arg *arg) {
  * Patches
  * ********/
 
-/* grid layout */
-// http://dwm.suckless.org/patches/gridmode
-// from 5.8.2 diff
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.8.2-gridmode.c"
-
 /* bottom stack layouts */
 // http://dwm.suckless.org/patches/bottom_stack
 // from source for 5.9
 #include "/etc/portage/savedconfig/x11-wm/dwm-5.9-bstack.c"
-
-/* push patch */
-// http://dwm.suckless.org/patches/push
-// from patch for 5.7.1
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.7.1-push.c"
 
 // vim:sw=2:sts=2:et:smarttab
