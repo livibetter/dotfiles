@@ -253,3 +253,27 @@ perl << EOF
  $curbuf->Set($pos[0],$encvalue)
 EOF
 endfunction
+
+" ================================================================== "
+" Open fold navigation                                               "
+" Based on: http://vim.wikia.com/wiki/Navigate_to_the_next_open_fold "
+" ================================================================== "
+
+function! GoToOpenFold(direction)
+  if (a:direction == "next")
+    normal zj
+    let start = line('.')
+    while (foldclosed(start) != -1)
+      let start = start + 1
+    endwhile
+  else
+    normal zk
+    let start = line('.')
+    while (foldclosed(start) != -1)
+      let start = start - 1
+    endwhile
+  endif
+  call cursor(start, 0)
+endfunction
+nmap zJ :call GoToOpenFold("next")<CR>
+nmap zK :call GoToOpenFold("prev")<CR>
