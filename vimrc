@@ -28,7 +28,7 @@ set hidden
 set viminfo='20,\"500,%
 
 set autoindent
-set tabstop=2
+set tabstop=8
 set softtabstop=2
 set expandtab
 set smarttab
