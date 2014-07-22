@@ -4,12 +4,10 @@
 
 # User specific environment and startup programs
 
-PATH=$HOME/bin:/sbin:/usr/sbin:/usr/games/bin:$PATH
-MANPATH=$HOME/share/man:$MANPATH
+source ~/.bash_base
+
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
-BROWSER=firefox
-EDITOR=vim
 
 export PATH
 export MANPATH
