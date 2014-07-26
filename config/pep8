@@ -1,0 +1,4 @@
+[pep8]
+ignore = E111,E121
+show-source = True
+statistics = True
