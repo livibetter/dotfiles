@@ -67,7 +67,6 @@ EOF
   au LocationChange (mail|groups)\.google\.com normal! <C-z>
   au LocationChange www\.commafeed\.com\/ normal! <C-z>
   au LocationChange code\.google\.com\/p\/[a-z0-9-]+\/issues\/ normal! <C-z>
-  au LocationChange github\.com\/[a-zA-Z]+\/[a-zA-Z0-9-]+\/(issues|network) normal! <C-z>
   au LocationChange grooveshark\.com normal! <C-z>
 
   " Enter Insert mode
@@ -123,38 +122,6 @@ EOF
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
 
-" Blogger
-" =======
-
-" fix Blogger template editing
-style www.blogger.com textarea[kind=change] { font-family: 'Envy Code R' !important; }
-" get rid of clickTrap of Blogger post writing preview
-style 3803541356848955053.*\.blogspot\.com div.blogger-clickTrap { display: none }
-" fix dashboard
-style www.blogger.com/blogger.g* <<EOF 
-/* maximize Labels popup in Blogger */
-div[role="listbox"] {
-    max-width: none !important;
-}
-div[role="listbox"] > div > div {
-  display: inline-block;
-}
-/* hide stats tab */
-div.blogg-tab.stats {
-  display: none;
-}
-/* hide +1 count */
-table.blogg-posttable > colgroup > col:nth-child(5),
-table.blogg-posttable > colgroup > col:nth-child(6),
-table.blogg-posttable > colgroup > col:nth-child(7) {
-  width: 0 !important;
-}
-table.blogg-posttable tr > td:nth-child(5),
-table.blogg-posttable tr > td:nth-child(6),
-table.blogg-posttable tr > td:nth-child(7) {
-  display: none !important;
-}
-EOF
 style wordpress.com <<EOF 
 #sidebar-topics-list li {
   display: inline-block;
