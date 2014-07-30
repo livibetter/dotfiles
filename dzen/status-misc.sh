@@ -15,7 +15,7 @@ updur="$(td.sh ${upsec%.*})"
 thres=$((7*24*60*60))
 ts="$(date -d "$(</usr/portage/metadata/timestamp.chk)" +%s)"
 dur=$(($(printf "%(%s)T" -1) - ts))
-td="$(td.sh $((thres-dur)))"
+td="$(td.sh -- $((thres-dur)))"
 
 # Formating
 echo " $(uname -srv)"
