@@ -61,12 +61,12 @@ static Rule rules[] = {
   { "URxvt",        "vimp-ext-editor",
                                   NULL,       0,        True,       -1 },
   
-  { "VNC Viewer",   NULL,         NULL,       0,        True,       -1 },
-  { "TigerVNC",     NULL,         NULL,       0,        True,       -1 },
-
   // Tag row #2
   // Programs with special initial tag
+  { "Vncviewer",    NULL,         NULL,       1<<3,     True,       -1 },
+
   { "libreoffice",  NULL,         NULL,       1<<4,     False,      -1 },
+  { "MuPDF",        NULL,         NULL,       1<<4,     True,       -1 },
 
   { "Geeqie",       NULL,         NULL,       1<<5,     False,      -1 },
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
