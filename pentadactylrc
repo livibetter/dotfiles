@@ -95,6 +95,23 @@ EOF
   source '~/.pentadactyl-Test.rc'
 :endif
 
+" clean up YouTube clutters
+:js <<EOF
+clean_yt = function (d) {
+  [
+    'div.branded-page-related-channels',
+    '#upsell-video',
+    '#watch-related'
+  ].forEach(function (sel) {
+    let e = d.querySelector(sel);
+    if (e)
+      e.parentNode.removeChild(e);
+  });
+}
+EOF
+au DOMLoad youtube.com js clean_yt(<doc>)
+
+
 " ====== "
 " Styles "
 " ====== "
