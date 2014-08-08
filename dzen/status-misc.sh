@@ -10,12 +10,12 @@ print_status_title 'Miscellaneous'
 
 read l1 l2 l3 procs _ <<< "$(</proc/loadavg)"
 read upsec _ <<< "$(</proc/uptime)"
-updur="$(td.sh ${upsec%.*})"
+updur="$(td ${upsec%.*})"
 
 thres=$((30 * 24 * 60 * 60))
 ts="$(date -d "$(</usr/portage/metadata/timestamp.chk)" +%s)"
 dur=$(($(printf "%(%s)T" -1) - ts))
-td="$(td.sh -- $((thres-dur)))"
+TD="$(td -- $((thres-dur)))"
 
 # Formating
 echo " $(uname -srv)"
@@ -26,7 +26,7 @@ echo
 
 echo -n " Portage: "
 ((dur>=thres)) && echo -n "T + " || echo -n "T - "
-echo "$td"
+echo "$TD"
 
 printf "          %(%A, %B %d, %Y %H:%M:%S)T\n" $((ts + thres))
 echo

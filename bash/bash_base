@@ -30,3 +30,9 @@ export BROWSER=firefox-bin
 # Only use server mode by my explict command, programs invoke editor may have
 # problem with server mode.
 export EDITOR=/usr/bin/vim
+
+#############
+# Loadables #
+#############
+
+enable -f $HOME/var/bin/td td

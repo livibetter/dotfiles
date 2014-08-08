@@ -113,8 +113,8 @@ sleeptil () {
 
   if [[ ! -z $verbose ]]; then
     END_DATE="$(date -d @$END_TS)"
-    if type td.sh &>/dev/null; then
-      DUR="$(td.sh $((END_TS - $(date +%s))))"
+    if type td &>/dev/null; then
+      DUR="$(td $((END_TS - $(date +%s))))"
     else
       DUR="$((END_TS - $(date +%s))) seconds"
     fi
