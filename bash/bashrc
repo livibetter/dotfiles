@@ -60,6 +60,9 @@ alias g=qfi
 complete -F _qfi g
 
 # Prompt
+if enable -f "$(which vimps1)" vimps1; then
+  PS1='$(vimps1 $?)'
+else
 [[ $TERM == 'linux' ]] && STR_MAX_LENGTH=2 || STR_MAX_LENGTH=3
 DIR_COLOR='\[\e[1;32m\]'
 DIR_HOME_COLOR='\[\e[1;35m\]'
@@ -101,6 +104,7 @@ if [[ $TERM == screen* ]]; then
 else
     PS1="$PS1_ERROR $DIR_COLOR$NEW_PWD $VCPROMPT_COLOR$VCPROMPT$USER_COLOR\$ \[\e[0m\]"
 fi
+fi # end of Prompt
 
 unset STR_MAX_LENGTH DIR_COLOR DIR_HOME_COLOR DIR_SEP_COLOR ABBR_DIR_COLOR VCPROMPT_COLOR VCPROMPT USER_COLOR NEW_PWD PS1_ERROR
 

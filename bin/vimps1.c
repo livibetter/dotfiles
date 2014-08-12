@@ -1,19 +1,7 @@
-// Multi-color and Vim-like abbreviated working directory PS1
-// using Bash loadable builtin
-// Copyright (C) 2011-2013 Yu-Jie Lin
-//
-// Compilation
-// ===========
-//
-//   Put a copy of Bash source at ./bash
-//   Put a copy of vcprompt source at ./vcprompt
-//   Run `make vimps1`
-//
-// This program uses code from vcprompt <http://vc.gerg.ca/hg/vcprompt/>,
-// whose License is appeneded, which is also this program is licensed under.
 /*
- * Copyright (C) 2009, 2010, Gregory P. Ward and contributors.
- *
+ * Multi-color and Vim-like abbreviated working directory PS1
+ * using Bash loadable builtin
+ * Copyright (C) 2011-2014 Yu-Jie Lin
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -47,8 +35,8 @@
 #include "svn.h"
 #include "fossil.h"
 
-// declare just for return type
-vccontext_t* probe_parents(vccontext_t** contexts, int num_contexts);
+vccontext_t* probe_dirs(vccontext_t** contexts, int num_contexts);
+void print_result(vccontext_t *context, options_t *options, result_t *result);
 
 #define S_CTLESC "\001"
 #define S_CTLNUL "\177"
@@ -70,39 +58,52 @@ vccontext_t* probe_parents(vccontext_t** contexts, int num_contexts);
 #define color_sep  31
 #define color_abbr 37
 
+options_t options = {
+  .debug         = 0,
+  .format        = "[%n:%b%m%u] ",
+  .show_branch   = 1,
+  .show_revision = 0,
+  .show_unknown  = 1,
+  .show_modified = 1,
+  .show_features = 0,
+};
+
+vccontext_t *(*func_contexts[])(options_t *) = {
+  get_cvs_context,
+  get_git_context,
+  get_hg_context,
+  get_svn_context,
+  get_fossil_context,
+};
+
+static int num_contexts = -1;
+
+vccontext_t **contexts;
+
 void print_vcprompt() {
-  // code from vcprompt
-  options_t options = {
-    .debug         = 0,
-    .format        = "[%n:%b%m%u] ",
-    .show_branch   = 1,
-    .show_revision = 0,
-    .show_unknown  = 1,
-    .show_modified = 1,
-  };
+  // has vcprompt initialized?
+  if (num_contexts == -1) {
+    set_options(&options);
 
-  set_options(&options);
+    num_contexts = sizeof(func_contexts) / sizeof(void *);
+    contexts = malloc(num_contexts * sizeof(vccontext_t *));
 
-  vccontext_t* contexts[] = {
-    get_cvs_context(&options),
-    get_git_context(&options),
-    get_hg_context(&options),
-    get_svn_context(&options),
-    get_fossil_context(&options),
-  };
-  int num_contexts = sizeof(contexts) / sizeof(vccontext_t*);
+    for (int i = 0; i < num_contexts; i++)
+      contexts[i] = (*func_contexts[i])(&options);
+  }
 
   result_t* result = NULL;
   vccontext_t* context = NULL;
 
-  if (context = probe_parents(contexts, num_contexts)) {
-    result = context->get_info(context);
-    if (result != NULL) {
-      print_result(context, &options, result);
-      free_result(result);
-    }
+  context = probe_dirs(contexts, num_contexts);
+  if (context == NULL)
+    return;
+
+  result = context->get_info(context);
+  if (result != NULL) {
+    print_result(context, &options, result);
+    free_result(result);
   }
-  // end of code from vcprompt
 }
 
 int vimps1_builtin (WORD_LIST *list) {
@@ -137,7 +138,6 @@ int vimps1_builtin (WORD_LIST *list) {
   // Error code
   if (list && *list->word->word != '0') {
     int columns;
-    int i;
 
     columns = atoi(get_string_value("COLUMNS"));
     SPF(p_ps1, "\033[41;1;37m");
@@ -217,4 +217,3 @@ struct builtin vimps1_struct = {
   "vimps1",
   0
   };
-// vim:sts=2:sw=2:et:smarttab
