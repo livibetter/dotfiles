@@ -124,15 +124,21 @@ void update_mem(int ID) {
   int mem_percentage;
   char *dzen_str = tmp_dzen[ID];
   char *color;
+  char key[32];
 
   fscanf(f, "%*s %d %*s", &total);
   fscanf(f, "%*s %d %*s", &free);
-  fscanf(f, "%*s %d %*s", &buffers);
-  fscanf(f, "%*s %d %*s", &cached);
+  fscanf(f, "%s %d %*s", key, &buffers);
+  if (strstr(key, "MemAvailable") != NULL) {
+    // the buffers is actually avaiable
+    used = total - buffers;
+  } else {
+    fscanf(f, "%*s %d %*s", &cached);
+    
+    free += buffers + cached;
+    used = total - free;
+  }
   fclose(f);
-  
-  free += buffers + cached;
-  used = total - free;
   mem_percentage = 100 * used / total;
 
   color = used_color(used, 1024 * 1024, -1, 100 * 1024);
