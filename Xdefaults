@@ -20,8 +20,8 @@ Rxvt.cursorBlink: True
 # URxvt
 
 URxvt.perl-lib: /home/livibetter/.urxvt/perl
-URxvt.urlLauncher: firefox-new-tab
 
 URxvt.perl-ext-common: default,url-select
-URxvt.underlineURLs:   true
 URxvt.keysym.M-u:      perl:url-select:select_next
+
+URxvt.url-select.underline: true
