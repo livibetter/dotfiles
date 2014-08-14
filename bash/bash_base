@@ -10,7 +10,7 @@ _PATH=(
   $HOME/.local/bin
   $HOME/.gem/ruby/2.0.0/bin
   /sbin
-  /sbin/usr/sbin
+  /usr/sbin
   $PATH
   /usr/games/bin
 )
