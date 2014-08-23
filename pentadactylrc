@@ -108,8 +108,53 @@ clean_yt = function (d) {
       e.parentNode.removeChild(e);
   });
 }
+
+clean_yt_activity = function (d) {
+  let _clean_yt_activity = function () {
+    // watched video entries
+    for (let v of d.querySelectorAll('.watched-badge')) {
+      while (v = v.parentElement)
+        if (v.classList.contains('feed-item-container'))
+          break;
+      if (!v)
+        continue;
+
+      v.style.opacity = 0.5;
+
+      let t;
+      (t = v.querySelector('.shelf-item:not(.compact-shelf) > div')) && t.remove();
+
+      if (t = v.querySelector('.yt-lockup-title'))
+        t.style.maxWidth = 'none';
+      (t = v.querySelector('.yt-lockup-thumbnail'))   &&  t.remove();
+      (t = v.querySelector('.yt-lockup-description')) &&  t.remove();
+    }
+
+    // subscription entries
+    for (let v of d.querySelectorAll('.yt-lockup-thumbnail .yt-thumb-square')) {
+      while (v = v.parentElement)
+        if (v.classList.contains('feed-item-container'))
+          break;
+      if (!v)
+        continue;
+
+      if (t = v.querySelector('.yt-lockup'))
+        t.style.maxWidth = 'none';
+      (t = v.querySelector('.yt-lockup-thumbnail'))   &&  t.remove();
+    }
+  }
+
+  // clean first before observing
+  _clean_yt_activity();
+
+  new MutationObserver(_clean_yt_activity).observe(
+    d.querySelector('#browse-items-primary'),
+    {attributes: true, childList: true, characterData: true}
+  );
+}
 EOF
 au DOMLoad youtube.com js clean_yt(<doc>)
+au PageLoad youtube.com/feed/subscription/* js clean_yt_activity(<doc>)
 
 
 " ====== "
