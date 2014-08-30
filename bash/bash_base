@@ -35,4 +35,4 @@ export EDITOR=/usr/bin/vim
 # Loadables #
 #############
 
-enable -f $HOME/var/bin/td td
+enable -f "$(which td.bash)" td
