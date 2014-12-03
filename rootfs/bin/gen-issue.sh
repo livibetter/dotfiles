@@ -34,10 +34,12 @@
 #   <http://iheartquotes.com/>
 # * QDB
 #   <http://www.qdb.us/>
+# * ASCII Art Farts
+#   <http://www.asciiartfarts.com/>
 
 gen_text()
 {
-  case "$((RANDOM % 3))" in
+  case "$((RANDOM % 4))" in
     0) # That's What She Said
       xmllint --xpath '//item[1]/description/text()' <(wget -q -O - http://www.twssstories.com/rss.xml) |
       sed 's/&lt;\/\?p&gt;//g;q' |
@@ -53,6 +55,9 @@ gen_text()
       xmllint --shell <(wget -q -O - 'http://qdb.us/qdb.xml?action=random&fixed=0') |
       sed '1,3d;$d;s/&amp;/\&/g;s/&lt;/</g;s/&gt;/>/g;s/&nbsp;/ /g;s/&quot;/"/g;s/<br \/>//g' |
       fold -s
+      ;;
+    3) # ASCII Art Farts
+      wget -q -O - http://www.asciiartfarts.com/today.txt
       ;;
   esac
 }
