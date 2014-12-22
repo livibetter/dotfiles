@@ -136,7 +136,7 @@ beeps() {
   # subshell'd to get rid of: [JOB#] PID#
   (
     for i in {1..5}; do
-      (aplay -q /usr/share/sounds/$BEEPS.wav &) >/dev/null
+      (aplay -q $HOME/var/sounds/$BEEPS.wav &) >/dev/null
       sleep 1
     done &
 
