@@ -3,16 +3,14 @@
 # https://github.com/livibetter/dotfiles/tree/master/bash/bashrc
 
 source /etc/profile
-source $HOME/.bash_base
-source $HOME/.bash_helper_func.sh
+source $HOME/.bash/bash_base
+source $HOME/.bash/bash_helper_func.sh
+source $HOME/.bash/hhrc
 
 #############
 # Variables #
 #############
 
-HISTFILESIZE=5000
-HISTSIZE=5000
-HISTCONTROL=ignoredups
 
 #######
 # Alias
@@ -112,9 +110,9 @@ unset STR_MAX_LENGTH DIR_COLOR DIR_HOME_COLOR DIR_SEP_COLOR ABBR_DIR_COLOR VCPRO
 # originally from /etc/bash/bashrc on Gentoo
 case ${TERM} in
   xterm*|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-    PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+    PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'"; ${PROMPT_COMMAND}"
     ;;
   screen*)
-    PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'
+    PROMPT_COMMAND='echo -ne "\033_${PWD/$HOME/~}\033\\"'"; ${PROMPT_COMMAND}"
     ;;
 esac

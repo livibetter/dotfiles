@@ -1,4 +1,7 @@
 # .bash_profile
 # vim:ft=sh
 
-source $HOME/.bash_base
+source $HOME/.bash/bash_base
+
+# ready the Bash History file
+cp -au $HOME/.bash_history /tmp

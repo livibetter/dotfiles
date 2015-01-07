@@ -4,7 +4,7 @@
 
 # User specific environment and startup programs
 
-source ~/.bash_base
+source $HOME/.bash/bash_base
 
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
