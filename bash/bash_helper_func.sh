@@ -1,5 +1,5 @@
 # My Bash helper functions
-# Copyright (c) 2011-2013 Yu-Jie Lin
+# Copyright (c) 2011-2015 Yu-Jie Lin
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
@@ -124,20 +124,25 @@ sleeptil () {
   sleep $((END_TS - $(date +%s)))
   }
 
-######################################################################
-# beeps: Providing visual and audio notifications via dzen2 and a wave
+############################################################################
+# beeps: Providing visual and audio notifications via dzen2 and wave command
 
 # Usage: beeps <message is written here>
 # ref: http://blog.yjl.im/2013/06/beeps-with-dzen.html
 
 beeps() {
-  (( BEEPS_RET=$? )) && BEEPS=error || BEEPS=generic
+  local BEEPS
+
+  (( BEEPS_RET=$? )) && BEEPS=3 || BEEPS=1
 
   # subshell'd to get rid of: [JOB#] PID#
   (
     for i in {1..5}; do
-      (aplay -q $HOME/var/sounds/$BEEPS.wav &) >/dev/null
-      sleep 1
+	  {
+	    wave -s 4800 -a 0.75 $((100 * i * BEEPS))
+	    wave -s 4800 -a 0.75 $((200 * i * BEEPS))
+	  } | aplay -f FLOAT_LE -r 48000 -c 1 -q
+      sleep 0.1
     done &
 
     echo "$@" |
