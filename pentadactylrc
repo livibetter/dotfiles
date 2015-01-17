@@ -60,6 +60,15 @@ window.one_unpinned_tab = function(event) {
   }
 gBrowser.mTabContainer.addEventListener('TabClose', one_unpinned_tab, false);
 gBrowser.mTabContainer.addEventListener('TabPinned', one_unpinned_tab, false);
+
+window.change_tab_bg = function(id, color) {
+  var tab = tabs.getTab(id);
+
+  if (!tab)
+    return;
+
+  tab.linkedBrowser.contentDocument.body.style.backgroundColor = color;
+}
 EOF
 
 :if config.profileName == "Normal"
@@ -78,7 +87,7 @@ EOF
   " Auto-pin
   au PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()
 
-  au PageLoad about:blank* js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#333";
+  au PageLoad about:blank* js change_tab_bg(<tab>-1, "#333");
   " PageLoad isn't fired when browser is launched
   :if getBrowser().contentDocument.location.href.indexOf('about:blank') == 0
     js getBrowser().contentDocument.body.style.backgroundColor = "#333";
@@ -87,7 +96,7 @@ EOF
   " causes the background color of editor becomes #333.
   " style -name blank about:blank body { background-color: #333 !important }
 :elif config.profileName == "Test"
-  au PageLoad about:blank js tabs.getTab(<tab>-1).linkedBrowser.contentDocument.body.style.backgroundColor = "#633";
+  au PageLoad about:blank* js change_tab_bg(<tab>-1, "#633");
   " PageLoad isn't fired when browser is launched
   :if getBrowser().contentDocument.location.href == 'about:blank'
     js getBrowser().contentDocument.body.style.backgroundColor = "#633";
