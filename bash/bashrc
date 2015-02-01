@@ -2,7 +2,6 @@
 # Author: Yu-Jie Lin
 # https://github.com/livibetter/dotfiles/tree/master/bash/bashrc
 
-source /etc/profile
 source $HOME/.bash/bash_base
 source $HOME/.bash/bash_helper_func.sh
 source $HOME/.bash/hhrc
