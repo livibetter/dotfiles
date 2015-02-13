@@ -138,10 +138,10 @@ beeps() {
   # subshell'd to get rid of: [JOB#] PID#
   (
     for i in {1..5}; do
-	  {
-	    wave -s 4800 -a 0.75 $((100 * i * BEEPS))
-	    wave -s 4800 -a 0.75 $((200 * i * BEEPS))
-	  } | aplay -f FLOAT_LE -r 48000 -c 1 -q
+      {
+        echo "4800 0.75 $((100 * i * BEEPS))"
+        echo "4800 0.75 $((200 * i * BEEPS))"
+      } | wave | aplay -f FLOAT_LE -r 48000 -c 1 -q
       sleep 0.1
     done &
 
