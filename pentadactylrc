@@ -28,10 +28,6 @@ map <C-q> <Nop>
 " Toggle app tab
 map <C-A-a> :pintab!<CR>
 
-" Grooveshark
-map gsn :js if((gs = gBrowser.tabs[0].linkedBrowser.contentWindow.wrappedJSObject.Grooveshark) != undefined) gs.next();<CR>
-map gsp :js if((gs = gBrowser.tabs[0].linkedBrowser.contentWindow.wrappedJSObject.Grooveshark) != undefined) gs.togglePlayPause();<CR>
-
 " Clean up all auto commands
 autocmd!
 
@@ -72,20 +68,12 @@ window.change_tab_bg = function(id, color) {
 EOF
 
 :if config.profileName == "Normal"
-  " Enter passthrough mode automatically in Gmail, CommaFeed, and GrooveShark
+  " Enter passthrough mode automatically in Gmail, CommaFeed
   au LocationChange (mail|groups)\.google\.com normal! <C-z>
   au LocationChange www\.commafeed\.com\/ normal! <C-z>
-  au LocationChange code\.google\.com\/p\/[a-z0-9-]+\/issues\/ normal! <C-z>
-  au LocationChange grooveshark\.com normal! <C-z>
 
   " Enter Insert mode
   au LocationChange docs\.google\.com :normal gi
-
-  " Auto reload
-  au PageLoad tw\.finance\.yahoo.com\/pf\/mypf js (function(){var t=getBrowser().tabs[<tab>-1];if (!t.pinned) getBrowser().pinTab(t);window.setTimeout(function(){getBrowser().reloadTab(t)},60000)})()
-"
-  " Auto-pin
-  au PageLoad grooveshark.com js (function(){ var b = getBrowser(); var t = b.tabs[<tab>-1]; b.pinTab(t);})()
 
   au PageLoad about:blank* js change_tab_bg(<tab>-1, "#333");
   " PageLoad isn't fired when browser is launched
@@ -192,20 +180,3 @@ EOF
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
-
-style wordpress.com <<EOF 
-#sidebar-topics-list li {
-  display: inline-block;
-  border: none !important;
-}
-#sidebar-topics-list li a {
-  border: none !important;
-  padding: 5px 30px 5px 5px !important;
-}
-#sidebar-topics-list li a.remove-topic {
-  padding: 0 5px !important;
-}
-#sidebar-topics-list li a.remove-topic span {
-  top: 2px !important;
-}
-EOF
