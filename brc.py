@@ -50,6 +50,7 @@ handlers = {
       'markup_prefix': '.. sectnum::\n\n',
       'id_affix': '',
       'settings_overrides': {
+        'initial_header_level': 3,
         'math_output': 'MathML',
         'syntax_highlight': 'short',
       },
