@@ -1,0 +1,14 @@
+
+[default]
+# Write your default config options here!
+# ao=alsa:device=plug=dmix
+#ao=alsa
+ao=pulse
+# Normalize the sound level
+af=volnorm=2
+msglevel=all=5
+zoom=1
+framedrop=1
+
+[gnome-mplayer]
+msglevel=all=5
