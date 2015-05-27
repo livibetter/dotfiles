@@ -220,6 +220,8 @@ endfunction
 
 let g:notes_directories = ['~/Documents/VimNotes']
 let g:notes_tagsindex = '~/Documents/VimNotes/tags.txt'
+let g:notes_conceal_italic = 0
+let g:notes_conceal_bold = 0
 let g:notes_conceal_url = 0
 
 nmap <LEADER>todo :Note ToDo<CR>
