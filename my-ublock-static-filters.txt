@@ -35,7 +35,8 @@
 
 ! Bar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-forums*.gardenweb.com##div#signUpPromoFooter
+forums.gardenweb.com###signUpPromoFooter
+forums2.gardenweb.com###signUpPromoFooter
 
 !! wikia.com !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
