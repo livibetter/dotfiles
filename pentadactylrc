@@ -2,6 +2,7 @@ colorscheme solarized-dark
 
 set defsearch=g
 set editor="urxvt -name vimp-ext-editor -e vim"
+set guioptions=brs
 
 " Remove all key mappings (1.0b7pre+) as mapclear in Vimperator and older
 " versions.
