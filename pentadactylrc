@@ -76,16 +76,16 @@ EOF
   " Enter Insert mode
   au LocationChange docs\.google\.com :normal gi
 
-  au PageLoad about:blank* js change_tab_bg(<tab>-1, "#333");
+  au PageLoad 'about:blank' js change_tab_bg(<tab>-1, "#333");
   " PageLoad isn't fired when browser is launched
-  :if getBrowser().contentDocument.location.href.indexOf('about:blank') == 0
+  :if getBrowser().contentDocument.location.href == 'about:blank'
     js getBrowser().contentDocument.body.style.backgroundColor = "#333";
   :endif
   " The following line is simple but has problem with Blogger post editor, it
   " causes the background color of editor becomes #333.
   " style -name blank about:blank body { background-color: #333 !important }
 :elif config.profileName == "Test"
-  au PageLoad about:blank* js change_tab_bg(<tab>-1, "#633");
+  au PageLoad 'about:blank' js change_tab_bg(<tab>-1, "#633");
   " PageLoad isn't fired when browser is launched
   :if getBrowser().contentDocument.location.href == 'about:blank'
     js getBrowser().contentDocument.body.style.backgroundColor = "#633";
