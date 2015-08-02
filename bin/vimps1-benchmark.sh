@@ -1,8 +1,6 @@
 #!/bin/bash
 
-TESTGIT='/tmp/vimps1-benchmark.test'
-
-trap 'kill $tmpcount_pid ;rm -rf "$TESTGIT"; "$tmpcount"; exit 130' INT
+trap 'kill $tmpcount_pid ; rm -f "$tmpcount"; exit 130' INT
 
 test_command () {
 
@@ -43,21 +41,7 @@ bash_ps1 () {
     fi
   done
 
-  vcprompt -f '[%n:%b%m%u] $ '
 }
-
-init_git () {
-  rm -rf "$TESTGIT"
-  mkdir -p "$TESTGIT"
-  cd "$TESTGIT"
-  git init
-  echo test > test
-  git add test
-  git commit -m 'for testing' 
-}
-
-echo "initializing testing Git $TESTGIT"
-init_git >/dev/null
 
 SETUP=('enable' '-f' "$PWD/vimps1" 'vimps1')
 VIA='vimps1'
@@ -70,5 +54,3 @@ VIA='Bash PS1'
 TD=(bash_ps1)
 
 test_command
-
-rm -rf "$TESTGIT"
