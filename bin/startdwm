@@ -1,0 +1,5 @@
+#!/bin/sh
+# Just simple helper script to save a few keystrokes
+# % exec startdwm
+
+exec startx $HOME/.xinitrc dwm
