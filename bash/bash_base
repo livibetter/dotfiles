@@ -8,7 +8,6 @@
 _PATH=(
   $HOME/var/private/scripts
   $HOME/.local/bin
-  $HOME/.gem/ruby/2.0.0/bin
   /sbin
   /usr/sbin
   $PATH

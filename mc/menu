@@ -53,7 +53,7 @@ t Unpack to /tmp
 
 #### Image File Menu ####
 
-+ f \.gif$ | f \.png$ | f \.jpe?g$ & & t r & ! t t
++ f \.gif$ | f \.png$ | f \.jpe?g$ & t r & ! t t
 1 gimp
   gimp %f &
 + f \.gif$ | f \.png$ | f \.jpe?g$ & t r & ! t t
@@ -66,3 +66,9 @@ s sxiv
 + f \.CR2$
 s sxiv
   sxiv %f &
+
+#### PDF File Menu ####
+
++ f \.pdf$ & t r
+1 mupdf
+  mupdf %f &
