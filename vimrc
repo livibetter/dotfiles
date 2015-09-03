@@ -14,7 +14,8 @@ execute pathogen#infect()
 "=========="
 
 set t_Co=256 
-colorscheme apprentice
+let g:hybrid_use_Xresources = 1
+colorscheme hybrid
 
 " Others
 "========
