@@ -316,9 +316,7 @@ type/^PostScript
 
 # PDF
 type/^PDF
-	Open=(xpdf %f &)
-	#Open=(acroread %f &)
-	#Open=(ghostview %f &)
+	Open=(mupdf %f &)
 	View=%view{ascii} pdftotext %f -
 
 # The following code very ugly and should not be taken as example.
