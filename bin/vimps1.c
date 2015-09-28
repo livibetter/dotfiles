@@ -49,7 +49,7 @@ int vimps1_builtin (WORD_LIST *list) {
   char *term_str, *pwd_str;
   int max_length = 3;  // length of shortened dir names
 
-  char ps1[255]  = ""; // this got to be enough, or Oops!
+  char ps1[1024] = ""; // this got to be enough, or Oops!
   char *p_ps1    = ps1;
   char *p_pwd;
   int  dir_count = 0;  // only for the first dir
