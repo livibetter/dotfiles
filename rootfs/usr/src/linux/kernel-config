@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.0.5-gentoo Kernel Configuration
+# Linux/x86 4.0.9-gentoo Kernel Configuration
 #
 
 #
@@ -582,6 +582,7 @@ CONFIG_PCIEAER=y
 # CONFIG_PCIE_ECRC is not set
 # CONFIG_PCIEAER_INJECT is not set
 # CONFIG_PCIEASPM is not set
+CONFIG_PCI_BUS_ADDR_T_64BIT=y
 # CONFIG_PCI_MSI is not set
 # CONFIG_PCI_DEBUG is not set
 # CONFIG_PCI_REALLOC_ENABLE_AUTO is not set
