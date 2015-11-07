@@ -120,3 +120,9 @@ EOF
 " fix gmail doesn't have readable monospace theme, Terminal uses Courier New which is horrible to read.
 " fix groups, it is... ahm... never mind.
 style mail.google.com,groups.google.com -name google-monospace * { font-family: 'Envy Code R' !important }
+
+" YouTube
+" =======
+
+" remove annoying channel trailers
+au DOMLoad '^https://www\.youtube\.com/(channel|user)/\w+(/featured){0,1}' :js <doc>.getElementsByClassName('c4-player-container')[0].remove();

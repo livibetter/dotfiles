@@ -54,4 +54,3 @@ wikia.com##nav#globalNavigation[class*="inverse"]
 ||scorecardresearch.com^
 ||uservoice.com^
 ||www-cdn.jtvnw.net/swflibs/*
-||youtube.com/html5_player_template
