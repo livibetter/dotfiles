@@ -57,15 +57,6 @@ window.one_unpinned_tab = function(event) {
   }
 gBrowser.mTabContainer.addEventListener('TabClose', one_unpinned_tab, false);
 gBrowser.mTabContainer.addEventListener('TabPinned', one_unpinned_tab, false);
-
-window.change_tab_bg = function(id, color) {
-  var tab = tabs.getTab(id);
-
-  if (!tab)
-    return;
-
-  tab.linkedBrowser.contentDocument.body.style.backgroundColor = color;
-}
 EOF
 
 :if config.profileName == "Normal"
@@ -75,21 +66,7 @@ EOF
 
   " Enter Insert mode
   au LocationChange docs\.google\.com :normal gi
-
-  au PageLoad 'about:blank' js change_tab_bg(<tab>-1, "#333");
-  " PageLoad isn't fired when browser is launched
-  :if getBrowser().contentDocument.location.href == 'about:blank'
-    js getBrowser().contentDocument.body.style.backgroundColor = "#333";
-  :endif
-  " The following line is simple but has problem with Blogger post editor, it
-  " causes the background color of editor becomes #333.
-  " style -name blank about:blank body { background-color: #333 !important }
 :elif config.profileName == "Test"
-  au PageLoad 'about:blank' js change_tab_bg(<tab>-1, "#633");
-  " PageLoad isn't fired when browser is launched
-  :if getBrowser().contentDocument.location.href == 'about:blank'
-    js getBrowser().contentDocument.body.style.backgroundColor = "#633";
-  :endif
   source '~/.pentadactyl-Test.rc'
 :endif
 
