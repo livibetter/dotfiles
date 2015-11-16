@@ -62,7 +62,7 @@ EOF
 :if config.profileName == "Normal"
   " Enter passthrough mode automatically in Gmail, CommaFeed
   au LocationChange (mail|groups)\.google\.com normal! <C-z>
-  au LocationChange www\.commafeed\.com\/ normal! <C-z>
+  au LocationChange feedly.com\/ normal! <C-z>
 
   " Enter Insert mode
   au LocationChange docs\.google\.com :normal gi
@@ -77,19 +77,6 @@ EOF
 
 " Delete all styles, first.
 delstyle!
-
-" Tired of these shits, CPU suckers
-style * <<EOF
-* {
-  border-radius: 0 !important;
-
-  box-shadow: none !important;
-  text-shadow: none !important;
-
-  animation: none !important;
-  transition: none !important;
-}
-EOF
 
 " Google
 " ======
