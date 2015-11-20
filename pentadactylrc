@@ -57,6 +57,12 @@ window.one_unpinned_tab = function(event) {
   }
 gBrowser.mTabContainer.addEventListener('TabClose', one_unpinned_tab, false);
 gBrowser.mTabContainer.addEventListener('TabPinned', one_unpinned_tab, false);
+
+window.pin_tab = function(tab_id) {
+  var b = getBrowser();
+  var t = b.tabs[tab_id - 1];
+  b.pinTab(t);
+}
 EOF
 
 :if config.profileName == "Normal"
@@ -66,6 +72,9 @@ EOF
 
   " Enter Insert mode
   au LocationChange docs\.google\.com :normal gi
+
+  " Auto-pin
+  au PageLoad play.spotify.com js pin_tab(<tab>);
 :elif config.profileName == "Test"
   source '~/.pentadactyl-Test.rc'
 :endif
