@@ -26,6 +26,9 @@ map Y :yank gBrowser.contentDocument.location.href<CR>
 " I hate when I want to press <C-w> but I hit q instead
 map <C-q> <Nop>
 
+" I hate when I want to :open, but fat finger gets in the way
+map <p> <Nop>
+
 " Toggle app tab
 map <C-A-a> :pintab!<CR>
 
