@@ -7,7 +7,7 @@ bashrun*font: xft:Envy Code R:style=Bold Oblique:pixelsize=20
 # Rxvt Colors
 
 # For less highlighting
-Rxvt*colorIT: #ff0000
+Rxvt*colorIT: #ff8888
 
 ###########
 # Rxvt misc
