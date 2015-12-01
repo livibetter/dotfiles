@@ -19,8 +19,13 @@
 # THE SOFTWARE.
 
 
+import os
+import re
+from os import path
+
 from docutils import nodes
 
+from bpy.handlers.base import BaseHandler
 from bpy.handlers.rst import register_role
 
 
@@ -29,6 +34,99 @@ def kbd(name, rawtext, text, lineno, inliner, options=None, content=None):
   """Generate kbd element"""
 
   return [nodes.raw('', '<kbd>%s</kbd>' % text, format='html')], []
+
+
+def __check_category(fullpath):
+
+  if '/series/SotD/' in fullpath:
+    return 'SotD'
+  return None
+
+
+def __generate(self, markup=None):
+
+  fullpath = path.join(os.getcwdu(), self.filename.decode('utf8'))
+  cat = __check_category(fullpath)
+  if cat == 'SotD':
+    self.options['markup_prefix'] += '''
+.. _SotD: http://blog.yjl.im/SotD
+.. _Song of the Day: http://blog.yjl.im/SotD
+
+'''
+
+  if markup is None:
+    markup = self.markup
+
+  return self.__generate(markup)
+
+
+def __generate_title(self, title=None):
+
+  prefix = ''
+
+  if title is None:
+    title = self.header.get('title', self.title)
+
+  fullpath = path.join(os.getcwdu(), self.filename.decode('utf8'))
+  cat = __check_category(fullpath)
+  if cat == 'SotD':
+    # check filename format
+    RE_FILENAME = re.compile(r'.*/\d{4}-\d{2}-\d{2} \d{4} .+?\.rst')
+    if not RE_FILENAME.match(self.filename):
+      msg = 'The filename is not in the format of "YYYY-MM-DD NNNN TITLE.rst"'
+      raise ValueError(msg)
+
+    # remove date and number
+    RE_TITLE = re.compile(r'^\d{4}-\d{2}-\d{2} \d{4} ')
+    if RE_TITLE.match(title):
+      title = title[16:]
+
+    prefix = 'SotD: '
+
+  return self.__generate_title(prefix + title)
+
+
+def __split_header_markup(self, source=None):
+
+  header, markup = self.__split_header_markup(source)
+
+  fullpath = path.join(os.getcwdu(), self.filename.decode('utf8'))
+  cat = __check_category(fullpath)
+  if cat == 'SotD':
+    label = 'Song of the Day'
+    if 'labels' not in header:
+      header['labels'] = []
+    if label not in header['labels']:
+      header['labels'].append(label)
+
+  return header, markup
+
+
+def __update_source(self, header=None, markup=None, only_returned=False):
+
+  if header is None:
+    header = self.header
+
+  fullpath = path.join(os.getcwdu(), self.filename.decode('utf8'))
+  cat = __check_category(fullpath)
+  if cat == 'SotD':
+    label = 'Song of the Day'
+    if 'labels' not in header:
+      header['labels'] = []
+    if label in header['labels']:
+      header['labels'].remove(label)
+
+  self.__update_source(header, markup, only_returned)
+
+
+BaseHandler.__generate_title = BaseHandler.generate_title
+BaseHandler.generate_title = __generate_title
+BaseHandler.__generate = BaseHandler.generate
+BaseHandler.generate = __generate
+BaseHandler.__split_header_markup = BaseHandler.split_header_markup
+BaseHandler.split_header_markup = __split_header_markup
+BaseHandler.__update_source = BaseHandler.update_source
+BaseHandler.update_source = __update_source
 
 
 service = 'blogger'
