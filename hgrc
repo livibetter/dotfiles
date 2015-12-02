@@ -1,6 +1,8 @@
 [extensions]
-hgext.convert=
-mq=
+graphlog =
+hgext.convert =
+mq =
+shelve =
 
 [ui]
 username = Yu-Jie Lin <livibetter@gmail.com>
