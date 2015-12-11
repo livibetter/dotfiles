@@ -28,6 +28,7 @@ map <C-q> <Nop>
 
 " I hate when I want to :open, but fat finger gets in the way
 map <p> <Nop>
+map <S-p> <Nop>
 
 " Toggle app tab
 map <C-A-a> :pintab!<CR>
