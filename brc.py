@@ -40,6 +40,8 @@ def __check_category(fullpath):
 
   if '/series/SotD/' in fullpath:
     return 'SotD'
+  if '/series/journal/' in fullpath:
+    return 'journal'
   return None
 
 
@@ -82,6 +84,20 @@ def __generate_title(self, title=None):
       title = title[16:]
 
     prefix = 'SotD: '
+  elif cat == 'journal':
+    # check filename format
+    RE_FILENAME = re.compile(r'.*/(\d{4}-\d{2}-\d{2}) .+?\.rst')
+    m = RE_FILENAME.match(self.filename)
+    if not m:
+      msg = 'The filename is not in the format of "YYYY-MM-DD TITLE.rst"'
+      raise ValueError(msg)
+
+    # remove date and number
+    RE_TITLE = re.compile(r'^\d{4}-\d{2}-\d{2} ')
+    if RE_TITLE.match(title):
+      title = title[11:]
+
+    prefix = 'Journal %s: ' % m.group(1)
 
   return self.__generate_title(prefix + title)
 
@@ -94,10 +110,15 @@ def __split_header_markup(self, source=None):
   cat = __check_category(fullpath)
   if cat == 'SotD':
     label = 'Song of the Day'
-    if 'labels' not in header:
-      header['labels'] = []
-    if label not in header['labels']:
-      header['labels'].append(label)
+  elif cat == 'journal':
+    label = 'journal'
+  else:
+    return header, markup
+
+  if 'labels' not in header:
+    header['labels'] = []
+  if label not in header['labels']:
+    header['labels'].append(label)
 
   return header, markup
 
@@ -111,10 +132,16 @@ def __update_source(self, header=None, markup=None, only_returned=False):
   cat = __check_category(fullpath)
   if cat == 'SotD':
     label = 'Song of the Day'
-    if 'labels' not in header:
-      header['labels'] = []
-    if label in header['labels']:
-      header['labels'].remove(label)
+  elif cat == 'journal':
+    label = 'journal'
+  else:
+    self.__update_source(header, markup, only_returned)
+    return
+
+  if 'labels' not in header:
+    header['labels'] = []
+  if label in header['labels']:
+    header['labels'].remove(label)
 
   self.__update_source(header, markup, only_returned)
 
