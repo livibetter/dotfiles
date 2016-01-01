@@ -1,5 +1,9 @@
-CFLAGS = -g
-LDFLAGS = -lasound
+CC       ?= gcc
+CFLAGS   ?= -g -O2
+CFLAGS   += -Wall -Wextra
+CFLAGS   += -std=c99
+CPPFLAGS += -D_POSIX_C_SOURCE=199309L
+LDFLAGS  += -lasound
 
 all: status
 

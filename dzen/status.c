@@ -1,17 +1,14 @@
-// Copyright 2010, 2011 Yu-Jie Lin
+// Copyright 2010-2012, 2014, 2016 Yu-Jie Lin
 // BSD License
-// gcc -lasound -o status status.c
+
+#include <alloca.h>
 #include <locale.h>
 #include <netdb.h>
-#include <netinet/in.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <sys/statvfs.h>
 #include <sys/time.h>
-#include <time.h>
 #include <unistd.h>
 #include <alsa/asoundlib.h>
 
@@ -53,7 +50,6 @@ void update_fs(int);
 void update_net(int);
 void update_thm(int);
 void update_bat(int);
-void update_mpd(int);
 void update_sound(int);
 void update_clock(int);
 struct update_func update_funcs[] = {
@@ -63,7 +59,6 @@ struct update_func update_funcs[] = {
   {5000000, &update_net},
   {10000000, &update_thm},
   {UI_BAT, &update_bat},
-  {500000, &update_mpd},
   {200000, &update_sound},
   {1000000, &update_clock}
 };
@@ -102,10 +97,16 @@ void update_cpu(int ID)
   char *dzen_str = tmp_dzen[ID];
   char *color;
 
-  fscanf(f, "%*s");
+  if (fscanf(f, "%*s") != 0)
+  {
+    goto err;
+  }
   for (i = 0; i < 10; i++)
   {
-    fscanf(f, "%d", &n);
+    if (fscanf(f, "%d", &n) != 1)
+    {
+      goto err;
+    }
     ncpu_total += n;
     if (i == 3)
       ncpu_idle = n;
@@ -123,6 +124,10 @@ void update_cpu(int ID)
   sprintf(dzen_str,
           "^ca(1,./status-cpu.sh)^i(icons/cpu.xbm)^ca() ^fg(%s)%3d%%^fg()",
           color, cpu_percentage);
+  return;
+err:
+  sprintf(dzen_str,
+          "^fg(#fff)^bg(#f00)^ca(1,./status-cpu.sh)^i(icons/cpu.xbm)^ca() !!!%%^bg()^fg()");
 }
 
 void update_mem(int ID)
@@ -134,9 +139,12 @@ void update_mem(int ID)
   char *color;
   char key[32];
 
-  fscanf(f, "%*s %d %*s", &total);
-  fscanf(f, "%*s %d %*s", &free);
-  fscanf(f, "%s %d %*s", key, &buffers);
+  if (fscanf(f, "%*s %d %*s", &total) != 1
+      || fscanf(f, "%*s %d %*s", &free) != 1
+      || fscanf(f, "%s %d %*s", key, &buffers) != 2)
+  {
+    goto err;
+  }
   if (strstr(key, "MemAvailable") != NULL)
   {
     // the buffers is actually avaiable
@@ -144,7 +152,10 @@ void update_mem(int ID)
   }
   else
   {
-    fscanf(f, "%*s %d %*s", &cached);
+    if (fscanf(f, "%*s %d %*s", &cached) != 1)
+    {
+      goto err;
+    }
 
     free += buffers + cached;
     used = total - free;
@@ -161,6 +172,10 @@ void update_mem(int ID)
     sprintf(dzen_str + strlen(dzen_str), "^i(icons/mem.xbm)");
   sprintf(dzen_str + strlen(dzen_str), "^ca() ^fg(%s)%4dMB %2d%%^fg()", color,
           used / 1024, mem_percentage);
+  return;
+err:
+  sprintf(dzen_str,
+          "^fg(#fff)^bg(#f00)^ca(1,./status-mem.sh)^i(icons/mem.xbm)^ca() !!!!MB !!%%^bg()^fg()");
 }
 
 void update_fs(int ID)
@@ -205,12 +220,18 @@ void update_net(int ID)
     else
       is_wifi = 1;
   }
-  fscanf(f, "%ld", &n_rxb);
+  if (fscanf(f, "%ld", &n_rxb) != 1)
+  {
+    goto err;
+  }
   fclose(f);
   if ((f = fopen("/sys/class/net/ppp0/statistics/tx_bytes", "r")) == NULL)
     if ((f = fopen("/sys/class/net/ppp1/statistics/tx_bytes", "r")) == NULL)
       return;
-  fscanf(f, "%ld", &n_txb);
+  if (fscanf(f, "%ld", &n_txb) != 1)
+  {
+    goto err;
+  }
   fclose(f);
 
   // rate in bytes
@@ -238,6 +259,10 @@ void update_net(int ID)
   sprintf(dzen_str + strlen(dzen_str),
           " ^fg(%s)%3ld^fg()/^fg(%s)%4ld^fg() KB/s", color, tx_rate, rx_color,
           rx_rate);
+  return;
+err:
+  sprintf(dzen_str,
+          "^fg(#fff)^bg(f00)^i(icons/net_wired.xbm) !!!/!!!! KB/s ^bg()^fg()");
 }
 
 void update_thm(int ID)
@@ -249,7 +274,10 @@ void update_thm(int ID)
   FILE *f;
   if ((f = fopen("/sys/class/thermal/thermal_zone0/temp", "r")) != NULL)
   {
-    fscanf(f, "%d", &thm);
+    if (fscanf(f, "%d", &thm) != 1)
+    {
+      goto err;
+    }
     thm /= 1000;
   }
   else
@@ -261,6 +289,9 @@ void update_thm(int ID)
 
   color = used_color(thm, 70, -1, 40);
   sprintf(dzen_str, "^i(icons/temp.xbm) ^fg(%s)%d°C^fg()", color, thm);
+  return;
+err:
+  sprintf(dzen_str, "^fg(#fff)^bg(#f00)^i(icons/temp.xbm) !!°C^bg()^fg()");
 }
 
 void update_bat(int ID)
@@ -269,15 +300,20 @@ void update_bat(int ID)
   char *color;
   int full, remaining = 0, percentage;
   char state[32] = "";
-  char line[128];
   static char flashed = 0;
   FILE *f;
 
-  f = fopen("/sys/class/power_supply/BAT0/charge_full", "r");
-  fscanf(f, "%d", &full);
+  if (!(f = fopen("/sys/class/power_supply/BAT0/charge_full", "r"))
+      || fscanf(f, "%d", &full) != 1)
+  {
+    goto err;
+  }
   fclose(f);
-  f = fopen("/sys/class/power_supply/BAT0/charge_now", "r");
-  fscanf(f, "%d", &remaining);
+  if (!(f = fopen("/sys/class/power_supply/BAT0/charge_now", "r"))
+      || fscanf(f, "%d", &remaining) != 1)
+  {
+    goto err;
+  }
   fclose(f);
   if (remaining > full)
   {
@@ -285,8 +321,11 @@ void update_bat(int ID)
   }
   percentage = 100 * remaining / full;
 
-  f = fopen("/sys/class/power_supply/BAT0/status", "r");
-  fscanf(f, "%s", state);
+  if (!(f = fopen("/sys/class/power_supply/BAT0/status", "r"))
+      || fscanf(f, "%s", state) != 1)
+  {
+    goto err;
+  }
   fclose(f);
 
   // Formating icon
@@ -321,6 +360,10 @@ void update_bat(int ID)
 
   sprintf(dzen_str + strlen(dzen_str), " ^fg(%s)%3d%%^fg()", color,
           percentage);
+  return;
+err:
+  sprintf(dzen_str,
+          "^fg(#fff)^bg(#f00)^i(icons/bat_empty_01.xbm) !!!%%^bg()^fg()");
 }
 
 // get sockaddr, IPv4 or IPv6:
@@ -330,225 +373,6 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in *) sa)->sin_addr);
   return &(((struct sockaddr_in6 *) sa)->sin6_addr);
 }
-
-int mpd_send(int sockfd, char *data)
-{
-  int numbytes;
-  return send(sockfd, data, strlen(data), 0);
-}
-
-char *mpd_recv(int sockfd)
-{
-#define MAXDATASIZE 1024
-  static char buf[MAXDATASIZE];
-  int numbytes;
-
-  if ((numbytes = recv(sockfd, buf, MAXDATASIZE - 1, 0)) == -1)
-    return NULL;
-  buf[numbytes] = '\0';
-  return buf;
-}
-
-
-int mpd_connect()
-{
-  const char *MPD_HOST = "localhost";
-  const char *MPD_PORT = "6600";
-  struct addrinfo hints, *servinfo, *p;
-  int sockfd, rv, numbytes;
-  char s[INET6_ADDRSTRLEN];
-
-  memset(&hints, 0, sizeof hints);
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
-
-  if ((rv = getaddrinfo(MPD_HOST, MPD_PORT, &hints, &servinfo)) != 0)
-  {
-    freeaddrinfo(servinfo);
-    return -1;
-  }
-  // loop through all the results and connect to the first we can
-  for (p = servinfo; p != NULL; p = p->ai_next)
-  {
-    if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1)
-      continue;
-
-    if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1)
-    {
-      close(sockfd);
-      continue;
-    }
-    break;
-  }
-
-  if (p == NULL)
-  {
-    freeaddrinfo(servinfo);
-    return -1;
-  }
-
-  inet_ntop(p->ai_family, get_in_addr((struct sockaddr *) p->ai_addr), s,
-            sizeof s);
-  freeaddrinfo(servinfo);       // all done with this structure
-  // get connected message
-  mpd_recv(sockfd);
-
-  return sockfd;
-}
-
-void update_mpd(int ID)
-{
-  char *dzen_str = tmp_dzen[ID];
-  char *buf = NULL;
-  static int sockfd = -1;
-  char *idx;
-  size_t len;
-#define title_size 64
-#define artist_size 64
-  wchar_t title[title_size] = L"", artist[artist_size] = L"";
-#define text_size 128
-  wchar_t new_text[text_size] = L"";
-  static wchar_t mpd_text[text_size];
-  static int pos = 0;
-  int t_pos;
-  static char dir = 0;
-  const int MPD_TEXT_SIZE = 20;
-  wchar_t t_text[MPD_TEXT_SIZE + 1];
-  int time_pos, time_total;
-  FILE *fp;
-  char is_lf_submit = 0;
-
-  if ((fp = fopen("/tmp/lf-submit.sh.currentsong", "r")) != NULL)
-  {
-    is_lf_submit = -1;
-
-    getline(&buf, &len, fp);    // first line is track
-    mbstowcs(title, buf, title_size - 1);
-    title[wcslen(title) - 1] = L'\0';   // remove the newline
-
-    getline(&buf, &len, fp);    // second line is artist
-    mbstowcs(artist, buf, artist_size - 1);
-    artist[wcslen(artist) - 1] = L'\0'; // remove the newline
-
-    // Clean up
-    free(buf);
-    buf = NULL;
-    fclose(fp);
-  }
-
-  if (!is_lf_submit && sockfd == -1)
-    sockfd = mpd_connect();
-  if (!is_lf_submit && mpd_send(sockfd, "currentsong\n") == -1)
-  {
-    sockfd = -1;
-    mpd_text[0] = L'\0';
-    sprintf(dzen_str,
-            "^ca(1,mpd;mpdscribble)^fg(#aaa)^i(icons/note.xbm)^fg()^ca()");
-  }
-  else
-  {
-    if (!is_lf_submit
-        && ((buf = mpd_recv(sockfd)) == NULL || strlen(buf) <= 0))
-    {
-      sockfd = -1;
-      mpd_text[0] = L'\0';
-      sprintf(dzen_str,
-              "^ca(1,mpd;mpdscribble)^fg(#aaa)^i(icons/note.xbm)^fg()^ca()");
-      return;
-    }
-    if (!is_lf_submit)
-    {
-      // find title
-      idx = strstr(buf, "Title: ");
-      if (idx != NULL)
-      {
-        idx += strlen("Title: ");
-        *strstr(idx, "\n") = '\0';
-        title[mbstowcs(title, idx, title_size - 1)] = L'\0';
-        idx[strlen(idx)] = '\n';
-      }
-      // find artist
-      idx = strstr(buf, "Artist: ");
-      if (idx != NULL)
-      {
-        idx += strlen("Artist: ");
-        *strstr(idx, "\n") = '\0';
-        artist[mbstowcs(artist, idx, artist_size - 1)] = L'\0';
-        idx[strlen(idx)] = '\n';
-      }
-    }
-    wcscpy(new_text, artist);
-    wcscat(new_text, L" - ");
-    wcscat(new_text, title);
-//printf("%s\n", new_text);
-    if (wcscmp(new_text, mpd_text))
-    {
-      system("killall status-mpd.sh &>/dev/null");
-      system("itch-music.sh &");
-      system("./status-mpd.sh 10 &");
-      wcscpy(mpd_text, new_text);
-      pos = 0;
-      dir = 0;
-    }
-    t_pos = 0;
-    if (wcslen(mpd_text) > MPD_TEXT_SIZE)
-    {
-      if (dir)
-      {
-        if (++pos >= wcslen(mpd_text) + 5 - MPD_TEXT_SIZE)
-        {
-          pos = wcslen(mpd_text) - MPD_TEXT_SIZE;
-          dir = !dir;
-        }
-      }
-      else
-      {
-        if (--pos <= -5)
-        {
-          pos = 0;
-          dir = !dir;
-        }
-      }
-      t_pos = (pos < 0) ? 0 : pos;
-      if (t_pos > wcslen(mpd_text) - MPD_TEXT_SIZE)
-        t_pos = wcslen(mpd_text) - MPD_TEXT_SIZE;
-    }
-    wcsncpy(t_text, mpd_text + t_pos, MPD_TEXT_SIZE);
-    len = wcslen(mpd_text + t_pos);
-    if (len > MPD_TEXT_SIZE)
-      len = MPD_TEXT_SIZE;
-    t_text[len] = L'\0';
-
-    swprintf(new_text, text_size, L"%-20ls", t_text);
-    sprintf(dzen_str, "^ca(1,./status-mpd.sh)%s^ca() ^fg(#aa0)%ls^fg()",
-            is_lf_submit
-            ? "^fg(#0a0)^i(icons/note.xbm)^fg()"
-            :
-            "^ca(3,bash -c 'killall status-mpd.sh &>/dev/null ; mpd --kill ; killall mpdscribble')^i(icons/note.xbm)^ca()",
-            new_text);
-  }
-  if (!is_lf_submit && mpd_send(sockfd, "status\n") != -1)
-  {
-    if ((buf = mpd_recv(sockfd)) == NULL || strlen(buf) <= 0)
-      return;
-    // find time
-    idx = strstr(buf, "time: ");
-    if (idx != NULL)
-    {
-      idx += strlen("time: ");
-      len = strstr(idx, "\n") - idx;
-      *(idx + len) = 0;
-      *(strstr(idx, ":")) = 0;
-      time_pos = atoi(idx);
-      time_total = atoi(idx + strlen(idx) + 1);
-      const int width = 136;
-      sprintf(dzen_str + strlen(dzen_str),
-              "^ib(1)^fg(#aaa)^p(_BOTTOM)^p(-%d;-3)^p(_LOCK_X)^ro(%dx3)^fg(#aaa)^p(1;1)^r(%dx1)^p(_UNLOCK_X)^p(%d)^p()^ib(0)",
-              width + 2, width, width * time_pos / time_total, width - 1);
-    }
-  }
-}
-
 
 void update_sound(int ID)
 {
@@ -630,6 +454,10 @@ int main(void)
   int i;
   uint64_t ts_current;
   struct timeval t;
+  struct timespec req = {
+    .tv_sec = 0,
+    .tv_nsec = SLEEP * 1000
+  };
   FILE *dzen;
 
   // http://www.cl.cam.ac.uk/~mgk25/unicode.html#c
@@ -640,12 +468,14 @@ int main(void)
     return 1;
   }
 
-  chdir("/home/livibetter/.dzen");
 
-//      dzen = popen("dzen2 -bg '#303030' -fg '#aaa' -fn 'Envy Code R-9' -x 840 -y 0 -w 840 -h 17 -ta right -e 'button3='", "w");
-  if ((dzen = fopen("/home/livibetter/.config/dzen-status/dzen", "r")) == NULL)
+  if (chdir("/home/livibetter/.dzen") == -1
+      || (dzen =
+          fopen("/home/livibetter/.config/dzen-status/dzen", "r")) == NULL
+      || fgets(old_dzen, sizeof old_dzen, dzen) == NULL)
+  {
     return 2;
-  fgets(old_dzen, sizeof old_dzen, dzen);
+  }
   fclose(dzen);
   dzen = popen(old_dzen, "w");
   if (!dzen)
@@ -680,14 +510,12 @@ int main(void)
     new_dzen[0] = 0;
     for (i = 0; i < UPDATE_FUNCS; i++)
     {
-//          printf("%d: %d\n", i, (unsigned int) strlen(tmp_dzen[i]));
       if (i > 0)
         strcat(new_dzen, " ");
       strcat(new_dzen, tmp_dzen[i]);
     }
     strcat(new_dzen,
            " ^ca(1,./status-misc.sh)^ca(3,./status-clouds.sh)^i(icons/info_01.xbm)^ca()^ca() ");
-//        printf("*: %d\n", (unsigned int) strlen(new_dzen));
 
     if (strcmp(old_dzen, new_dzen))
     {
@@ -695,7 +523,7 @@ int main(void)
       fflush(dzen);
       strcpy(old_dzen, new_dzen);
     }
-    usleep(SLEEP);
+    nanosleep(&req, NULL);
   }
   // pclose(dzen);
   // free(update_ts);
