@@ -4,6 +4,7 @@
 #include <alloca.h>
 #include <locale.h>
 #include <netdb.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,6 +35,7 @@
 char old_dzen[2048];
 char new_dzen[2048];
 
+FILE *dzen;
 uint64_t *update_ts;
 char **tmp_dzen;
 
@@ -449,6 +451,21 @@ void update_next_ts(int ID)
   update_ts[ID] = t.tv_sec * 1000000 + t.tv_usec + update_funcs[ID].interval;
 }
 
+void clean_up()
+{
+  free(update_ts);
+  pclose(dzen);
+}
+
+void sig_handler(int sig)
+{
+  (void) sig;
+
+  clean_up();
+  signal(sig, SIG_DFL);
+  raise(sig);
+}
+
 int main(void)
 {
   int i;
@@ -458,7 +475,6 @@ int main(void)
     .tv_sec = 0,
     .tv_nsec = SLEEP * 1000
   };
-  FILE *dzen;
 
   // http://www.cl.cam.ac.uk/~mgk25/unicode.html#c
   if (!setlocale(LC_CTYPE, ""))
@@ -468,6 +484,9 @@ int main(void)
     return 1;
   }
 
+  signal(SIGINT, sig_handler);
+  signal(SIGKILL, sig_handler);
+  signal(SIGTERM, sig_handler);
 
   if (chdir("/home/livibetter/.dzen") == -1
       || (dzen =
@@ -525,7 +544,7 @@ int main(void)
     }
     nanosleep(&req, NULL);
   }
-  // pclose(dzen);
-  // free(update_ts);
-  // ...
+
+  clean_up();
+  return EXIT_SUCCESS;
 }
