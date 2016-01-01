@@ -38,6 +38,7 @@ char new_dzen[2048];
 FILE *dzen;
 uint64_t *update_ts;
 char **tmp_dzen;
+snd_mixer_t *h_mixer = NULL;
 
 
 typedef void (*update_func_pointer) (int);
@@ -387,7 +388,6 @@ void update_sound(int ID)
   int percentage;
   int switch_value;
 
-  static snd_mixer_t *h_mixer = NULL;
   static snd_mixer_selem_id_t *sid = NULL;
   static snd_mixer_elem_t *elem = NULL;
 
@@ -453,6 +453,12 @@ void update_next_ts(int ID)
 
 void clean_up()
 {
+  snd_mixer_close(h_mixer);
+  for (int i = 0; i < UPDATE_FUNCS; i++)
+  {
+    free(tmp_dzen[i]);
+  }
+  free(tmp_dzen);
   free(update_ts);
   pclose(dzen);
 }
