@@ -1,5 +1,5 @@
-// Copyright 2010-2012, 2014, 2016 Yu-Jie Lin
-// BSD License
+// Written by Yu-Jie Lin in 2010-2012, 2014, 2016
+// Public domain, or via UNLICENSE, if not applicable.
 
 #include <alloca.h>
 #include <locale.h>

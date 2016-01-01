@@ -1,6 +1,6 @@
 #!/bin/bash
-# Copyright 2010 Yu-Jie Lin
-# BSD License
+# Written by Yu-Jie Lin in 2010
+# Public domain, or via UNLICENSE, if not applicable.
 
 # Configuration
 ###############
