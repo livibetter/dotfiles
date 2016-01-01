@@ -25,7 +25,7 @@
 //   yellow-cyan flashing is meaning battery capacity is low and charging
 #define BAT_FULL 50
 #define BAT_LOW 10
-// On my laptop, /proc/acpi/battery/... update interval is 15 seconds
+// On my laptop, /sys/class/power_supply/BAT0/... update interval is 15 seconds
 // Normal update interval when capacity is more than low capacity
 #define UI_BAT 5000000
 // Flashing rate when in low capacity, the default is 500ms for red, 500ms for yellow/cyan
@@ -219,11 +219,7 @@ void update_thm(int ID) {
   int thm;
 
   FILE *f;
-  if ((f = fopen("/proc/acpi/thermal_zone/THM/temperature", "r")) != NULL) {
-    fscanf(f, "%*s %d", &thm);
-    }
-  // kernel 2.6.37+ doesn't have /proc/acpi/thermal_zone
-  else if ((f = fopen("/sys/class/thermal/thermal_zone0/temp", "r")) != NULL) {
+  if ((f = fopen("/sys/class/thermal/thermal_zone0/temp", "r")) != NULL) {
     fscanf(f, "%d", &thm);
     thm /= 1000;
     }
@@ -246,36 +242,29 @@ void update_bat(int ID) {
   static char flashed = 0;
   FILE *f;
 
-  f = fopen("/proc/acpi/battery/BAT0/info", "r");
-  while (fgets(line, sizeof(line), f) != NULL) {
-    if (strstr(line, "last full capacity") != NULL) {
-      sscanf(line, "last full capacity: %d", &full);
-      break;
-      }
-    }
+  f = fopen("/sys/class/power_supply/BAT0/charge_full", "r");
+  fscanf(f, "%d", &full);
   fclose(f);
-
-  f = fopen("/proc/acpi/battery/BAT0/state", "r");
-  while (fgets(line, sizeof(line), f) != NULL) {
-    if (strstr(line, "charging state") != NULL)
-      sscanf(line, "charging state: %s", state);
-    if (strstr(line, "remaining capacity") != NULL)
-      sscanf(line, "remaining capacity: %d", &remaining);
-    if (remaining != 0 && state[0] != 0)
-      break;
-    }
+  f = fopen("/sys/class/power_supply/BAT0/charge_now", "r");
+  fscanf(f, "%d", &remaining);
   fclose(f);
-
+  if (remaining > full) {
+    remaining = full;
+    }
   percentage = 100*remaining/full;
-  
+
+  f = fopen("/sys/class/power_supply/BAT0/status", "r");
+  fscanf(f, "%s", state);
+  fclose(f);
+
   // Formating icon
-  if (state == strstr(state, "charged")) {
+  if (state == strstr(state, "Full")) {
     sprintf(dzen_str, "^fg(#0a0)");
     percentage=100;
     }
-  else if (state == strstr(state, "charging"))
+  else if (state == strstr(state, "Charging"))
     sprintf(dzen_str, "^fg(#0aa)");
-  else if (state == strstr(state, "discharging"))
+  else if (state == strstr(state, "Discharging"))
     sprintf(dzen_str, "^fg(#aa0)");
   else
     sprintf(dzen_str, "^fg(#a00)");
