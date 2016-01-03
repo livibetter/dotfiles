@@ -12,6 +12,9 @@
 
 BOX cmt-c
 
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
+
 sample
   /* foobar */
 ends
@@ -34,6 +37,9 @@ END cmt-c
 
 BOX cmt-pound
 
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
+
 sample
   # foobar
 ends
@@ -51,6 +57,9 @@ elastic (w)
 END cmt-pound
 
 BOX cmt-vim
+
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
 
 sample
   " foobar
@@ -76,6 +85,9 @@ END cmt-vim
 #####
 
 BOX h1-c
+
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
 
 sample
   /**********/
@@ -103,6 +115,9 @@ END h1-c
 
 BOX h1-pound
 
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
+
 sample
   ##########
   # foobar #
@@ -124,6 +139,9 @@ elastic (n, w, s, e)
 END h1-pound
 
 BOX h1-vim
+
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
 
 sample
   " ====== "
@@ -150,6 +168,9 @@ END h1-vim
 
 BOX h2-c
 
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
+
 sample
   /* foobar
    *********/
@@ -175,6 +196,9 @@ END h2-c
 
 BOX h2-pound
 
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
+
 sample
   # foobar 
   ########
@@ -194,6 +218,9 @@ elastic (w, s)
 END h2-pound
 
 BOX h2-vim
+
+author "Yu-Jie Lin"
+designer "Yu-Jie Lin"
 
 sample
   " foobar
