@@ -18,7 +18,13 @@ export PATH="${_PATH// /:}"
 unset _PATH
 
 export MANPATH=$MANPATH:$HOME/share/man:$HOME/.local/man:$HOME/.local/share/man
+
+export GOROOT=$HOME/var/bin/go
+export GOPATH=$HOME/.local/lib64/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 export PERL5LIB=$HOME/.local/lib/perl5:$PERL5LIB
+
 export LD_LIBRARY_PATH=$HOME/.local/lib
 export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:/usr/lib64/pkgconfig
 
