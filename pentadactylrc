@@ -12,7 +12,7 @@ map , <Leader>
 
 " guioptions!=s controls and options.showtabline control all windows, not what
 " I need. I need to control each individually.
-map <silent> <C-F8> :js toggle_toolbar('addon-bar');<CR>
+map <silent> <C-F8> :set guioptions!=s<CR>
 map <silent> <S-F8> :js toggle_toolbar('TabsToolbar');<CR>
 map <silent>   <F8> :js toggle_toolbars(['PersonalToolbar', 'nav-bar', 'toolbar-menubar']);<CR>
 
@@ -40,7 +40,7 @@ js <<EOF
 window.toggle_toolbar = function(id) {
   var tb = document.getElementById(id);
   if (tb._visible === undefined)
-    tb._visible = id == 'addon-bar' || id == 'TabsToolbar';
+    tb._visible = id == 'TabsToolbar';
   tb._visible = !tb._visible;
   window.setToolbarVisibility(tb, tb._visible);
   }
