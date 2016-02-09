@@ -29,6 +29,11 @@ export GOROOT=$HOME/var/bin/go
 export GOPATH=$HOME/.local/lib64/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# Haskell
+#########
+
+export PATH=$PATH:$HOME/.cabal/bin
+
 # Perl
 ######
 
