@@ -1,84 +1,28 @@
 Xft.dpi: 96
 
 ! Without restarting X, xrdb -merge ~/.Xresources, before new terminal window.
-! https://github.com/solarized/xresources
-! Solarized color scheme for the X Window System
-!
-! http://ethanschoonover.com/solarized
 
+! selenized black color palette for urxvt.
 
-! Common
+URxvt*background:  #1b1b1b
+URxvt*foreground:  #ababab
 
-#define S_yellow #b58900
-#define S_orange #cb4b16
-#define S_red #dc322f
-#define S_magenta #d33682
-#define S_violet #6c71c4
-#define S_blue #268bd2
-#define S_cyan #2aa198
-#define S_green #859900
+! normal colors: "black", red, green, yellow, blue, magenta, cyan, "white"
+URxvt*color0:      #303030
+URxvt*color1:      #ed413d
+URxvt*color2:      #63ad2d
+URxvt*color3:      #c9a323
+URxvt*color4:      #4188ee
+URxvt*color5:      #d363e3
+URxvt*color6:      #2db9ab
+URxvt*color7:      #ababab
 
-! Bright Common
-
-#define S_brred #ec423f
-#define S_brgreen #95a910
-#define S_bryellow #c59910
-#define S_brblue #369be2
-#define S_brmagenta #e34692
-#define S_brcyan #3ab1a8
-
-
-! Dark
-
-#define S_base03 #002b36
-#define S_base02 #073642
-#define S_base01 #586e75
-#define S_base00 #657b83
-#define S_base0 #839496
-#define S_base1 #93a1a1
-#define S_base2 #eee8d5
-#define S_base3 #fdf6e3
-
-
-! Light
-
-! #define S_base03 #fdf6e3
-! #define S_base02 #eee8d5
-! #define S_base01 #93a1a1
-! #define S_base00 #839496
-! #define S_base0 #657b83
-! #define S_base1 #586e75
-! #define S_base2 #073642
-! #define S_base3 #002b36
-
-
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
-!
-! URxvt*background: S_base03
-
-URxvt*background: S_base03
-URxvt*foreground: S_base2
-URxvt*fading: 40
-URxvt*fadeColor: S_base03
-URxvt*cursorColor: S_base1
-URxvt*pointerColorBackground: S_base01
-URxvt*pointerColorForeground: S_base1
-
-URxvt*color0: S_base02
-URxvt*color1: S_red
-URxvt*color2: S_green
-URxvt*color3: S_yellow
-URxvt*color4: S_blue
-URxvt*color5: S_magenta
-URxvt*color6: S_cyan
-URxvt*color7: S_base2
-
-URxvt*color8: S_base01
-URxvt*color9: S_brred
-URxvt*color10: S_brgreen
-URxvt*color11: S_bryellow
-URxvt*color12: S_brblue
-URxvt*color13: S_brmagenta
-URxvt*color14: S_brcyan
-URxvt*color15: S_base3
+! bright/bold versions of colors (in the same order)
+URxvt*color8:      #777777
+URxvt*color9:      #ff594f
+URxvt*color10:     #79c344
+URxvt*color11:     #e1b83c
+URxvt*color12:     #5d9cff
+URxvt*color13:     #ea79fb
+URxvt*color14:     #4cd0c1
+URxvt*color15:     #c6c6c6
