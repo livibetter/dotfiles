@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2013 by Yu-Jie Lin
+# Copyright (C) 2011-2016 by Yu-Jie Lin
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
+import json
 import os
 import re
 from os import path
@@ -157,7 +157,13 @@ BaseHandler.update_source = __update_source
 
 
 service = 'blogger'
+
+fn = path.join(path.dirname(path.realpath(__file__)), 'brc.py.blogger.json')
+with open(fn) as f:
+  data = json.load(f)
 service_options = {
+  'client_id': data['installed']['client_id'],
+  'client_secret': data['installed']['client_secret'],
   'blog': 3803541356848955053
 }
 
