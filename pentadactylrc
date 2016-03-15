@@ -70,12 +70,10 @@ window.pin_tab = function(tab_id) {
 EOF
 
 :if config.profileName == "Normal"
-  " Enter passthrough mode automatically in Gmail, CommaFeed
-  au LocationChange (mail|groups)\.google\.com normal! <C-z>
-  au LocationChange feedly.com\/ normal! <C-z>
-
-  " Enter Insert mode
-  au LocationChange docs\.google\.com :normal gi
+  " Enter passthrough mode automatically
+  au LocationChange docs.google.com :normal! <C-z>
+  au LocationChange mail.google.com :normal! <C-z>
+  au LocationChange feedly.com      :normal! <C-z>
 
   " Auto-pin
   au PageLoad play.spotify.com js pin_tab(<tab>);
