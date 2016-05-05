@@ -1,5 +1,12 @@
 @-moz-document url(about:blank){
-  body {
+  body
+  {
     background-color: #333;
+  }
+
+  /* for Blogger editor */
+  body#postingComposeBox
+  {
+    background-color: initial;
   }
 }
