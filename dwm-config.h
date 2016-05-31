@@ -46,9 +46,6 @@ static Rule rules[] = {
 
   { "MPlayer",      NULL,         NULL,       0,        True,       -1 },
   { "mpv",          NULL,         NULL,       0,        True,       -1 },
-  { "Smplayer",     NULL,         NULL,       0,        True,       -1 },
-  { NULL,           NULL,         "VLC media player",
-                                              0,        True,       -1 },
   
   { "URxvt",        "bashrun",    NULL,       0,        True,       -1 },
   { NULL,           NULL,         "Volume Control",
@@ -63,7 +60,6 @@ static Rule rules[] = {
   // Programs with special initial tag
   { "Vncviewer",    NULL,         NULL,       1<<3,     True,       -1 },
 
-  { "libreoffice",  NULL,         NULL,       1<<4,     False,      -1 },
   { "MuPDF",        NULL,         NULL,       1<<4,     True,       -1 },
 
   { "Geeqie",       NULL,         NULL,       1<<5,     False,      -1 },
