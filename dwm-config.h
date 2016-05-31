@@ -119,7 +119,7 @@ static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodif
 
 static Key keys[] = {
   /* modifier                     key         function        argument */
-  { MODKEY,                       XK_p,       spawn,          {.v = bashrun_cmd } },
+  { MODKEY,                       XK_r,       spawn,          {.v = bashrun_cmd } },
 
   { MODKEY|ShiftMask,             XK_Return,  spawn,          {.v = urxvtc_tmux_cmd } },
   { MODKEY|ShiftMask|Mod1Mask,    XK_Return,  spawn,          {.v = urxvtc_tmux_attach_cmd } },
