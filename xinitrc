@@ -30,7 +30,7 @@ export QT_IM_MODULE="xim"
 
 xrdb -merge .Xresources
 xset fp+ ~/.fonts/Envy\ Code\ R/
-setxkbmap -model pc104 -layout us -option compose:menu
+setxkbmap -model pc104 -layout us -option compose:paus
 
 synclient HorizTwoFingerScroll=1
 
