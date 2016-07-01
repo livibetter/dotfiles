@@ -53,11 +53,14 @@ static Rule rules[] = {
   { "URxvt",        "dzen-status-sound",
                                   NULL,       0,        True,       -1 },
   { "URxvt",        "mc",         NULL,       0,        True,       -1 },
-  { "URxvt",        "vimp-ext-editor",
-                                  NULL,       0,        True,       -1 },
   
+  // Tag row #1
+  { "Firefox Normal",
+                    "Navigator",  NULL,       1,        False,      -1 },
+  { "Firefox Test", "Navigator",  NULL,       1<<1,     False,      -1 },
+  { "Firefox HS",   "Navigator",  NULL,       1<<2,     False,      -1 },
+
   // Tag row #2
-  // Programs with special initial tag
   { "Vncviewer",    NULL,         NULL,       1<<3,     True,       -1 },
 
   { "MuPDF",        NULL,         NULL,       1<<4,     True,       -1 },
@@ -66,7 +69,6 @@ static Rule rules[] = {
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
 
   // Tag row #3
-  { "Firefox",      "Navigator",  NULL,       1<<6,     False,      -1 },
   { "URxvt",        "urxvt",      NULL,       1<<7,     False,      -1 },
 };
 

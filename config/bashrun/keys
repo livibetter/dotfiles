@@ -1,0 +1,148 @@
+################################################################################
+# 
+# bashrun keyboard configuration file
+# 
+# The current keymap can be set using 
+#    KEYMAP <keymap>
+#
+# Keybindings are defined using
+#    <action> <keyseq> <keyname>
+#
+# - supported keymaps: "emacs", "vi-insert" or "vi-command".
+# - keyseq: valid readline keyseq (see readline(1))
+# - keyname: optional description for keyseqs like \e[11~ etc.
+# 
+# The following keyseqs are reserved by bashrun for internal use:
+#     
+#    \C-x[0-9][...]
+#    \20[0-9]
+#
+################################################################################
+
+KEYMAP emacs
+
+quit  \C-q 
+abort \C-g 
+pass  \ew  
+run   \C-m 
+run   \C-j 
+
+term-run  \e\C-m 
+term-run  \e\C-j 
+term-hold \eh 
+term-page \e+ 
+
+su-run       \esu
+su-term-run  \es\C-m
+su-term-run  \es\C-j
+su-term-hold \esh  
+su-term-page \es+
+
+show-manual \e? 
+show-info   \e\C-? 
+show-help   \C-x?
+
+copy        \ex
+copy-paste  \e\C-x
+
+filter \ea
+filter-paste \e\C-a 
+
+browse        \e\C-b
+google-search \e\C-g
+dict-lookup   \e\C-d
+
+bashrun-bindings \eOP   F1
+bashrun-bindings \e[11~ F1
+
+bashrun-manual   \eOQ   F2
+bashrun-manual   \e[12~ F2 
+
+bashrun-handlers \eOR   F3
+bashrun-handlers \e[13~ F3
+
+bashrun-debug    \e[24~ F12
+
+toggle-size  \C-l
+resize-up    \e[1;5A C-up
+resize-down  \e[1;5B C-down
+resize-left  \e[1;5D C-left
+resize-right \e[1;5C C-right
+
+################################################################################
+
+KEYMAP vi-insert
+
+quit  \C-q
+abort \C-g
+run   \C-m
+run   \C-j
+
+bashrun-bindings \eOP   F1
+bashrun-bindings \e[11~ F1
+
+bashrun-manual   \eOQ   F2
+bashrun-manual   \e[12~ F2
+
+bashrun-handlers \eOR   F3
+bashrun-handlers \e[13~ F3
+
+bashrun-debug    \e[24~ F12
+
+toggle-size  \C-l
+resize-up    \e[1;5A C-up
+resize-down  \e[1;5B C-down
+resize-left  \e[1;5D C-left
+resize-right \e[1;5C C-right
+
+################################################################################
+
+KEYMAP vi-command
+
+quit  \C-q
+abort \C-g
+pass  \ew
+run   \C-m
+run   \C-j
+
+term-run  \e\C-m
+term-run  \e\C-j
+term-hold \eh 
+term-page \e+ 
+
+su-run       \esu
+su-term-run  \es\C-m
+su-term-run  \es\C-j
+su-term-hold \esh  
+su-term-page \es+
+
+show-manual \e? 
+show-info   \ei
+show-help   \eh
+
+copy        \ec
+copy-paste  \ev
+
+filter \ea
+filter-paste \e\C-a 	   
+
+browse        \eb
+google-search \eg
+dict-lookup   \ed
+
+bashrun-bindings \eOP   F1
+bashrun-bindings \e[11~ F1
+
+bashrun-manual   \eOQ   F2
+bashrun-manual   \e[12~ F2
+
+bashrun-handlers \eOR   F3
+bashrun-handlers \e[13~ F3
+
+bashrun-debug    \e[24~ F12
+
+toggle-size  \C-l
+resize-up    \e[1;5A C-up
+resize-down  \e[1;5B C-down
+resize-left  \e[1;5D C-left
+resize-right \e[1;5C C-right

@@ -1,0 +1,175 @@
+################################################################################
+#
+# bashrun user configuration file
+#
+# NOTE: If xdotool(1) is being used, you will have to restart the
+#       current instance of bashrun using "bashrun --restart" for
+#       changes to take effect.
+#
+################################################################################
+
+# set terminal: (xterm|rxvt|urxvt|urxvtc|mrxvt|aterm|mlterm)
+XTERM=urxvtc
+
+# additional commandline options for the terminal
+# by default, Xterm's metaSendsEscape and allowWindowOps are enabled,
+# so that Meta keybindings and window resizing work out of the box.
+# You'll have to adjust this if you're using a terminal other than xterm.
+
+#XTERM_OPTIONS="-xrm XTerm**metaSendsEscape:True -xrm XTerm**allowWindowOps:True"
+XTERM_OPTIONS=""
+
+# If set to "yes", the terminal won't be hidden after every command
+KEEP_OPEN=no	
+
+# terminal size in default mode
+SMALL_COLUMNS=40
+SMALL_LINES=1
+
+# terminal size in "large" mode (xterm and urxvt only)
+LARGE_COLUMNS=40
+LARGE_LINES=8
+
+# foreground and background colors
+BGCOLOR=black
+FGCOLOR=grey
+
+# simple prompt
+PS1=">"
+
+# fancy prompt
+#PS1=">\033[s\033[1;\$((COLUMNS-4))f\$(date +%H:%M)\033[u"
+
+# history options (see bash(1)):
+HISTCONTROL=ignoredups:erasedups 
+
+# COMPLETION_TYPE: 'complete', 'menu-complete' or 'quiet-complete'.
+#
+# 'complete'       : as usual (see bash(1))
+# 'menu-complete'  : makes <TAB> cycle through completions on the
+#                    current line instead of paging all possible
+#                    completions (see bash(1)).
+# 'quiet-complete' : like 'complete' with the following readline settings:
+#                      - page-completions off
+#	               - print-completions-horizontally on
+#	               - completion-query-items -1
+#
+#                    This means although completions are shown you will not
+#                    get to see them in a one-line terminal. 
+#                     
+# COMPLETION_THRESHOLD: if LINES >= COMPLETION_THRESHOLD, switch to
+#                       ALTERNATIVE_COMPLETION_TYPE. Disabled for
+#                       values <= 1
+#                       
+# 
+# ALTERNATIVE_COMPLETION_TYPE: The completion type to switch to if
+#                              LINES >= COMPLETION_THRESHOLD.
+#
+# This default setup will use 'menu-complete' in small mode and
+# 'complete' in large mode
+
+COMPLETION_TYPE=menu-complete
+COMPLETION_THRESHOLD=$LARGE_LINES
+ALTERNATIVE_COMPLETION_TYPE=complete
+
+# whether to use extended bash completion
+USE_EXTENDED_BASH_COMPLETION=no
+
+# path to bash_completion.sh
+EXTENDED_BASH_COMPLETION_PATH=/etc/profile.d/bash_completion.sh 
+
+# command to run directly after making the window visible via xdotool
+#POST_MAP_COMMAND='transset-df -a 0.65'
+
+# Which dict client to use for dict-lookup. Add it to TERMINAL_RULES
+# if neccessary. (default=dict --pager $PAGER)
+# DICT_CLIENT=kdict
+
+# Rules for always launching certain programs in a terminal. Include a
+# space separated list of program names after the colons to
+# automatically run, hold or page those commands in the terminal.
+
+TERMINAL_RULES=(
+    "RUN:"
+    "PAGE:"
+    "HOLD:"
+)
+
+# DIRHANDLER is a command to run when a path to a directory is entered
+# and the directory exists. The path will be passed as the first
+# argument.
+#DIRHANDLER='kfmclient openProfile filemanagement'
+
+# BROWSER to use for google lookup (C-M-g)
+BROWSER=firefox-bin
+
+# GOOGLE_FALLBACK (default: no) If set to "yes" bashrun will automatically
+# google the commandline if it isn't executable or handled by HANDLERS
+# or DIRHANDLER
+GOOGLE_FALLBACK=no
+
+# HANDLERS: handlers allow rewriting of non-executable commandlines
+# based on regular expression matches, using subpattern substitution
+# and unary file test operators for refinement. 
+# See bashrun(1) for details.
+
+HANDLERS=(
+    # plain url handlers, for lines beginning with http, https or www
+    #'^https?'   "$BROWSER"
+    #'^www'      "$BROWSER"
+
+    # web shortcuts (examples for subpattern substitution)
+    #'^gg:(.+)'  "$BROWSER 'http://www.google.com/search?q=\$1'"
+    #'^ggl:(.+)' "$BROWSER 'http://www.google.com/search?q=\$1&btnI=I%27m+Feeling+Lucky'"
+    #'^fm:(.+)'  "$BROWSER 'http://freshmeat.net/search/?q=\$1&section=projects'"
+    #'^sf:(.+)'  "$BROWSER 'https://sourceforge.net/projects/\$1/'"
+    #'^sfw:(.+)' "$BROWSER 'http://\$1.sourceforge.net/'"
+    #'^ftp:(.+)' "xterm -e 'ncftp \$1'"
+
+    #()$ is necessary, or bashrun will run $BROWSER 'https://mail.google.com/mail/' t gm
+    '^ff()$'  "firefox-bin"
+    '^ffn()$' "firefox-bin --new-instance"
+    '^ff1()$' "firefox-bin --new-instance -p Normal --class 'Firefox Normal'"
+    '^ff2()$' "firefox-bin --new-instance -p Test   --class 'Firefox Test'"
+    '^ff3()$' "firefox-bin --new-instance -p HS     --class 'Firefox HS'"
+    '^mmc()$' "urxvtc -name mc -e bash -lic \"exec /usr/bin/mc\""
+
+    # file associations:
+    #'\.jpe?g$'  "f!x:gimp"
+    
+    # ??command: show manual page
+    #'^\?\?(.+)'  "urxvtc -e sh -c \"sleep 0.001 ; exec man \$1\""
+    
+    # ?command: page 'command --help' in xterm
+    #'^\?(.+)'  "xterm -e '\$1 --help | $PAGER'"
+    )  
+
+# BOOKMARS is an array of strings that will be added to the possible
+# command completions. Make sure there is a HANDLER defined for each
+# of them.
+
+BOOKMARKS=(
+    www.google.com
+    www.archlinux.org
+    www.slashdot.org
+    www.linux.com
+    )
+
+# LOGFILE: command output is appended to LOGFILE. If it doesn't exist,
+# bashrun will attempt to create it. If it is not writeable, output is
+# redirected to /dev/null instead. Logging is disabled for su-actions.
+
+LOGFILE=/dev/null
+
+# Additional bash setup
+#
+# Since this file will be used as the rcfile for the bash session
+# invoked by bashrun, you can do anything here that you would usually
+# do in your ~/.bashrc. For example, you might set environment
+# variables, define functions or aliases, bind additional function
+# keys, etc.
+#
+# Just make sure that you don't interfere with the tty/bash settings
+# and keybindings used by bashrun (see the manual page). If you need
+# to know exactely what is going on, take a look at
+# $PREFIX/share/bashrun/bashrc
