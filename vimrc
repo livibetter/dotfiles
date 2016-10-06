@@ -137,6 +137,15 @@ augroup fixes
     \   end=" \=```" keepend contains=markdownLineStart
     \ | endif
 
+  " W
+  " =
+
+  autocmd BufRead *.txt if expand('%:p:h') =~ expand('$HOME') . '/Documents/'
+    \ | let &l:colorcolumn=&textwidth + 1
+    \ | setlocal formatoptions=qwa2t
+    \ | setlocal spell spelllang=en_us
+    \ | endif
+
 augroup END
 
 function! SortCSSCmd()
