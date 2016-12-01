@@ -140,11 +140,10 @@ augroup fixes
   " W
   " =
 
-  autocmd BufRead *.txt if expand('%:p:h') =~ expand('$HOME') . '/Documents/'
-    \ | let &l:colorcolumn=&textwidth + 1
+  autocmd BufRead *.txt
+    \   let &l:colorcolumn=&textwidth + 1
     \ | setlocal formatoptions=qwa2t
     \ | setlocal spell spelllang=en_us
-    \ | endif
 
 augroup END
 
