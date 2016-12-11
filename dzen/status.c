@@ -416,8 +416,7 @@ void update_sound(int ID)
   // snd_mixer_close(h_mixer);
   percentage = 100 * vol / vol_max;
 
-  sprintf(dzen_str,
-          "^ca(1,urxvtc -name 'dzen-status-sound' -title 'Sound Mixer' -geometry 160x40 -e alsamixer)^i(icons/spkr_01.xbm)^ca() ");
+  sprintf(dzen_str, "^i(icons/spkr_01.xbm) ");
   if (switch_value)
     sprintf(dzen_str + strlen(dzen_str), "^fg(#%02xaaaa)%3d%%^fg()",
             176 - percentage * 176 / 100, percentage);
