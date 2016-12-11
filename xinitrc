@@ -36,6 +36,4 @@ synclient HorizTwoFingerScroll=1
 
 pulseaudio --start
 
-urxvtd -q -o -f
-
 exec "$1"

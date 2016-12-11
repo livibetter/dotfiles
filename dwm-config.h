@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-envy code r-medium-r-normal-*-12-*-*-*-*-*-*-*";
+static const char *fonts[] = { "Envy Code R:pixelsize=14" };
 static const char normbordercolor[] = "#303030";
 static const char normbgcolor[]     = "#303030";
 static const char normfgcolor[]     = "#808080";
@@ -10,21 +10,14 @@ static const char selbgcolor[]      = "#303030";
 static const char selfgcolor[]      = "#cccccc";
 static const unsigned int borderpx  = 2;      /* border pixel of windows */
 static const unsigned int snap      = 8;      /* snap pixel */
-static const Bool showbar           = True;   /* False means no bar */
-static const Bool topbar            = True;   /* False means bottom bar */
+static const int showbar            = 1;      /* 0 means no bar */
+static const int topbar             = 1;      /* 0 means bottom bar */
 
 /* function declarations */
 // customized
-void enternotify_ffm(XEvent *e);
 void self_restart(const Arg *arg);
-void toggle_ffm(const Arg *arg);
-void toggle_rules(const Arg *arg);
 void togglebar_dzen(const Arg *arg);
 // patches
-#include "grid.c"
-void grid(Monitor *m);
-static void bstack(Monitor *m);
-static void bstackhoriz(Monitor *m);
 #include "b/push.c"
 static void pushup(const Arg *arg);
 static void pushdown(const Arg *arg);
@@ -42,17 +35,7 @@ static Rule rules[] = {
   { "Firefox",      "Dialog",     NULL,       0,        True,       -1 },
   { "Firefox",      "Places",     NULL,       0,        True,       -1 },
   
-  { "Leafpad",      NULL,         NULL,       0,        True,       -1 },
-
-  { "MPlayer",      NULL,         NULL,       0,        True,       -1 },
   { "mpv",          NULL,         NULL,       0,        True,       -1 },
-  
-  { "URxvt",        "bashrun",    NULL,       0,        True,       -1 },
-  { NULL,           NULL,         "Volume Control",
-                                              0,        True,       -1 },
-  { "URxvt",        "dzen-status-sound",
-                                  NULL,       0,        True,       -1 },
-  { "URxvt",        "mc",         NULL,       0,        True,       -1 },
   
   // Tag row #1
   { "Firefox Normal",
@@ -61,15 +44,11 @@ static Rule rules[] = {
   { "Firefox HS",   "Navigator",  NULL,       1<<2,     False,      -1 },
 
   // Tag row #2
-  { "Vncviewer",    NULL,         NULL,       1<<3,     True,       -1 },
-
-  { "MuPDF",        NULL,         NULL,       1<<4,     True,       -1 },
-
   { "Geeqie",       NULL,         NULL,       1<<5,     False,      -1 },
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
 
   // Tag row #3
-  { "URxvt",        "urxvt",      NULL,       1<<7,     False,      -1 },
+  { "st-256color",  NULL,         NULL,       1<<7,     False,      -1 },
 };
 
 /* layout(s) */
@@ -82,9 +61,6 @@ static const Layout layouts[] = {
   { "[]=",    tile },  /* first entry is default */
   { "><>",    NULL },  /* no layout function means floating behavior */
   { "[M]",    monocle },
-  { "HHH",    grid },
-  { "TTT",    bstack },
-  { "===",    bstackhoriz },
 };
 
 /* key definitions */
@@ -98,11 +74,12 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { "/bin/sh", "-c", cmd, NULL }
 
 /* commands */
-static const char *bashrun_cmd[]            = { "bashrun", NULL };
-static const char *urxvtc_tmux_cmd[]        = { "urxvtc", "-sl", "0", "-e", "tmux", "-2", NULL };
-static const char *urxvtc_tmux_attach_cmd[] = { "urxvtc", "-sl", "0", "-e", "tmux", "-2", "attach", NULL };
-static const char *urxvtc_cmd[]             = { "urxvtc", NULL };
-static const char *urxvt_cmd[]              = { "urxvt", NULL };
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = { NULL };
+
+static const char *st_tmux_cmd[]        = { "st", "tmux", NULL };
+static const char *st_tmux_attach_cmd[] = { "st", "tmux", "attach", NULL };
+static const char *st_cmd[]             = { "st", NULL };
 
 static const char *sound_vol_up_cmd[]   = { "amixer", "-q", "sset", "Master,0", "5%+", NULL };
 static const char *sound_vol_down_cmd[] = { "amixer", "-q", "sset", "Master,0", "5%-", NULL };
@@ -121,12 +98,9 @@ static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodif
 
 static Key keys[] = {
   /* modifier                     key         function        argument */
-  { MODKEY,                       XK_r,       spawn,          {.v = bashrun_cmd } },
-
-  { MODKEY|ShiftMask,             XK_Return,  spawn,          {.v = urxvtc_tmux_cmd } },
-  { MODKEY|ShiftMask|Mod1Mask,    XK_Return,  spawn,          {.v = urxvtc_tmux_attach_cmd } },
-  { MODKEY|ControlMask,           XK_Return,  spawn,          {.v = urxvtc_cmd } },
-  { MODKEY|ControlMask|Mod1Mask,  XK_Return,  spawn,          {.v = urxvt_cmd } },
+  { MODKEY,                       XK_Return,  spawn,          {.v = st_tmux_cmd } },
+  { MODKEY|Mod1Mask,              XK_Return,  spawn,          {.v = st_tmux_attach_cmd } },
+  { MODKEY|ControlMask,           XK_Return,  spawn,          {.v = st_cmd } },
   
   // keysym XF86AudioRaiseVolume 0x1008ff13, keycode 123
   { 0,                            0x1008ff13, spawn,          {.v = sound_vol_up_cmd } },
@@ -145,9 +119,6 @@ static Key keys[] = {
   { MODKEY,                       XK_F3,      spawn,          {.v = monitor_expand_cmd} },
 
   { MODKEY|ShiftMask,             XK_t,       spawn,          {.v = ts_cmd} },
-
-  { MODKEY|ShiftMask,             XK_m,       toggle_ffm,     {0} },
-  { MODKEY|ShiftMask,             XK_r,       toggle_rules,   {0} },
 
   { MODKEY,                       XK_b,       togglebar_dzen, {0} },
 
@@ -176,9 +147,6 @@ static Key keys[] = {
   { MODKEY,                       XK_t,       setlayout,      {.v = &layouts[0]} },
   { MODKEY,                       XK_f,       setlayout,      {.v = &layouts[1]} },
   { MODKEY,                       XK_m,       setlayout,      {.v = &layouts[2]} },
-  { MODKEY,                       XK_g,       setlayout,      {.v = &layouts[3]} }  ,
-  { MODKEY,                       XK_v,       setlayout,      {.v = &layouts[4]} },
-  { MODKEY,                       XK_n,       setlayout,      {.v = &layouts[5]} },
   { MODKEY,                       XK_space,   setlayout,      {0} },
   
   { MODKEY|ShiftMask,             XK_space,   togglefloating, {0} },
@@ -225,64 +193,6 @@ static Button buttons[] = {
  * Customized functions
  * *********************/
 
-/* toggle focus-follows-mouse */
-static Bool focus_follows_mouse = True;
-
-void
-enternotify_ffm(XEvent *e) {
-  if (focus_follows_mouse)
-    enternotify(e);
-}
-
-void
-toggle_ffm(const Arg *arg) {
-  // Swap EnterNotify handler when first toggle is occured.
-  if (handler[EnterNotify] == enternotify)
-    handler[EnterNotify] = enternotify_ffm;
-  focus_follows_mouse = !focus_follows_mouse;
-
-  update_toggling_text();
-}
-
-/* toggle rules */
-// 2: uninitalized
-// 0: off - tags are set to NULL
-// 1: on  - restore original tags
-static unsigned char rules_toggled = 2;
-static unsigned int *saved_rules_tags;
-
-void
-toggle_rules(const Arg *arg) {
-  int i;
-  int len_rules;
-
-  len_rules = LENGTH(rules);
-  if (rules_toggled == 2) {
-    saved_rules_tags = malloc(sizeof(unsigned int) * len_rules);
-    for (i=0; i<len_rules; i++)
-      saved_rules_tags[i] = rules[i].tags;
-    rules_toggled = True;
-  }
-
-  rules_toggled = !rules_toggled;
-  for (i=0; i<len_rules; i++)
-    if (rules_toggled)
-      rules[i].tags = saved_rules_tags[i];
-    else
-      rules[i].tags = 0;
-
-  update_toggling_text();
-}
-
-/* update status text for toggling status */
-void
-update_toggling_text(void) {
-  strcpy(stext, "  ");
-  stext[0] = rules_toggled ? 'R' : 'r';
-  stext[1] = focus_follows_mouse ? 'M' : 'm';
-  drawbars();
-}
-
 /* toggle bar and dzen */
 void
 togglebar_dzen(const Arg *arg) {
@@ -298,15 +208,5 @@ self_restart(const Arg *arg) {
   const char *p = "/usr/bin/dwm";
   execv(p, (char *const[]) {p, NULL});
 }
-
-
-/* *******
- * Patches
- * ********/
-
-/* bottom stack layouts */
-// http://dwm.suckless.org/patches/bottom_stack
-// from source for 5.9
-#include "/etc/portage/savedconfig/x11-wm/dwm-5.9-bstack.c"
 
 // vim:sw=2:sts=2:et:smarttab

@@ -13,9 +13,7 @@ execute pathogen#infect()
 " Settings "
 "=========="
 
-set t_Co=256 
-let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+colorscheme desert
 
 " Others
 "========
@@ -144,6 +142,7 @@ augroup fixes
     \   let &l:colorcolumn=&textwidth + 1
     \ | setlocal formatoptions=qwa2t
     \ | setlocal spell spelllang=en_us
+    \ | hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 augroup END
 

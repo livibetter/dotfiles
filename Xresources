@@ -1,28 +1,3 @@
 Xft.dpi: 96
 
 ! Without restarting X, xrdb -merge ~/.Xresources, before new terminal window.
-
-! selenized black color palette for urxvt.
-
-URxvt*background:  #1b1b1b
-URxvt*foreground:  #ababab
-
-! normal colors: "black", red, green, yellow, blue, magenta, cyan, "white"
-URxvt*color0:      #303030
-URxvt*color1:      #ed413d
-URxvt*color2:      #63ad2d
-URxvt*color3:      #c9a323
-URxvt*color4:      #4188ee
-URxvt*color5:      #d363e3
-URxvt*color6:      #2db9ab
-URxvt*color7:      #ababab
-
-! bright/bold versions of colors (in the same order)
-URxvt*color8:      #777777
-URxvt*color9:      #ff594f
-URxvt*color10:     #79c344
-URxvt*color11:     #e1b83c
-URxvt*color12:     #5d9cff
-URxvt*color13:     #ea79fb
-URxvt*color14:     #4cd0c1
-URxvt*color15:     #c6c6c6
