@@ -192,36 +192,6 @@ function! BoxesMap()
 
 endfunction
 
-"=============================================="
-" b.py <https://bitbucket.org/livibetter/b.py> "
-"=============================================="
-
-augroup bpy
-
-  autocmd!
-
-  autocmd BufRead * call BpyMap()
-
-augroup END
-
-function! BpyMap()
-
-  if index(['markdown', 'rst'], &filetype) == -1
-    return
-  endif
-
-  for [maptype, key           , cmd] in [
-     \['nmap' , '<F5>'        , 'generate'],
-     \['imap' , '<F5>'        , 'generate'],
-     \['nmap' , '<LEADER>post', 'post'],
-     \['nmap' , '<LEADER>chk' , 'checklink'],
-     \]
-    exec maptype ' <buffer> ' . key . " <ESC>:w<CR>:exec '!b.py " . cmd .
-        \" ' . shellescape(expand('%:p'))<CR>"
-  endfor
-
-endfunction
-
 "===================================="
 " https://github.com/xolox/vim-notes "
 "===================================="
