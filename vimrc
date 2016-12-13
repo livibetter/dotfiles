@@ -207,34 +207,6 @@ nmap <LEADER>todo :Note ToDo<CR>
 " using command-line-only abbrev to alias Note
 cabbrev note Note
 
-"============================================================="
-" HTML Encode/Decode                                          "
-" http://vim.wikia.com/wiki/HTML_entities#Perl_HTML::Entities "
-"============================================================="
-
-vmap <LEADER>h :call HTMLEncode()<CR>
-vmap <LEADER>H :call HTMLDecode()<CR>
-
-function! HTMLEncode()
-perl << EOF
- use HTML::Entities;
- @pos = $curwin->Cursor();
- $line = $curbuf->Get($pos[0]);
- $encvalue = encode_entities($line);
- $curbuf->Set($pos[0],$encvalue)
-EOF
-endfunction
-
-function! HTMLDecode()
-perl << EOF
- use HTML::Entities;
- @pos = $curwin->Cursor();
- $line = $curbuf->Get($pos[0]);
- $encvalue = decode_entities($line);
- $curbuf->Set($pos[0],$encvalue)
-EOF
-endfunction
-
 " ================================================================== "
 " Open fold navigation                                               "
 " Based on: http://vim.wikia.com/wiki/Navigate_to_the_next_open_fold "
