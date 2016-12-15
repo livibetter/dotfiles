@@ -44,7 +44,6 @@ static Rule rules[] = {
   { "Firefox HS",   "Navigator",  NULL,       1<<2,     False,      -1 },
 
   // Tag row #2
-  { "Geeqie",       NULL,         NULL,       1<<5,     False,      -1 },
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
 
   // Tag row #3
@@ -209,4 +208,4 @@ self_restart(const Arg *arg) {
   execv(p, (char *const[]) {p, NULL});
 }
 
-// vim:sw=2:sts=2:et:smarttab
+// vim:filetype=c:sw=2:sts=2:et:smarttab
