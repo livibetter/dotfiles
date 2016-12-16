@@ -27,6 +27,8 @@ static const char *tags[] = { "1", "2", "3", "q", "w", "e", "a", "s", "d" };
 
 /* rules can not be const if using toggle_rules() */
 static Rule rules[] = {
+  // In xprop output:
+  // WM_CLASS(STRING) = "Instance", "Class"
   /* class          instance      title       tags mask isfloating  monitor */
   // Stuff need to be floating
   { "Sxiv",         NULL,         NULL,       0,        True,       -1 },
@@ -44,10 +46,12 @@ static Rule rules[] = {
   { "Firefox HS",   "Navigator",  NULL,       1<<2,     False,      -1 },
 
   // Tag row #2
+  { "st-256color",  "st-writing", NULL,       1<<4,     False,      -1 },
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
 
   // Tag row #3
-  { "st-256color",  NULL,         NULL,       1<<7,     False,      -1 },
+  { "st-256color",  "st-256color",
+                                  NULL,       1<<7,     False,      -1 },
 };
 
 /* layout(s) */

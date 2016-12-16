@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# In dwm config, it's under instance, not class
+# In xprop: WM_CLASS(STRING) = "Instance", "Class"
+CLASS='st-writing'
+FONT='Kingthings Trypewriter 2:size=34'
+TMUX= nohup st -c "$CLASS" -f "$FONT" tmux &>/dev/null &
