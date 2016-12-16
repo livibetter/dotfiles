@@ -106,15 +106,7 @@ augroup fixes
   "==========================================================
 
   autocmd BufEnter * let &titlestring = 'vim:' . expand('%:t')
-  if &term =~ 'screen.*'
-    " ^[ is by pressing Ctrl+V ESC
-    " The link uses ^[k for window name, but with tmux, it seems to mess up
-    " when Vim quits. Use ^[_ and change tmux format strings to use #T instead
-    " of #W.
-    set t_ts=_
-    set t_fs=\
-  endif
-  if &term =~ '\(screen\|urxvt\|xterm\).*'
+  if &term =~ '\(st\|xterm\).*'
     set title
   endif
 
