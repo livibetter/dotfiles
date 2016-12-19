@@ -21,6 +21,10 @@ alias ls='ls --color=auto'
 alias vim.='/usr/bin/vim'
 alias vi.='vim.'
 _vim() {
+  if ((!UID)); then
+	/usr/bin/vim "$@"
+	return
+  fi
   if (( $# > 0 )); then
     /usr/bin/vim --servername VIM --remote-silent "$@"
   else
