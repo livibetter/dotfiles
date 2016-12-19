@@ -27,29 +27,28 @@ _vim() {
     /usr/bin/vim --servername VIM
   fi
   }
-alias vimp='/usr/bin/vim --servername VIM --remote-tab'
 alias vim='_vim'
-alias vip='vimp'
 alias vi='vim'
 
-#######
-# misc.
-alias mc='. /usr/libexec/mc/mc-wrapper.sh -x'
-alias ytdl='cd /tmp ; youtube-dl'
-
-alias pyhttp='python -m SimpleHTTPServer 8001'
-
-# for root
-if (( UID == 0 )); then
-  alias rm='rm -i'
-  alias cp='cp -i'
-  alias mv='mv -i'
-fi
-
+#####
 # qfi
 source $HOME/.local/share/qfi/wrapper.sh
 alias g=qfi
 complete -F _qfi g
+
+#######
+# misc.
+alias cm="./configure --prefix=$HOME/.local && make"
+alias ff1='x firefox-bin --new-instance -p Normal --class "Firefox Normal"'
+alias ff2='x firefox-bin --new-instance -p Test   --class "Firefox Test"'
+alias ff3='x firefox-bin --new-instance -p HS     --class "Firefox HS"'
+alias mt='mt.sh | tail'
+alias pyhttp='python -m SimpleHTTPServer 8001'
+alias tt='cd /tmp;'
+alias wdps1="PS1='\\[\\e[1;32m\\]\$(basename -- \"\$PWD\")\\[\\e[0m\\] \\[\\e[1;34m\\]$\\[\\e[0m\\] '"
+# For virtual console to launch X window with ease
+[[ $TERM == linux ]] && alias x='reset ; exec startdwm'
+alias ytdl='cd /tmp ; youtube-dl'
 
 ########
 # Prompt
