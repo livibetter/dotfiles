@@ -38,7 +38,7 @@ complete -F _qfi g
 
 #######
 # misc.
-alias cm="./configure --prefix=$HOME/.local && make"
+alias cm="./configure --prefix=\$HOME/.local && make"
 alias ff1='x firefox-bin --new-instance -p Normal --class "Firefox Normal"'
 alias ff2='x firefox-bin --new-instance -p Test   --class "Firefox Test"'
 alias ff3='x firefox-bin --new-instance -p HS     --class "Firefox HS"'
@@ -57,24 +57,16 @@ alias ytdl='cd /tmp ; youtube-dl'
 if enable -f "$(which vimps1)" vimps1 2>/dev/null; then
   PS1='$(vimps1 $?)'
 else
-DIR_COLOR='\[\e[1;32m\]'
-(( UID == 0 )) && USER_COLOR='\[\e[1;31m\]' || USER_COLOR='\[\e[1;34m\]'
+  DIR_COLOR='\[\e[1;32m\]'
+  USER_COLOR="\[\e[1;$((31 + (UID > 0) * 3))m\]"
 
-PS1_ERROR='$(
-ret=$?
-(( ret == 0 )) ||
+  PS1_ERROR='$(ret=$?; ((ret == 0)) ||
 printf "\e[41;1;37m%${COLUMNS}s\e[$(((COLUMNS-${#ret})/2))G%s\e[0m\n\[\e[0m\]" "" "$ret"
 )'
 
-# the first $DIR_COLOR can be removed
-if [[ $TERM == screen* ]]; then
-    PS1="$PS1_ERROR $DIR_COLOR\\w"'\[\033k\033\\\]'" $USER_COLOR\$ \[\e[0m\]"
-else
-    PS1="$PS1_ERROR $DIR_COLOR\\w $USER_COLOR\$ \[\e[0m\]"
-fi
+  PS1="$PS1_ERROR $DIR_COLOR\\w $USER_COLOR\$ \[\e[0m\]"
+  unset DIR_COLOR USER_COLOR PS1_ERROR
 fi # end of Prompt
-
-unset DIR_COLOR USER_COLOR PS1_ERROR
 
 # Change the window title of X terminals
 # originally from /etc/bash/bashrc on Gentoo
