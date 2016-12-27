@@ -29,24 +29,6 @@ export GOROOT=$HOME/var/bin/go
 export GOPATH=$HOME/.local/lib64/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# Haskell
-#########
-
-export PATH=$PATH:$HOME/.cabal/bin
-
-# Perl
-######
-
-# Module::Build
-export PERL_MB_OPT=$HOME/.local
-
-# ExtUtils::MakeMaker
-export PERL_MM_OPT=$HOME/.local
-
-MYPERL5LIB=$PERL_MB_OPT/lib/perl5
-[[ $PERL5LIB = *$MYPERL5LIB* ]] || export PERL5LIB=$PERL5LIB:$MYPERL5LIB
-unset MYPERL5LIB
-
 # Shared library path
 #####################
 
