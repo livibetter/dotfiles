@@ -33,7 +33,9 @@ _vim() {
   }
 alias vim='_vim'
 # ref: http://superuser.com/a/410197/23540
-[[ $(tmux display-message -p '#S') != st-writing ]] && alias vi='vim'
+if [[ $(tmux display-message -p '#S' 2>/dev/null) != st-writing ]]; then
+  alias vi='vim'
+fi
 
 #####
 # qfi
