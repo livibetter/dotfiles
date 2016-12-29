@@ -6,6 +6,15 @@
 source $HOME/.bash/bash_helper_func.sh
 source $HOME/.bash/hhrc
 
+############
+# Completion
+############
+
+for compfile in $HOME/.bash_completion.d/*; do
+  source "$compfile"
+done
+unset compfile
+
 #######
 # Alias
 #######
