@@ -27,8 +27,6 @@ alias ls='ls --color=auto'
 
 #####
 # vim
-alias vim.='/usr/bin/vim'
-alias vi.='vim.'
 _vim() {
   if ((!UID)); then
 	/usr/bin/vim "$@"
@@ -40,10 +38,9 @@ _vim() {
     /usr/bin/vim --servername VIM
   fi
   }
-alias vim='_vim'
 # ref: http://superuser.com/a/410197/23540
 if [[ $(tmux display-message -p '#S' 2>/dev/null) != st-writing ]]; then
-  alias vi='vim'
+  alias vi='_vim'
 fi
 
 #####
