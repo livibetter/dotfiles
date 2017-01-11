@@ -7,6 +7,7 @@
 
 _PATH=(
   $HOME/var/private/scripts
+  $HOME/p/dotfiles/.local/bin
   $HOME/.local/bin
   /sbin
   /usr/sbin
