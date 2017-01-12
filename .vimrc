@@ -146,12 +146,6 @@ augroup fixes
 
 augroup END
 
-function! SortCSSCmd()
-
-  command! -buffer -range=% -nargs=* SortCSS :<line1>,<line2>!sortcss.py <f-args>
-
-endfunction
-
 "================================================="
 " boxes comments <http://boxes.thomasjensen.com/> "
 "================================================="
