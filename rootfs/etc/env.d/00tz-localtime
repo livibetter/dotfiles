@@ -1,0 +1,8 @@
+# ref:
+# - https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
+# - https://redd.it/5vcvrz
+# note:
+# - "For a million calls this saves around 0.6 seconds in CPU time."
+#   -- https://www.reddit.com/r/linux/comments/5vcvrz/-/de1gbv1/
+
+TZ=':/etc/localtime'
