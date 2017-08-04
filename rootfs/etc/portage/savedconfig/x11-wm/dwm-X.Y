@@ -47,8 +47,11 @@ static Rule rules[] = {
 
   // Tag row #2
   { "vym",          "vym",        NULL,       1<<3,     False,      -1 },
+
   { "st-256color",  "st-writing", NULL,       1<<4,     False,      -1 },
+
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
+  { "Timeline",     NULL,         NULL,       1<<5,     False,      -1 },
 
   // Tag row #3
   { "st-256color",  "st-256color",
