@@ -49,11 +49,18 @@ static Rule rules[] = {
   { "vym",          "vym",        NULL,       1<<3,     False,      -1 },
 
   { "st-256color",  "st-writing", NULL,       1<<4,     False,      -1 },
+  { "libreoffice-startcenter",
+                    NULL,         NULL,       1<<4,     False,      -1 },
+  { "libreoffice-writer",
+                    NULL,         NULL,       1<<4,     False,      -1 },
 
   { "Gimp",         NULL,         NULL,       1<<5,     True,       -1 },
   { "Timeline",     NULL,         NULL,       1<<5,     False,      -1 },
 
   // Tag row #3
+  { "libreoffice-calc",
+                    NULL,         NULL,       1<<6,     False,      -1 },
+
   { "st-256color",  "st-256color",
                                   NULL,       1<<7,     False,      -1 },
 };
