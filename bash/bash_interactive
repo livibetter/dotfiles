@@ -55,6 +55,8 @@ alias cm="./configure --prefix=\$HOME/.local && make"
 alias ff1='x firefox-bin --new-instance -p Normal --class "Firefox Normal"'
 alias ff2='x firefox-bin --new-instance -p Test   --class "Firefox Test"'
 alias ff3='x firefox-bin --new-instance -p HS     --class "Firefox HS"'
+alias lo1='x loffice -env:UserInstallation=file://\$HOME/var/libreoffice/Normal'
+alias lo3='x loffice -env:UserInstallation=file://\$HOME/var/libreoffice/HS'
 alias mt='mt.sh | tail'
 alias pyhttp='python -m SimpleHTTPServer 8001'
 alias tt='cd /tmp;'
