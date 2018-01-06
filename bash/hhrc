@@ -3,7 +3,8 @@
 # % hh --show-configuration
 
 # add this configuration to ~/.bashrc
-export HH_CONFIG=hicolor         # get more colors
+# use more colors and keyword search
+export HH_CONFIG='hicolor,keywords'
 export HH_PROMPT='% '            # set the prompt string
 shopt -s histappend              # append new history items to .bash_history
 export HISTCONTROL=ignorespace   # leading space hides commands from history
