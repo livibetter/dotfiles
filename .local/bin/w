@@ -3,5 +3,5 @@
 # In dwm config, it's under instance, not class
 # In xprop: WM_CLASS(STRING) = "Instance", "Class"
 CLASS='st-writing'
-FONT='Kingthings Trypewriter 2:size=34'
+FONT='Kingthings Trypewriter 2:size=26'
 TMUX= nohup st -c "$CLASS" -f "$FONT" tmux new-session -s "$CLASS" &>/dev/null &
