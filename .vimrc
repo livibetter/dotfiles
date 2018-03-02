@@ -110,11 +110,6 @@ augroup fixes
     set title
   endif
 
-  " CSS
-  "=====
-
-  autocmd BufEnter * if &filetype =~ 'css\|html' | call SortCSSCmd() | endif
-
   " Markdown
   "==========
 
