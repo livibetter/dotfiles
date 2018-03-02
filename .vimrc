@@ -137,7 +137,7 @@ augroup fixes
     \    && expand('%:e') == ''
     \    && expand('%:p:h') =~ expand('$HOME') . '/Documents/w.txt'
     \    )
-    \ | let &l:textwidth = 78
+    \ | let &l:textwidth = 79
     \ | let &l:colorcolumn = &textwidth + 1
     \ | setlocal formatoptions=qwa2t
     \ | setlocal spell spelllang=en_us
