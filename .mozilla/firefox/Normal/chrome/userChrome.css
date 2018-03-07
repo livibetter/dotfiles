@@ -1,3 +1,9 @@
+/* https://www.reddit.com/r/firefox/comments/7cvzkq/how_can_i_remove_firefox_57_page_load_animation/dpvnvc1/ */
+
+.tab-throbber {
+    visibility: hidden !important;
+}
+
 /**
  * Square Tab for Firefox Australis
  * https://userstyles.org/styles/99560/square-tab-for-firefox-australis
