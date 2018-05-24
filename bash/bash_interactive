@@ -87,4 +87,7 @@ fi # end of Prompt
 # originally from /etc/bash/bashrc on Gentoo
 PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'"; ${PROMPT_COMMAND}"
 
+# Goes to /tmp
+tt
+
 # vim:ft=sh
