@@ -27,7 +27,7 @@ alias ls='ls --color=auto'
 
 #####
 # vim
-_vim() {
+__vim() {
   if ((!UID)); then
 	/usr/bin/vim "$@"
 	return
@@ -40,7 +40,7 @@ _vim() {
   }
 # ref: http://superuser.com/a/410197/23540
 if [[ $(tmux display-message -p '#S' 2>/dev/null) != st-writing ]]; then
-  alias vi='_vim'
+  alias vi='__vim'
 fi
 
 #####
