@@ -18,7 +18,7 @@ static const int topbar             = 1;      /* 0 means bottom bar */
 void self_restart(const Arg *arg);
 void togglebar_dzen(const Arg *arg);
 // patches
-#include "b/push.c"
+#include "push.c"
 static void pushup(const Arg *arg);
 static void pushdown(const Arg *arg);
 
