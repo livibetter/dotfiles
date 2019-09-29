@@ -1,3 +1,0 @@
-Xft.dpi: 96
-
-! Without restarting X, xrdb -merge ~/.Xresources, before new terminal window.

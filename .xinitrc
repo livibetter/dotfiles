@@ -17,23 +17,10 @@ export XDG_DATA_HOME
 export BROWSER
 export EDITOR
 
-# .bashrc ####################################################################
+# .profile
 
-#export XMODIFIERS="@im=gcin"
-# Make sure updates of ~/.XCompose take effective on newly started programs
-# without needing to restart X.
-export GTK_IM_MODULE="xim"
-export QT_IM_MODULE="xim"
-#export XIM_PROGRAM="gcin"
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
 
-# .xinitrc ###################################################################
-
-xrdb -merge .Xresources
-xset fp+ ~/.fonts/Envy\ Code\ R/
-setxkbmap -model pc104 -layout us -option compose:paus
-
-synclient HorizTwoFingerScroll=1
-
-pulseaudio --start
-
+# Let WM take over
 exec "$1"
