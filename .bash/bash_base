@@ -6,9 +6,9 @@
 #########
 
 _PATH=(
-  $HOME/var/private/scripts
-  $HOME/p/dotfiles/.local/bin
   $HOME/.local/bin
+  /usr/local/share/dotfiles/.local/bin
+  /usr/local/bin
   /sbin
   /usr/sbin
   $PATH
@@ -22,13 +22,6 @@ unset _PATH
 #########
 
 export MANPATH=$MANPATH:$HOME/.local/man:$HOME/.local/share/man
-
-# Go
-####
-
-export GOROOT=$HOME/var/bin/go
-export GOPATH=$HOME/.local/lib64/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Shared library path
 #####################
@@ -50,4 +43,3 @@ export EDITOR=/usr/bin/vim
 # Loadables #
 #############
 
-enable -f "$(which td.bash)" td
