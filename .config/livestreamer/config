@@ -1,0 +1,7 @@
+player=mpv
+# https://github.com/chrippa/livestreamer/issues/1478#issuecomment-247242827
+http-header=Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6
+# http://docs.livestreamer.io/issues.html#multi-threaded-streaming
+hls-segment-threads=3
+# http://docs.livestreamer.io/cli.html#positional-arguments
+default-stream=1080p60,1080p,720p60,720p,best
