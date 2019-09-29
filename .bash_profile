@@ -4,4 +4,4 @@
 source $HOME/.bashrc
 
 # ready the Bash History file
-cp -au $HOME/.bash_history /tmp
+cp -au "$HOME/.bash_history" "$HISTFILE"
