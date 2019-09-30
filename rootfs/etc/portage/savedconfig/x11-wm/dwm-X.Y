@@ -40,14 +40,9 @@ static Rule rules[] = {
   { "mpv",          NULL,         NULL,       0,        True,       -1 },
   
   // Tag row #1
-  { "Firefox Normal",
-                    "Navigator",  NULL,       1,        False,      -1 },
-  { "Firefox Test", "Navigator",  NULL,       1<<1,     False,      -1 },
-  { "Firefox HS",   "Navigator",  NULL,       1<<2,     False,      -1 },
+  { "Firefox",      "Navigator",  NULL,       1,        False,      -1 },
 
   // Tag row #2
-  { "vym",          "vym",        NULL,       1<<3,     False,      -1 },
-
   { "st-256color",  "st-writing", NULL,       1<<4,     False,      -1 },
   { "libreoffice-startcenter",
                     NULL,         NULL,       1<<4,     False,      -1 },
@@ -95,18 +90,8 @@ static const char *st_tmux_cmd[]        = { "st", "tmux", NULL };
 static const char *st_tmux_attach_cmd[] = { "st", "tmux", "attach", NULL };
 static const char *st_cmd[]             = { "st", NULL };
 
-static const char *sound_vol_up_cmd[]   = { "amixer", "-q", "sset", "Master,0", "5%+", NULL };
-static const char *sound_vol_down_cmd[] = { "amixer", "-q", "sset", "Master,0", "5%-", NULL };
-static const char *sound_mute_cmd[]     = { "amixer", "-q", "sset", "Master,0", "toggle", NULL };
-
-static const char *xsnap_cmd[]      = SHCMD("xsnap -file \"$HOME/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\"");
-static const char *xsnap_full_cmd[] = SHCMD("xsnap -file \"$HOME/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\" -region \"`xwininfo -root | sed '/\\(Width\\|Height\\)/ {s/[ :a-z-]//gi;p} ; d' | tr '\\n' ' ' | cut -d ' ' -f1-2 | tr ' ' 'x'`+0+0\"");
-
-static const char *monitor_off_cmd[]    = { "monitorOff.sh", NULL };
-static const char *monitor_switch_cmd[] = { "monitorSwitch-xrandr", NULL };
-static const char *monitor_expand_cmd[] = { "monitorExpand.sh", NULL };
-
-static const char *lock_cmd[] = { "xlock", "-mode", "blank", "-startCmd", "monitorOff.sh", "-timeout", "15", "-dpmsoff", "1", NULL };
+static const char *xsnap_cmd[]      = SHCMD("xsnap -file \"$HOME/.local/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\"");
+static const char *xsnap_full_cmd[] = SHCMD("xsnap -file \"$HOME/.local/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\" -region \"`xwininfo -root | sed '/\\(Width\\|Height\\)/ {s/[ :a-z-]//gi;p} ; d' | tr '\\n' ' ' | cut -d ' ' -f1-2 | tr ' ' 'x'`+0+0\"");
 
 static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date --utc +%Y-%m-%dT%H:%M:%SZ)");
 
@@ -116,22 +101,9 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,              XK_Return,  spawn,          {.v = st_tmux_attach_cmd } },
   { MODKEY|ControlMask,           XK_Return,  spawn,          {.v = st_cmd } },
   
-  // keysym XF86AudioRaiseVolume 0x1008ff13, keycode 123
-  { 0,                            0x1008ff13, spawn,          {.v = sound_vol_up_cmd } },
-  // keysym XF86AudioLowerVolume 0x1008ff11, keycode 122
-  { 0,                            0x1008ff11, spawn,          {.v = sound_vol_down_cmd } },
-  // keysym XF86AudioMute 0x1008ff12, keycode 121
-  { 0,                            0x1008ff12, spawn,          {.v = sound_mute_cmd } },
-
   { 0,                            XK_Print,   spawn,          {.v = xsnap_cmd} },
   { MODKEY,                       XK_Print,   spawn,          {.v = xsnap_full_cmd} },
   
-  { MODKEY|ControlMask,           XK_l,       spawn,          {.v = lock_cmd} },
-  
-  { MODKEY,                       XK_F1,      spawn,          {.v = monitor_off_cmd} },
-  { MODKEY,                       XK_F2,      spawn,          {.v = monitor_switch_cmd} },
-  { MODKEY,                       XK_F3,      spawn,          {.v = monitor_expand_cmd} },
-
   { MODKEY|ShiftMask,             XK_t,       spawn,          {.v = ts_cmd} },
 
   { MODKEY,                       XK_b,       togglebar_dzen, {0} },
