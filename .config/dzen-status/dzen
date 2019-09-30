@@ -1,4 +1,4 @@
-dzen2 -bg '#303030' -fg '#aaa' -fn 'Liberation Mono:pixelsize=14' -x 1276 -y 1 -w 640 -h 17 -ta right -e 'button3='
+dzen2 -bg '#303030' -fg '#aaa' -fn 'Envy Code R:pixelsize=14' -x 1276 -y 0 -w 640 -h 17 -ta right -e 'button3='
 # 1920 - w640 = 1280
 # For better visual result, a bit of gap, 4px, is added, so that
 #   x = 1280 - 4 = 1276

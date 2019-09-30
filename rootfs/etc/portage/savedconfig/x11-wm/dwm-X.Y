@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = { "Liberation Mono:pixelsize=14" };
+static const char *fonts[] = { "Envy Code R:pixelsize=14" };
 static const char normbordercolor[] = "#303030";
 static const char normbgcolor[]     = "#303030";
 static const char normfgcolor[]     = "#808080";
