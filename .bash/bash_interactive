@@ -37,7 +37,7 @@ fi
 #######
 # misc.
 alias cm="./configure --prefix=\$HOME/.local && make"
-alias ff='x firefox-bin --new-instance -p Normal --class "Firefox Normal"'
+alias ff='x firefox-bin --new-instance -p Normal'
 alias lo='x loffice -env:UserInstallation=file://\$HOME/var/libreoffice/Normal'
 alias mt='mt.sh | tail'
 alias pyhttp='python -m SimpleHTTPServer 8001'
