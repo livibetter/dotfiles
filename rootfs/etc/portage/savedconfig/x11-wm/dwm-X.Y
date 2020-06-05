@@ -93,6 +93,8 @@ static const char *st_cmd[]             = { "st", NULL };
 static const char *xsnap_cmd[]      = SHCMD("xsnap -file \"$HOME/.local/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\"");
 static const char *xsnap_full_cmd[] = SHCMD("xsnap -file \"$HOME/.local/tmp/ss/`date +'%Y-%m-%d--%H:%M:%S.png'`\" -region \"`xwininfo -root | sed '/\\(Width\\|Height\\)/ {s/[ :a-z-]//gi;p} ; d' | tr '\\n' ' ' | cut -d ' ' -f1-2 | tr ' ' 'x'`+0+0\"");
 
+static const char *monitor_off_cmd[] = SHCMD("sleep 0.5 ;  xset dpms force off");
+
 static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date --utc +%Y-%m-%dT%H:%M:%SZ)");
 
 static Key keys[] = {
@@ -104,6 +106,8 @@ static Key keys[] = {
   { 0,                            XK_Print,   spawn,          {.v = xsnap_cmd} },
   { MODKEY,                       XK_Print,   spawn,          {.v = xsnap_full_cmd} },
   
+  { MODKEY,                       XK_F1,      spawn,          {.v = monitor_off_cmd} },
+
   { MODKEY|ShiftMask,             XK_t,       spawn,          {.v = ts_cmd} },
 
   { MODKEY,                       XK_b,       togglebar_dzen, {0} },
