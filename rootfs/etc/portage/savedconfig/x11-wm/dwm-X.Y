@@ -1,17 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = { "Envy Code R:pixelsize=14" };
-static const char normbordercolor[] = "#303030";
-static const char normbgcolor[]     = "#303030";
-static const char normfgcolor[]     = "#808080";
-static const char selbordercolor[]  = "#80c080";
-static const char selbgcolor[]      = "#303030";
-static const char selfgcolor[]      = "#cccccc";
 static const unsigned int borderpx  = 2;      /* border pixel of windows */
 static const unsigned int snap      = 8;      /* snap pixel */
 static const int showbar            = 1;      /* 0 means no bar */
 static const int topbar             = 1;      /* 0 means bottom bar */
+static const char *fonts[]          = { "Envy Code R:pixelsize=14" };
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { "#808080", "#303030", "#303030" },
+	[SchemeSel]  = { "#cccccc", "#303030", "#80c080" },
+};
 
 /* function declarations */
 // customized
@@ -61,9 +60,9 @@ static Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact    = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* False means respect size hints in tiled resizals */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster     = 1;    /* number of clients in master area */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
   /* symbol   arrange function */
