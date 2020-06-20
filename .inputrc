@@ -1,15 +1,9 @@
 "\e[6~": menu-complete
-#TAB: menu-complete
-
-#set completion-ignore-case On
 
 # Use Ctrl+Left/Right to jump between words
-# Screen/tmux
+# st/tmux
 "\e[1;5D": backward-word
 "\e[1;5C": forward-word
-# xterm/urxvt
-"\eOd": backward-word
-"\eOc": forward-word
 
 # Automatic inputting '' or "" and move the cursor
 "\C-x\'": "'' \e[D\e[D"
