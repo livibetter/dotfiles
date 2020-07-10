@@ -40,6 +40,9 @@ static Rule rules[] = {
   
   // Tag row #1
   { "Firefox",      "Navigator",  NULL,       1,        False,      -1 },
+  { "Google-chrome",
+                    "google-chrome",
+                                  NULL,       1,        False,      -1 },
 
   // Tag row #2
   { "st-256color",  "st-writing", NULL,       1<<4,     False,      -1 },
