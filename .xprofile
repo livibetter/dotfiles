@@ -4,13 +4,6 @@
 
 setxkbmap -model pc104 -layout us -option compose:paus
 
-# IBUS
-
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-
-ibus-daemon -drx
-
 # PulseAudio
 
 pulseaudio --start
