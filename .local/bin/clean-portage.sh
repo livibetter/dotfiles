@@ -3,9 +3,8 @@
 # By Yu-Jie Lin
 
 DIRS=(
-	/usr/portage/distfiles
-	/var/cache/edb
-	/var/tmp/{binpkgs,ccache,portage} 
+	/var/cache/{binpkgs,distfiles,edb}
+	/var/tmp/{ccache,portage} 
 	)
 
 # show the space usages
