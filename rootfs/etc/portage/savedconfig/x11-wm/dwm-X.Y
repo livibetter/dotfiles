@@ -32,14 +32,14 @@ static Rule rules[] = {
   // Stuff need to be floating
   { "Sxiv",         NULL,         NULL,       0,        True,       -1 },
   // Make sure Firefox's pop out dialog/windows floating
-  { "Firefox",      "Browser",    NULL,       0,        True,       -1 },
-  { "Firefox",      "Dialog",     NULL,       0,        True,       -1 },
-  { "Firefox",      "Places",     NULL,       0,        True,       -1 },
+  { "firefox",      "Browser",    NULL,       0,        True,       -1 },
+  { "firefox",      "Dialog",     NULL,       0,        True,       -1 },
+  { "firefox",      "Places",     NULL,       0,        True,       -1 },
   
   { "mpv",          NULL,         NULL,       0,        True,       -1 },
   
   // Tag row #1
-  { "Firefox",      "Navigator",  NULL,       1,        False,      -1 },
+  { "firefox",      "Navigator",  NULL,       1,        False,      -1 },
   { "Google-chrome",
                     "google-chrome",
                                   NULL,       1,        False,      -1 },
