@@ -7,3 +7,9 @@ setxkbmap -model pc104 -layout us -option compose:paus
 # PulseAudio
 
 pulseaudio --start
+
+# Middle mouse scroll
+# https://askubuntu.com/a/868173 (2023-05-31)
+
+deviceId=13
+xinput set-prop $deviceId "libinput Scroll Method Enabled" 0, 0, 1
