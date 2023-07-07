@@ -86,7 +86,6 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { "/bin/sh", "-c", cmd, NULL }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { NULL };
 
 static const char *st_tmux_cmd[]        = { "st", "tmux", NULL };
@@ -100,7 +99,7 @@ static const char *monitor_off_cmd[] = SHCMD("sleep 0.5 ;  xset dpms force off")
 
 static const char *ts_cmd[] = SHCMD("xdotool keyup t ; xdotool type --clearmodifiers $(date --utc +%Y-%m-%dT%H:%M:%SZ)");
 
-static Key keys[] = {
+static const Key keys[] = {
   /* modifier                     key         function        argument */
   { MODKEY,                       XK_Return,  spawn,          {.v = st_tmux_cmd } },
   { MODKEY|Mod1Mask,              XK_Return,  spawn,          {.v = st_tmux_attach_cmd } },
@@ -168,7 +167,7 @@ static Key keys[] = {
 /* button definitions */
 /* click can be a tag number (starting at 0),
  * ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
   /* click        event mask  button    function        argument */
   { ClkLtSymbol,  0,          Button1,  setlayout,      {0} },
   { ClkLtSymbol,  0,          Button3,  setlayout,      {.v = &layouts[2]} },
