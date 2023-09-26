@@ -2,7 +2,7 @@
 # Checking last sync of Portage tree (metadata timestamp / sync command issued)
 # Created at around 2014-01-13 08:43:29.000000000 +0800
 #
-# Copyright (c) 2014, 2017 Yu-Jie Lin
+# Copyright (c) 2014, 2017, 2023 Yu-Jie Lin
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-TS="$(date -d "$(</usr/portage/metadata/timestamp.chk)" +%s)"
+TS="$(date -d "$(</var/db/repos//gentoo/metadata/timestamp.chk)" +%s)"
 printf '%s: %(%c)T\n' meta "$TS"
 
 if ! (( UID )); then
