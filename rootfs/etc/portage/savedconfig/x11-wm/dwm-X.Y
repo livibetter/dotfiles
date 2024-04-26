@@ -86,6 +86,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { "/bin/sh", "-c", cmd, NULL }
 
 /* commands */
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { NULL };
 
 static const char *st_tmux_cmd[]        = { "st", "tmux", NULL };
