@@ -33,7 +33,7 @@ export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:/usr/lib64/pkgconfig
 # Variables #
 #############
 
-export BROWSER=firefox-bin
+export BROWSER=google-chrome-stable
 # Invoking Vim directly, not server mode via vi* alias defined in bashrc
 # Only use server mode by my explict command, programs invoke editor may have
 # problem with server mode.
